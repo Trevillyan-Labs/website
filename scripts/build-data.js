@@ -35,20 +35,20 @@ function urlNode(loc, lastmod) {
 const today = new Date().toISOString().slice(0, 10);
 const staticPages = [
   '',
-  'patents.html',
-  'team.html',
-  'contact.html',
-  'privacy-policy.html',
-  'terms.html',
+  'patents',
+  'team',
+  'contact',
+  'privacy-policy',
+  'terms',
 ];
 
 const urls = [
   ...staticPages.map((p) => urlNode(p ? `${baseUrl}/${p}` : baseUrl + '/', today)),
   ...patentsFiltered.map((p) =>
-    urlNode(`${baseUrl}/detail_patents.html?slug=${encodeURIComponent(p.Slug)}`, today)
+    urlNode(`${baseUrl}/patents/${encodeURIComponent(p.Slug)}`, today)
   ),
   ...teamFiltered.map((t) =>
-    urlNode(`${baseUrl}/detail_team.html?slug=${encodeURIComponent(t.Slug)}`, today)
+    urlNode(`${baseUrl}/team/${encodeURIComponent(t.Slug)}`, today)
   ),
 ];
 

@@ -9,7 +9,11 @@
 
   function getSlug() {
     var params = new URLSearchParams(window.location.search);
-    return params.get('slug') || '';
+    var q = params.get('slug');
+    if (q) return q;
+    var path = (window.location.pathname || '').replace(/\/$/, '');
+    var m = path.match(/^\/(?:patents|team)\/([^/]+)$/);
+    return m ? m[1] : '';
   }
 
   function showEl(el) {
@@ -66,7 +70,7 @@
       var clone = itemTemplate.cloneNode(true);
       stripIds(clone);
       var a = clone.querySelector('a.focus-wrapper');
-      if (a) a.href = 'detail_patents.html?slug=' + encodeURIComponent(p.Slug);
+      if (a) a.href = '/patents/' + encodeURIComponent(p.Slug);
       var img = clone.querySelector('.focus-image img');
       setSrc(img, p['Main Image']);
       var dateEl = clone.querySelector('.focus-date');
@@ -92,7 +96,7 @@
       var clone = itemTemplate.cloneNode(true);
       stripIds(clone);
       var a = clone.querySelector('a.about-value-wrapper');
-      if (a) a.href = 'detail_team.html?slug=' + encodeURIComponent(t.Slug);
+      if (a) a.href = '/team/' + encodeURIComponent(t.Slug);
       var nameEl = clone.querySelector('.text-42px.medium');
       setText(nameEl, t.Name);
       var titleEl = clone.querySelector('.text-18px.title');
@@ -118,7 +122,7 @@
     if (catDiv && catDiv.classList.contains('w-dyn-bind-empty')) setText(catDiv, patent['Patent Number']);
     var authorLink = document.querySelector('a.team-member-name');
     if (authorLink) {
-      authorLink.href = author ? 'detail_team.html?slug=' + encodeURIComponent(author.Slug) : '#';
+      authorLink.href = author ? '/team/' + encodeURIComponent(author.Slug) : '#';
       var authorNameEl = authorLink.querySelector('.text-18px.underline');
       setText(authorNameEl, author ? author.Name : authorSlug);
     }
@@ -163,19 +167,30 @@
   }
 
   function detectBase() {
-    var path = window.location.pathname || '';
+    var path = (window.location.pathname || '').replace(/\/$/, '');
+    if (pathIsDetailPage(path, 'patents') || pathIsDetailPage(path, 'team')) {
+      BASE = '';
+      return;
+    }
     if (path.endsWith('.html') && path !== '/index.html') {
       BASE = './';
     } else if (path.indexOf('/') > -1 && !path.endsWith('/')) {
       BASE = path.replace(/\/[^/]+$/, '/');
     }
   }
+  function pathIsDetailPage(path, type) {
+    if (!path) return false;
+    if (type === 'patents') return /^\/patents\/[^/]+$/.test(path.replace(/\/$/, ''));
+    if (type === 'team') return /^\/team\/[^/]+$/.test(path.replace(/\/$/, ''));
+    return false;
+  }
 
   function init() {
     detectBase();
     var slug = getSlug();
-    var isPatentDetail = /detail_patents\.html$/i.test(window.location.pathname);
-    var isTeamDetail = /detail_team\.html$/i.test(window.location.pathname);
+    var pathname = (window.location.pathname || '').replace(/\/$/, '');
+    var isPatentDetail = /detail_patents\.html$/i.test(pathname) || pathIsDetailPage(pathname, 'patents');
+    var isTeamDetail = /detail_team\.html$/i.test(pathname) || pathIsDetailPage(pathname, 'team');
 
     if (isPatentDetail && slug) {
       Promise.all([
