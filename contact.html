@@ -308,6 +308,7 @@ LogRocket.identify(trevillyanlabsmpdistinctid);
     if (!form) return;
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       var submitBtn = document.getElementById('body-contact-form-submit-button');
       var formBlock = form.closest('.form-block');
       var doneEl = formBlock ? formBlock.querySelector('.w-form-done') : null;
@@ -316,6 +317,7 @@ LogRocket.identify(trevillyanlabsmpdistinctid);
       submitBtn.disabled = true;
       submitBtn.value = submitBtn.getAttribute('data-wait') || 'Please wait...';
       if (failEl) failEl.style.display = 'none';
+      if (doneEl) doneEl.style.display = 'none';
 
       fetch('/api/contact', {
         method: 'POST',
@@ -339,6 +341,7 @@ LogRocket.identify(trevillyanlabsmpdistinctid);
         var isSuccess = result.ok || (result.status >= 200 && result.status < 300);
         if (isSuccess && result.data.success !== false) {
           form.style.display = 'none';
+          if (failEl) failEl.style.display = 'none';
           if (doneEl) doneEl.style.display = 'block';
         } else {
           if (failEl) { failEl.querySelector('div').textContent = result.data.error || 'Something went wrong.'; failEl.style.display = 'block'; }
@@ -351,7 +354,7 @@ LogRocket.identify(trevillyanlabsmpdistinctid);
         submitBtn.disabled = false;
         submitBtn.value = 'Submit';
       });
-    });
+    }, true);
   })();
   </script>
   <script>
