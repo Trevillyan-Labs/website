@@ -70,7 +70,7 @@
 
 .w-checkbox-input--inputType-custom.w--redirected-checked {
   background-color: #3898ec;
-  background-image: url('https://d3e54v103j8qbb.cloudfront.net/static/custom-checkbox-checkmark.589d534424.svg');
+  background-image: url('../images/checkbox-checkmark.svg');
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -776,6 +776,11 @@ figcaption {
 
 .footer-logo {
   width: 320px;
+  transition: none;
+}
+
+a.footer-logo:hover img.footer-logo {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1500%) hue-rotate(197deg);
 }
 
 .footer-column-wrapper {
@@ -830,6 +835,44 @@ figcaption {
   width: 30px;
   height: 30px;
   margin-right: 6px;
+}
+
+.social-media-link img.image-contain {
+  transition: filter 0.2s;
+}
+
+#footer-linkedin-icon-button {
+  position: relative;
+}
+
+#footer-linkedin-icon-button .social-media-hover {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  mix-blend-mode: normal !important;
+  transition: none !important;
+}
+
+#footer-linkedin-icon-button.social-media-link {
+  transition: none;
+}
+
+#footer-linkedin-icon-button.social-media-link img.image-contain {
+  filter: none;
+  transition: none;
+}
+
+#footer-linkedin-icon-button.social-media-link:hover img.image-contain {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(100%) saturate(2000%) hue-rotate(200deg) !important;
+}
+
+#footer-linkedin-icon-button.social-media-link:hover .social-media-hover {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  mix-blend-mode: normal !important;
 }
 
 .social-media-link.hidden {
@@ -2016,7 +2059,7 @@ figcaption {
 }
 
 .trevillyan-labs-logo-link.mixpanel-trigger:hover {
-  color: var(--black);
+  color: var(--primary-color);
 }
 
 .trevillyan-labs-logo-link.mixpanel-trigger.w--current {
@@ -2025,6 +2068,11 @@ figcaption {
 
 .trevillyan-labs-logo-link.mixpanel-trigger.dark {
   color: var(--white);
+  transition: color 0.2s;
+}
+
+.trevillyan-labs-logo-link.mixpanel-trigger.dark:hover {
+  color: var(--primary-color);
 }
 
 .padding-vertical-small {

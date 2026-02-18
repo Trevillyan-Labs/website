@@ -1,0 +1,15 @@
+{
+  "name": "trevillyan-labs-website",
+  "private": true,
+  "scripts": {
+    "build:data": "node scripts/build-data.js",
+    "build:html": "node scripts/inject-components.js",
+    "build:html:init": "node scripts/inject-components.js --init",
+    "build": "npm run build:data && npm run build:html",
+    "migrate:webflow": "node scripts/migrate-webflow-assets.js",
+    "migrate:webflow:dry-run": "node scripts/migrate-webflow-assets.js --dry-run"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.1"
+  }
+}
