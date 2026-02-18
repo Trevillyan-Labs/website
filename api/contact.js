@@ -47,15 +47,10 @@ module.exports = async (req, res) => {
     from: `"${name}" <${gmailUser}>`,
     replyTo: email,
     to: contactEmail,
-    subject: `[Trevillyan Labs Contact] ${subject}`,
-    text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
-    html: `
-      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
-    `
+    cc: email,
+    subject: `Trevillyan Labs Inquiry - ${name}: ${subject}`,
+    text: `${message}`,
+    html: `<p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`
   };
 
   try {
