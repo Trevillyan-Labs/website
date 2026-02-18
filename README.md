@@ -1,43 +1,52 @@
 # Trevillyan Labs — Webflow Export
 
-Static export of the **Trevillyan Labs** website from Webflow. The site is for a research and development company that invents and licenses technologies.
+Static export of the **Trevillyan Labs** website from Webflow. The site is for a research and development company that invents and licenses technologies. CMS-style content is provided by `data/*.json` and rendered client-side; the contact form posts to a Vercel serverless function.
 
 ---
 
-## To-do list
+## Quick start
 
-- [x] **CMS content** — Patents and team data are loaded from `data/*.json` and rendered by `js/cms-render.js`. See “CMS data implementation” below.
-- [x] **Collection links** — Card links point to `detail_patents.html?slug=...` and `detail_team.html?slug=...`; pagination is still placeholder.
-- [ ] **Homepage patent image** — Replace the external sample image on the homepage (`index.html`) with a local asset or your own URL.
-- [x] **Contact form** — Form submits to `/api/contact` (Vercel serverless function) and sends email via Gmail SMTP. Set `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and optionally `CONTACT_EMAIL` in Vercel env vars.
-- [ ] **OG/Twitter images** (optional) — Download Webflow CDN images and reference local copies if you want the site fully independent of Webflow URLs.
-- [ ] **Third-party scripts** (optional) — Review Mixpanel, Hotjar, and LogRocket IDs; update or remove if domain/project changes.
+```bash
+npm install
+npm run build
+npx serve .
+```
+
+Then open the root URL (e.g. http://localhost:3000). The site must be served over HTTP so `fetch()` can load the JSON data; `file://` won’t work.
+
+---
+
+## Running locally
+
+Serve the folder over HTTP so `fetch()` can load the JSON data (file:// won’t work). Examples:
+
+- **Node:** `npx serve .` or `npx http-server` → open the root URL (e.g. http://localhost:3000)
+- **Python:** `python3 -m http.server 8000` → http://localhost:8000
+- **VS Code:** “Live Server” extension → “Open with Live Server”
 
 ---
 
 ## CMS data implementation
 
-CMS content is driven by JSON files in `data/` and a small client-side script.
+Content is driven by JSON in `data/` and `js/cms-render.js`.
 
 ### Data files
 
 | File | Purpose |
 |------|--------|
-| `data/patents.json` | Patent list and detail content (used by the site at runtime) |
-| `data/team_members.json` | Team list and detail content (same) |
+| `data/patents.json` | Patent list and detail content |
+| `data/team_members.json` | Team list and detail content |
 
-Edit these JSON files directly to add or change patents and team members. Date fields use the format `"Mon D, YYYY"` (e.g. `"Oct 17, 2023"`).
+Edit these files directly. Date fields use format `"Mon D, YYYY"` (e.g. `"Oct 17, 2023"`).
 
 ### Build step (sitemap)
 
-After editing the JSON files, run `npm run build:data` to regenerate **`sitemap.xml`**. This runs `scripts/build-data.js`, which reads `data/patents.json` and `data/team_members.json` and writes the sitemap (static pages plus one URL per patent and per team member). To use a different base URL (e.g. for staging): `SITE_URL=https://staging.example.com npm run build:data`.
+After editing the JSON files, run **`npm run build:data`** to regenerate `sitemap.xml`. For a different base URL (e.g. staging): `SITE_URL=https://staging.example.com npm run build:data`. Default base URL is `https://www.trevillyanlabs.io`.
 
 ### How it works
 
-- **List pages** (`index.html`, `patents.html`, `team.html`): `js/cms-render.js` loads the right JSON, clones the single `.w-dyn-item` template for each row, fills in text/images, and sets each card’s link to the detail page with `?slug=...`. The homepage shows the first 3 patents; the full patents and team pages show all items.
-- **Detail pages** (`detail_patents.html`, `detail_team.html`): The script reads `?slug=` from the URL, loads the matching JSON, finds the item by `Slug`, and fills the template (title, meta, body, images, links). Patent detail also resolves “Author (Team Member)” to a team member name and link.
-
-**Important:** The site must be served over HTTP (e.g. `npx serve .` or `python3 -m http.server 8000`) so `fetch()` can load the JSON files. Opening HTML files via `file://` will not load the data.
+- **List pages** (`index.html`, `patents.html`, `team.html`): `cms-render.js` loads the JSON, clones the `.w-dyn-item` template per row, fills text/images, and sets card links to the detail page with `?slug=...`. Homepage shows the first 3 patents; patents and team pages show all.
+- **Detail pages** (`detail_patents.html`, `detail_team.html`): Script reads `?slug=` from the URL (or path on Vercel), finds the item by `Slug`, and fills the template. Patent detail resolves “Author (Team Member)” to a team member name and link. Team detail hides social buttons when the corresponding link is missing or empty in JSON.
 
 ### Adding or editing content
 
@@ -49,36 +58,20 @@ After editing the JSON files, run `npm run build:data` to regenerate **`sitemap.
 
 ## Header and footer components
 
-The site header (nav + logo + links) and footer are shared components so you can change them in one place and have updates apply to every page.
+Header and footer are shared: edit `components/header.html` and `components/footer.html`, then run **`npm run build:html`** to inject them into the root HTML. Placeholders like `{{HEADER_PATENTS_CUR}}` mark the current page (e.g. “Patents” active).
 
-### How it works
-
-- **Source of truth:** `components/header.html` and `components/footer.html` contain the shared markup. They use placeholders like `{{HEADER_LOGO_ARIA}}` and `{{FOOTER_PATENTS_CUR}}` so the build can mark the current page (e.g. “Patents” or “Contact” as active).
-- **Source pages:** The `src/` folder holds one HTML file per main page (e.g. `src/index.html`, `src/patents.html`). Each file has `<!-- INCLUDE components/header.html -->` and `<!-- INCLUDE components/footer.html -->` where the header and footer go.
-- **Build:** Running `npm run build:html` reads each `src/*.html`, injects the component contents in place of those comments, replaces the placeholders for the current page, and writes the result to the repo root (e.g. `index.html`, `patents.html`). The root HTML files are what you deploy; don’t edit them for header/footer changes.
-
-### Editing the header or footer
-
-1. Edit `components/header.html` or `components/footer.html`.
-2. Run `npm run build:html`.
-3. Reload the site.
-
-To rebuild everything (data + HTML): `npm run build`.
+- **Source pages:** `src/*.html` contain `<!-- INCLUDE components/header.html -->` and `<!-- INCLUDE components/footer.html -->`. The build replaces these with the component contents and writes the result to the repo root. Deploy the root HTML files; don’t edit them for header/footer changes.
+- **Full rebuild:** `npm run build` runs both `build:data` and `build:html`.
 
 ### When to run init
 
-The `src/` files are generated from the current root HTML. You only need to regenerate them when:
-
-- You add a new page that should use the shared header/footer, or
-- You change the structure of the header or footer block in the root HTML and need to re-slice.
-
-To (re)create `src/` from the current root pages:
+Regenerate `src/` only when you add a new page that should use the shared header/footer, or when you change the structure of the header/footer block and need to re-slice. Pages without the standard layout (e.g. `401.html`, `404.html`, `detail_patents.html`, `detail_team.html`) are skipped by init and remain static.
 
 ```bash
 npm run build:html -- --init
 ```
 
-Then run `npm run build:html` to inject components and write the root HTML again. Pages that don’t have the standard header (e.g. `401.html`, `404.html`, `detail_patents.html`) are skipped by init and stay as static root HTML.
+Then run `npm run build:html` to inject components again.
 
 ---
 
@@ -86,38 +79,29 @@ Then run `npm run build:html` to inject components and write the root HTML again
 
 ```
 website/
-├── index.html           # Homepage
-├── sitemap.xml          # Generated by build (see CMS data implementation)
-├── team.html            # Team listing (CMS)
-├── detail_team.html     # Single team member (CMS template)
-├── patents.html         # Patents listing (CMS)
-├── detail_patents.html  # Single patent (CMS template)
-├── contact.html         # Contact form
-├── privacy-policy.html
-├── terms.html
-├── 404.html
-├── 401.html             # Password-protected utility page
-├── components/          # Shared header/footer (injected at build)
+├── index.html, team.html, patents.html, contact.html
+├── detail_patents.html, detail_team.html   # CMS detail templates
+├── privacy-policy.html, terms.html, 404.html, 401.html
+├── sitemap.xml                             # Generated by npm run build:data
+├── api/
+│   └── contact.js                          # Vercel serverless (contact form)
+├── components/
 │   ├── header.html
 │   └── footer.html
-├── src/                 # Page sources with INCLUDE placeholders (generated by build:html --init)
-│   ├── index.html
-│   ├── patents.html
-│   └── ...
+├── src/                                    # Page sources (INCLUDE placeholders); generated by build:html --init
 ├── data/
-│   ├── patents.json     # Patent list and detail (edit directly)
+│   ├── patents.json
 │   └── team_members.json
 ├── scripts/
-│   ├── build-data.js    # Reads JSON, writes sitemap.xml
-│   └── inject-components.js  # Injects header/footer into src → root HTML
-├── css/
-│   ├── normalize.css
-│   ├── webflow.css
-│   └── trevillyan-labs.webflow.css
+│   ├── build-data.js                       # Writes sitemap.xml from data/*.json
+│   ├── inject-components.js               # Injects header/footer: src → root HTML
+│   └── migrate-webflow-assets.js          # Optional: download Webflow CDN assets locally
+├── css/                                    # normalize, webflow, trevillyan-labs.webflow
 ├── js/
 │   ├── webflow.js
-│   └── cms-render.js    # Injects CMS data into lists and detail pages
-├── images/              # Local images, favicons, icons
+│   └── cms-render.js                       # Injects CMS data into lists and detail pages
+├── images/
+├── vercel.json                             # Rewrites, redirects, build command
 ├── package.json
 └── README.md
 ```
@@ -126,106 +110,22 @@ website/
 
 ## Deploying to Vercel
 
-1. **Install Vercel CLI** (optional, for local deploy): `npm i -g vercel`
-2. **From project root**, run:
-   ```bash
-   vercel
-   ```
-   Or connect your GitHub repo at [vercel.com](https://vercel.com) and import the project.
-
-3. **Environment variables** (in Vercel Project Settings → Environment Variables):
-   - `SITE_URL` – Your production URL (e.g. `https://www.trevillyanlabs.io`) for the sitemap. Vercel sets `VERCEL_URL` automatically; for production, set `SITE_URL` to your custom domain.
-   - **Contact form** (for `api/contact.js`):
-     - `GMAIL_USER` – Gmail address used to send mail (e.g. `you@gmail.com`)
-     - `GMAIL_APP_PASSWORD` – [App password](https://support.google.com/accounts/answer/185833) from your Google Account (2FA required)
-     - `CONTACT_EMAIL` – Optional. Where to receive messages (defaults to `GMAIL_USER`). Use your business email (e.g. `bill@trevillyanlabs.io`) if different from Gmail.
-
-4. After deployment, your site will be live at `https://your-project.vercel.app` (or your custom domain).
+1. From project root: `vercel`, or connect the GitHub repo at [vercel.com](https://vercel.com).
+2. **Environment variables** (Project Settings → Environment Variables):
+   - **`SITE_URL`** — Production URL (e.g. `https://www.trevillyanlabs.io`) for the sitemap.
+   - **Contact form** (`api/contact.js`):
+     - **`GMAIL_USER`** — Gmail address used to send mail
+     - **`GMAIL_APP_PASSWORD`** — [App password](https://support.google.com/accounts/answer/185833) (2FA required)
+     - **`CONTACT_EMAIL`** — Optional; defaults to `GMAIL_USER` (e.g. use `bill@trevillyanlabs.io` if different)
 
 ---
 
-## Running locally
+## Tech stack
 
-Serve the folder with any static server. Examples:
-
-- **Python:** `python3 -m http.server 8000` → http://localhost:8000
-- **Node:** `npx serve .` or `npx http-server`
-- **VS Code:** Use the “Live Server” extension and “Open with Live Server”
-
-Open `index.html` in the browser (or the root URL if using a server).
-
----
-
-## Missing / important: CMS and dynamic behavior
-
-This is a **static code export**. Webflow’s **CMS data is not included** and **dynamic collection behavior does not run** outside Webflow. The following rely on CMS or Webflow hosting and are affected.
-
-### 1. CMS collection data (missing)
-
-- **No JSON or data files** are present for collections. In Webflow, CMS content is stored in the project and injected when the site is published on Webflow. Exported HTML only contains the **templates** (one `w-dyn-item` and `w-dyn-bind-empty` placeholders).
-- **List pages** (`team.html`, `patents.html`, and the “Patent Portfolio” block on `index.html`) will show **“No items found.”** because there is no collection data.
-- **Detail pages** (`detail_team.html`, `detail_patents.html`) have empty or placeholder content (e.g. `<title>,</title>`, “Patent :”) because they are CMS item templates, not pre-rendered pages.
-
-**Collections inferred from the templates:**
-
-| Collection   | List page(s)              | Detail template   | Typical fields (from classes) |
-|-------------|----------------------------|-------------------|--------------------------------|
-| **Patents** | `index.html`, `patents.html` | `detail_patents.html` | Image, date, title, paragraph; detail: posting (richtext), hero image, links |
-| **Team**    | `team.html`               | `detail_team.html` | Name, title, image, brand color block; detail: extended content |
-
-To have real content when not using Webflow hosting you would need to either:
-
-- Re-export from Webflow after adding CMS content (Webflow can export one static page per CMS item in some setups), or  
-- Add your own data (e.g. JSON) and a small script or static generator to fill the `w-dyn-item` / `w-dyn-bind-empty` structure, or  
-- Re-host the site on Webflow so CMS works as designed.
-
-### 2. Collection list links
-
-- All collection item links are `href="#"` (e.g. patent cards, team cards). In Webflow they would point to the correct CMS item slugs (e.g. `/patents/my-patent-slug`).
-- **Pagination** on `team.html` and `patents.html` also uses `href="#"` and will not work without custom logic or Webflow.
-
-### 3. External / CDN assets
-
-- **Homepage patent block** (`index.html`): one image is from a **different Webflow project** and is not in this export:
-  - `https://uploads-ssl.webflow.com/643636146c76ca416deb6e13/643636791922860d461ff418_sample_logo06.svg`
-  - Consider replacing with a local asset or your own CDN URL.
-- **OG/Twitter images** in `<meta>` tags point to Webflow CDN (`uploads-ssl.webflow.com/656cf6b97a03960364ead541/...`). They will work as long as those URLs remain valid; for full independence, download and reference local copies.
-
-### 4. Contact form
-
-- The form on `contact.html` uses `method="get"` and has **no `action`** URL. In Webflow it was likely connected to Webflow Forms.
-- In this export, **submissions are not sent anywhere**. To make the form work, you need to add an `action` to your own endpoint or a form service (e.g. Formspree, Netlify Forms, custom backend).
-
-### 5. Third-party scripts
-
-The export includes:
-
-- **Mixpanel** (analytics)
-- **Hotjar** (session recording / feedback)
-- **LogRocket** (session replay)
-
-They are configured with project IDs in the HTML. If you change domains or projects, update or remove these scripts and their IDs as needed.
-
----
-
-## Summary: what works vs what’s missing
-
-| Item                    | Status |
-|-------------------------|--------|
-| Static layout & styling | ✅ Uses local CSS/images |
-| Navigation, footer, legal pages | ✅ Works |
-| Contact form            | ⚠️ No backend; needs `action` or form service |
-| Patents / Team lists    | ✅ Populated from `data/*.json` via `cms-render.js` (serve over HTTP) |
-| Patent / Team detail pages | ✅ Populated from JSON via `?slug=` (e.g. `detail_patents.html?slug=...`) |
-| OG/Twitter images       | ✅ Point to Webflow CDN (or replace with local) |
-| One homepage image      | ⚠️ External (other Webflow project); replace if needed |
-
----
-
-## Tech notes
-
-- **Fonts:** Google Fonts (Ubuntu family) loaded from `fonts.googleapis.com`.
-- **Site ID (Webflow):** `656cf6b97a03960364ead541` (in `data-wf-site` and some meta/asset URLs).
-- **Last export (from HTML comment):** Sun Feb 15 2026.
-
-If you want to fully own the content and behavior off Webflow, the main tasks are: (1) supplying CMS-like data and wiring it into the list/detail templates, (2) fixing collection and pagination links, (3) wiring the contact form to a backend or form service, and (4) replacing or localizing any external image URLs.
+- **Frontend:** Static HTML/CSS/JS (Webflow export). Layout and styling: `css/normalize.css`, `css/webflow.css`, `css/trevillyan-labs.webflow.css`. Interactivity: `js/webflow.js`, jQuery.
+- **Content:** JSON in `data/` (patents, team) rendered client-side by `js/cms-render.js`. No CMS backend; edit JSON and run `npm run build:data` to refresh the sitemap.
+- **Build:** Node scripts in `scripts/` — `build-data.js` (sitemap from JSON), `inject-components.js` (header/footer into pages), optional `migrate-webflow-assets.js` (localize CDN assets).
+- **Hosting:** Static site on Vercel; rewrites in `vercel.json` for clean URLs. Contact form: serverless `api/contact.js` (Node, Nodemailer, Gmail SMTP).
+- **Fonts:** Google Fonts (Ubuntu) from `fonts.googleapis.com`.
+- **Analytics / third-party:** Mixpanel, Hotjar, LogRocket (IDs in HTML; update or remove if project/domain changes).
+- **Assets:** All site images (homepage patent block, hero/backgrounds, OG/Twitter meta images, data-driven patent and team images) use local paths under `images/`; no Webflow CDN or external image URLs.

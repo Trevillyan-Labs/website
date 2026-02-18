@@ -7,7 +7,7 @@ const path = require('path');
 
 const rootDir = path.join(__dirname, '..');
 const dataDir = path.join(rootDir, 'data');
-const baseUrl = (process.env.SITE_URL || 'https://www.trevillyanlabs.com').replace(/\/$/, '');
+const baseUrl = (process.env.SITE_URL || 'https://www.trevillyanlabs.io').replace(/\/$/, '');
 
 const patentsPath = path.join(dataDir, 'patents.json');
 const teamPath = path.join(dataDir, 'team_members.json');
