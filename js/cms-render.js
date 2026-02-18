@@ -39,6 +39,12 @@
     if (!el) return;
     el.href = url || '#';
   }
+  function setSocialLink(el, url) {
+    if (!el) return;
+    var hasUrl = typeof url === 'string' && url.trim() !== '';
+    el.href = hasUrl ? url : '#';
+    el.style.display = hasUrl ? '' : 'none';
+  }
 
   function stripIds(node) {
     if (node.id) node.removeAttribute('id');
@@ -152,11 +158,11 @@
       linkedin: document.querySelector('#body-linkedin-button'),
       youtube: document.querySelector('.social-media-wrapper.team-view a:nth-of-type(5)')
     };
-    setHref(links.twitter, member['Twitter Link'] || '#');
-    setHref(links.facebook, member['Facebook Link'] || '#');
-    setHref(links.instagram, member['Instagram Link'] || '#');
-    setHref(links.linkedin, member['Linkedin Link'] || '#');
-    setHref(links.youtube, member['Youtube Link'] || '#');
+    setSocialLink(links.twitter, member['Twitter Link']);
+    setSocialLink(links.facebook, member['Facebook Link']);
+    setSocialLink(links.instagram, member['Instagram Link']);
+    setSocialLink(links.linkedin, member['Linkedin Link']);
+    setSocialLink(links.youtube, member['Youtube Link']);
     var bio = document.querySelector('.div-block-5 p.w-dyn-bind-empty');
     setText(bio, member['Bio Summary']);
     var img = document.querySelector('.team-view-image-wrapper img.image-contain');
