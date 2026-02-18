@@ -78,6 +78,8 @@
       list.appendChild(clone);
     });
     if (empty) empty.style.display = items.length ? 'none' : '';
+    var pagination = container.querySelector('.w-pagination-wrapper');
+    if (pagination) pagination.style.display = 'none';
   }
 
   function renderTeamList(container, team) {
@@ -100,6 +102,8 @@
       list.appendChild(clone);
     });
     if (empty) empty.style.display = team.length ? 'none' : '';
+    var pagination = container.querySelector('.w-pagination-wrapper');
+    if (pagination) pagination.style.display = 'none';
   }
 
   function renderPatentDetail(patent, team) {
