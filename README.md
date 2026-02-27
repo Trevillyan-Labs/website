@@ -99,7 +99,13 @@ website/
 ├── css/                                    # normalize, webflow, trevillyan-labs.webflow
 ├── js/
 │   ├── webflow.js
-│   └── cms-render.js                       # Injects CMS data into lists and detail pages
+│   ├── cms-render.js                       # Injects CMS data into lists and detail pages
+│   └── analytics/                          # Analytics / third-party (Mixpanel, LogRocket, Hotjar)
+│       ├── analytics-config.js            # Single config: IDs and options for all tools
+│       ├── mixpanel.js                    # Mixpanel loader + init
+│       ├── logrocket.js                   # LogRocket load + init + identify
+│       ├── hotjar.js                       # Hotjar init
+│       └── mixpanel-events.js             # Element → event mapping and scroll tracking
 ├── images/
 ├── vercel.json                             # Rewrites, redirects, build command
 ├── package.json
@@ -127,5 +133,5 @@ website/
 - **Build:** Node scripts in `scripts/` — `build-data.js` (sitemap from JSON), `inject-components.js` (header/footer into pages), optional `migrate-webflow-assets.js` (localize CDN assets).
 - **Hosting:** Static site on Vercel; rewrites in `vercel.json` for clean URLs. Contact form: serverless `api/contact.js` (Node, Nodemailer, Gmail SMTP).
 - **Fonts:** Google Fonts (Ubuntu) from `fonts.googleapis.com`.
-- **Analytics / third-party:** Mixpanel, Hotjar, LogRocket (IDs in HTML; update or remove if project/domain changes).
+- **Analytics / third-party:** Mixpanel, Hotjar, LogRocket. All IDs and options live in **`js/analytics/analytics-config.js`**; event mapping and scroll tracking in **`js/analytics/mixpanel-events.js`**. Update or remove there if the project/domain changes.
 - **Assets:** All site images (homepage patent block, hero/backgrounds, OG/Twitter meta images, data-driven patent and team images) use local paths under `images/`; no Webflow CDN or external image URLs.
