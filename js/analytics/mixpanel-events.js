@@ -86,7 +86,9 @@
     var list = document.querySelectorAll('.mixpanel-trigger');
     for (var i = 0; i < list.length; i++) {
       list[i].addEventListener('click', function (e) {
-        trackClick(e.target);
+        // Use currentTarget: it's the .mixpanel-trigger element we attached to (has the id).
+        // target can be a child (e.g. img, span) with no id, which caused "Unknown Event Triggered".
+        trackClick(e.currentTarget);
       });
     }
   }
