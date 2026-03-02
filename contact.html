@@ -26,6 +26,7 @@
   <script src="js/analytics/mixpanel.js"></script>
   <script src="js/analytics/hotjar.js"></script>
   <script src="js/analytics/logrocket.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div class="page-wrapper">
@@ -128,6 +129,8 @@
                     <form id="contact-form" name="contact-form" data-name="Contact Form" method="post"><input class="text-field mixpanel-trigger w-input" maxlength="256" name="name" data-name="Name" placeholder="Name" type="text" id="body-contact-form-name-input" required=""><input class="text-field mixpanel-trigger w-input" maxlength="256" name="email" data-name="Email" placeholder="E-mail" type="email" id="body-contact-form-email-input" required=""><input class="text-field mixpanel-trigger w-input" maxlength="256" name="subject" data-name="Subject" placeholder="Subject" type="text" id="body-contact-form-subject-input" required=""><textarea id="body-contact-form-body-input" name="message" maxlength="5000" data-name="Message" placeholder="How can we help?" class="textarea mixpanel-trigger w-input" required></textarea><label class="w-checkbox checkbox-field">
                         <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox mixpanel-trigger"></div><input id="body-contact-form-checkbox" type="checkbox" name="consent" data-name="Consent" style="opacity:0;position:absolute;z-index:-1" required><span class="w-form-label" for="checkbox">I Agree to <a href="/privacy-policy" id="body-privacy-policy-button" class="link mixpanel-trigger">Privacy Policy.</a></span>
                       </label>
+                      <!-- Turnstile: 1x00000000000000000000AA = test key (always passes). Replace with your production site key from Cloudflare Turnstile dashboard. -->
+                      <div class="cf-turnstile" data-sitekey="0x4AAAAAACkmh5kFD2tB9Wrk" data-theme="dark"></div>
                       <div class="div-block-4"><input type="submit" data-wait="Please wait..." id="body-contact-form-submit-button" class="submit-button mixpanel-trigger w-button" value="Submit"></div>
                     </form>
                     <div class="w-form-done">
@@ -241,6 +244,13 @@
       var doneEl = formBlock ? formBlock.querySelector('.w-form-done') : null;
       var failEl = formBlock ? formBlock.querySelector('.w-form-fail') : null;
 
+      var turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
+      var turnstileToken = turnstileInput ? turnstileInput.value : '';
+      if (!turnstileToken) {
+        if (failEl) { failEl.querySelector('div').textContent = 'Please complete the verification.'; failEl.style.display = 'block'; }
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.value = submitBtn.getAttribute('data-wait') || 'Please wait...';
       if (failEl) failEl.style.display = 'none';
@@ -254,7 +264,8 @@
           email: form.querySelector('[name="email"]').value.trim(),
           subject: form.querySelector('[name="subject"]').value.trim(),
           message: form.querySelector('[name="message"]').value.trim(),
-          consent: form.querySelector('[name="consent"]').checked
+          consent: form.querySelector('[name="consent"]').checked,
+          cf_turnstile_response: turnstileToken
         })
       })
       .then(function(r) {

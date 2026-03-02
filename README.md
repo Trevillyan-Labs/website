@@ -123,6 +123,7 @@ website/
      - **`GMAIL_USER`** — Gmail address used to send mail
      - **`GMAIL_APP_PASSWORD`** — [App password](https://support.google.com/accounts/answer/185833) (2FA required)
      - **`CONTACT_EMAIL`** — Optional; defaults to `GMAIL_USER` (e.g. use `bill@trevillyanlabs.io` if different)
+     - **`TURNSTILE_SECRET_KEY`** — [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile) secret key for server-side verification. Create a widget in the dashboard, add your domain, and copy the secret key. The **site key** is embedded in the contact page HTML (`src/contact.html`; replace the test key `1x00000000000000000000AA` with your production site key for production).
 
 ---
 
