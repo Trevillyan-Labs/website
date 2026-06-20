@@ -1,6 +1,16 @@
-# Trevillyan Labs — Webflow Export
+# Trevillyan Labs — Website
 
-Static export of the **Trevillyan Labs** website from Webflow. The site is for a research and development company that invents and licenses technologies. CMS-style content is provided by `data/*.json` and rendered client-side; the contact form posts to a Vercel serverless function.
+The marketing site for **Trevillyan Labs**, an independent software studio that ships custom software for clients, operates its own products (NewsNook), and advises founders and early-stage startups on product and go-to-market execution. The site's primary job is to get visitors to **hire the studio**; owned products appear as credibility proof and link out to their own sites. CMS-style content is provided by `data/*.json` and rendered client-side; the contact form posts to a Vercel serverless function and is protected by Cloudflare Turnstile against bots.
+
+> **🚧 Mid-revamp.** This README documents the **current** site — a Webflow static export. The site is being re-narrated and rebuilt on **Next.js + TypeScript + Tailwind** to reflect what Trevillyan Labs does today. See **[`REVAMP-PLAN.md`](REVAMP-PLAN.md)** for the plan and **[`.agents/references/decisions/`](.agents/references/decisions/)** for the decisions behind it.
+
+## For AI agents & contributors
+
+- **Agent operating contract:** [`CLAUDE.md`](CLAUDE.md) (and [`AGENTS.md`](AGENTS.md)).
+- **Agent context (progressive disclosure):** [`.agents/README.md`](.agents/README.md) → start at [`.agents/references/INDEX.md`](.agents/references/INDEX.md).
+- **Strategy / marketing exercise:** vision, personas, journeys, content plan, brand guide under [`.agents/references/strategy/`](.agents/references/strategy/).
+- **Branch / commit / PR conventions:** [`CONTRIBUTING.md`](CONTRIBUTING.md). **Security:** [`SECURITY.md`](SECURITY.md).
+- **What Trevillyan Labs does (canonical):** the company `docs` repo, `company/identity-and-positioning.md`.
 
 ---
 
