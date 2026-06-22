@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Brand design tokens — source of truth: .agents/references/strategy/brand_style_guide.md */
+@theme {
+  --font-sans: var(--font-ubuntu), Helvetica, system-ui, sans-serif;
+  --font-mono: var(--font-ubuntu-mono), ui-monospace, monospace;
+
+  /* Brand */
+  --color-brand: #1583fa;
+  --color-brand-hover: #0f6fd6;
+  --color-brand-tint: #e8f1fd;
+
+  /* Text */
+  --color-ink: #1e293b;
+  --color-muted: #64748b;
+  --color-muted-2: #94a3b8;
+
+  /* Surfaces (light) */
+  --color-surface: #f8fafc;
+  --color-surface-2: #f1f5f9;
+  --color-line: #e6ebf1;
+
+  /* Accent (reserve) */
+  --color-amber: #f59e0b;
+
+  /* Dark (hero / section rhythm) */
+  --color-hero: #0b1220;
+  --color-hero-card: #131c2e;
+  --color-hero-line: #22304a;
+  --color-hero-muted: #8597ad;
+  --color-hero-accent: #5aa9ff;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-brand) 22%, transparent);
+}
