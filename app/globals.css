@@ -50,3 +50,31 @@ body {
 ::selection {
   background: color-mix(in srgb, var(--color-brand) 22%, transparent);
 }
+
+/* Legal pages — faithful rich-text from the original export */
+.legal {
+  color: var(--color-ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.legal h2,
+.legal h3,
+.legal h4,
+.legal h5,
+.legal h6 {
+  margin: 2rem 0 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+.legal h2 { font-size: 1.35rem; }
+.legal h3,
+.legal h5 { font-size: 1.1rem; }
+.legal h4,
+.legal h6 { font-size: 1rem; }
+.legal p { margin: 0.75rem 0; }
+.legal ul,
+.legal ol { margin: 0.75rem 0; padding-left: 1.25rem; list-style: disc; }
+.legal li { margin: 0.35rem 0; }
+.legal a { color: var(--color-brand); text-decoration: underline; }
+.legal strong { font-weight: 500; }
