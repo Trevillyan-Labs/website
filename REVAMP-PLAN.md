@@ -44,8 +44,8 @@ Mirrors `.agents/references/strategy/content_plan.md` (authoritative for IA + pa
 /services               Offerings: Build (contract dev, web/portfolio) · Advise (startup, enterprise AI) · Products
 /products/newsnook      NewsNook proof page (credibility) → links out to newsnook.ai (not sold here)
 /work                   Case studies index (proof across engagement types)
-/work/[slug]            Case study (MDX): NewsNook, Faith portfolio, KPMG advising,
-                        Verbaly, Clip Automation
+/work/[slug]            Case study (MDX): NewsNook, Journalism portfolio (client unnamed),
+                        Verbaly, Clip Automation  (KPMG held back — needs permission)
 /about                  Founder + studio story; patents as proof
 /patents                Patents index (credibility) — preserved
 /patents/[slug]         Patent detail — preserved
@@ -120,9 +120,9 @@ represented accurately by AI answer engines and LLMs to drive client referrals)
 
 | Phase | Outcome | Key work |
 |---|---|---|
-| **0 — Plan & content** *(this doc)* | Agreed scope, IA, copy outline | Lock stack ✅, draft home/services copy, inventory assets to port |
-| **1 — Scaffold & brand** | Running Next.js app with brand shell | App Router skeleton, Tailwind + brand tokens, Ubuntu fonts, nav/footer, port logo SVG |
-| **2 — Content & narrative** | All pages live with real copy | Home studio story (hire-first), `/services` (Build/Advise/Products), `/products/newsnook` (proof page), `/about`, `/work` + case studies (MDX), `/faq`, migrate patents/team to typed content, port legal pages |
+| **0 — Plan & content** ✅ | Agreed scope, IA, copy, design language | Stack locked, strategy + `.agents/` written, mockups approved |
+| **1 — Scaffold & brand** ✅ | Running Next.js app with brand shell + home | App Router + Tailwind v4 + brand tokens, Ubuntu (`next/font`), nav/footer, home (hero/services/work/CTA). Live preview via PR #2 |
+| **2 — Content & narrative** ✅ | All pages live with real copy | `/services`, `/work` + case studies (Clip/NewsNook/journalism), `/about` (+patents), `/products/newsnook`, `/contact` (intent-routed + route handler), `/faq` (+FAQPage JSON-LD), `/patents` + `/patents/[slug]`, `/team` + `/team/[slug]`, `/privacy-policy` + `/terms` (faithful legal copy), and legacy `.html` → clean-URL redirects (parity). Case studies use typed content (`lib/content.ts`); MDX deferred. **Still needs Bill:** Verbaly case-study content; full Turnstile + booking wiring (env/keys) — landing in Phase 3. |
 | **3 — SEO/AEO/analytics/security** | NewsNook-grade non-functional layer | Metadata + JSON-LD + robots/sitemap, **AEO/LLM layer (FAQ, `llms.txt`, AI-crawler allowlist, entity consistency)**, env-config analytics, security headers + rate-limit, `.agents/` + SECURITY.md + CODEOWNERS |
 | **4 — QA & launch** | Production on Vercel | URL/redirect parity check, Lighthouse + a11y pass, contact-form e2e, preview → promote |
 | **5 — Post-launch** *(optional)* | Compounding SEO | Blog/case-study cadence, conversion measurement, iterate copy on data |
@@ -133,19 +133,22 @@ represented accurately by AI answer engines and LLMs to drive client referrals)
 
 - **A. Analytics → PostHog.** Consolidate Mixpanel + Hotjar + LogRocket into a single PostHog setup
   (product analytics + session replay + funnels), keys via env-config.
-- **B. Case studies (5 at launch):** NewsNook (owned product), Faith portfolio (web build), KPMG
-  (AI advising — anonymized per confidentiality rules), **Verbaly**, and **Clip Automation** (Bill's
-  first 6 months at Clip were a contracted Product & Program Manager engagement).
+- **B. Case studies (4 at launch):** NewsNook ("Our product"), **Journalism portfolio** ("Website" —
+  **client unnamed on the site**; internally the Faith engagement), **Verbaly**, and **Clip Automation**
+  ("Startup MVP" — contracted PM/PgM for 6 months; **delivered the MVP, founding engineering team, and
+  7-figure ARR**). Type tags lead with delivered value, plain-language. **KPMG is held back** — don't
+  publish until KPMG grants permission.
 - **C. Blog → deferred to Phase 5.** Ship the studio story first.
 - **D. Repo → build in place** on this branch (`revamp/site-narrative-restack`), same Vercel project.
 
 ### Content still to gather (Phase 2 input)
 
-- **Verbaly** and **Clip Automation** have **no docs** in `docs/` yet — need from Bill: what each
-  engagement was, the role/scope, outcome/impact, dates, and what's publicly shareable (logos,
-  metrics, naming). NewsNook/Faith/KPMG have repo context to draw from.
-- Confirm public-facing wording for **KPMG** and **Faith** clears `identity-and-positioning.md
-  §Confidentiality`.
+- **Verbaly** has **no docs** yet — need from Bill: what the engagement was, role/scope, outcome,
+  dates, and what's publicly shareable. **Clip Automation** headline outcome is known (MVP, founding
+  engineering team, 7-figure ARR); still need supporting detail for the full case-study page. NewsNook
+  and the journalism-portfolio engagement have repo context to draw from.
+- **Journalism portfolio:** confirm what's shareable **without naming the client**.
+- **KPMG:** held back pending KPMG's permission — do not publish a KPMG case study until then.
 
 ---
 

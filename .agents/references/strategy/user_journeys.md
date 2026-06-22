@@ -28,20 +28,21 @@ Jordan) are defined in `personas.md`. Each journey ends in a measurable action w
 - **Conversion event:** `contact_submitted` (intent: build) / `call_booked`.
 - **Drop-off risks:** unclear what TL builds; no relevant proof; high-friction contact.
 
-### J2 — Enterprise AI leader books advisory  *(Hugh — P0)*
-1. Lands on **Home** or directly on **Services → enterprise AI advisory** (referral-heavy).
-2. Reads the advisory offering framed around *his* outcomes (credible with clients; productive with
-   agents/automation/tooling in constrained environments).
-3. Skims credibility (founder background, approach) — and notes TL itself runs on agentic AI (Ren).
-4. **Books an intro call** / submits contact (intent: enterprise AI advisory).
-- **Conversion event:** `call_booked` / `contact_submitted` (intent: enterprise-ai).
+### J2 — Enterprise AI leader books advisory  *(Hugh — P2, secondary)*
+> Secondary path. Advise focuses on product & GTM execution (J2b); applying AI for leaders is a
+> secondary line, not a headline.
+1. Lands on **Home** or **Services** and finds the secondary "applying AI for leaders" line.
+2. Reads it framed around *his* outcomes (credible with clients; productive with agents/automation/
+   tooling), and notes TL itself runs on agentic AI (Ren).
+3. **Books an intro call** / submits contact (intent: applying AI — secondary).
+- **Conversion event:** `call_booked` / `contact_submitted` (intent: applying-ai).
 
 ### J2b — Startup founder books advisory  *(Priya — P0)*
-1. Lands on **Home** or **Services → startup advisory** (referral / inbound).
+1. Lands on **Home** or **Services → product & go-to-market execution** (referral / inbound).
 2. Reads the offering: product strategy, PMF, fundraising, team building, running lean with agentic
    AI — backed by a 3x founder who ships a live product and operates the studio on an AI assistant.
 3. Skims a relevant proof point (NewsNook as owned product; the "operated by Ren" model).
-4. **Books an intro call** / submits contact (intent: startup advisory).
+4. **Books an intro call** / submits contact (intent: product & GTM execution).
 - **Conversion event:** `call_booked` / `contact_submitted` (intent: startup-advisory).
 
 ### J3 — NewsNook as proof → hand-off  *(secondary; Sam — P3 / proof for clients)*
@@ -53,7 +54,7 @@ Jordan) are defined in `personas.md`. Each journey ends in a measurable action w
 
 ### J4 — Web/portfolio client engages  *(Wren — P1)*
 1. Lands on **Home / Services → web & portfolio builds**.
-2. Opens the **Faith** case study; sees craft + end-to-end framing.
+2. Opens the **journalism portfolio** case study (client unnamed); sees craft + end-to-end framing.
 3. **Contact** (intent: web/portfolio build).
 - **Conversion event:** `contact_submitted` (intent: web build).
 
@@ -76,8 +77,9 @@ Format: *As a [persona], I want [capability] so that [outcome].*
 **Services**
 - As **Dana**, I want each offering to state *what I get, how it works, and how to start* so that I
   can picture an engagement.
-- As **Priya**, I want startup advisory that covers product/PMF/fundraising *and* running lean with
-  agentic AI, from someone who's actually shipped, so that I trust it over generic fractional help.
+- As **Priya**, I want product & go-to-market execution help (product/PMF/GTM/fundraising) *and* a way
+  to run lean with AI, from someone who's actually shipped, so that I trust it over generic fractional
+  help.
 - As **Hugh**, I want the enterprise-AI advisory framed around my outcomes (not jargon) so that I
   trust it's practical.
 - As **Priya/Hugh**, I want proof TL runs on agentic AI itself (operated by Ren) so that the advice

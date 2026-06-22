@@ -85,6 +85,20 @@ breaks only. Define all colors as design tokens (Tailwind theme / CSS variables)
   (Retire the stray `Outfit` font lingering in the current Webflow CSS — Ubuntu is the studio
   typeface.)
 
+**Type scale (locked — mockup-approved).** Two weights only (400 regular, 500 medium); sentence case.
+
+| Role | Size / weight | Use |
+|---|---|---|
+| Display | 40 / 500 | Hero headline |
+| H1 | 30 / 500 | Page / section heading |
+| H2 | 22 / 500 | Subsection heading |
+| H3 | 18 / 500 | Card title |
+| Body | 16 / 400 | Body copy (line-height ~1.6) |
+| Caption | 13 / 400 | Captions, muted labels, eyebrows |
+| Mono | 14 | Ubuntu Mono — technical/credibility accent |
+
+Sizes are fluid/responsive (scale down on mobile). Implement as Tailwind theme tokens, not hard-coded.
+
 ## Layout & visual style
 
 - **Generous whitespace, clear grid, big type.** Let content breathe.

@@ -62,12 +62,13 @@ URL parity for `/patents`, `/team`, `/contact`, `/privacy-policy`, `/terms` is m
     1. **Contract software development** — full-stack Next.js / React / TypeScript builds (Python for
        scripting). MVPs, internal tools, custom apps.
     2. **Web & portfolio builds** — focused, high-craft sites, end-to-end (design → build → maintain).
-  - **Advise**
-    3. **Startup advisory** — **product and go-to-market execution** for founders and early-stage
-       startups: product strategy, path to PMF, fundraising, team building, and running lean with
-       agentic AI (AI employees / assistants / automation).
-    4. **Enterprise AI advisory** — AI strategy and adoption: agentic employees and assistants,
-       automation, tooling, and applying AI credibly within real constraints. For enterprise leaders.
+  - **Advise — product & go-to-market execution** (the focus, *not* "AI advisory")
+    3. **Startup & founder advisory** — product and go-to-market execution for founders and early-stage
+       startups: product strategy, path to PMF, GTM, fundraising, and team building; running lean with
+       agentic AI as a means. From a 3x founder who ships a live product.
+    4. *(Secondary)* **Applying AI for leaders** — advising on where agents/assistants/automation/
+       tooling fit and what they can't do; a secondary line, not a headline. The studio's own AI-run
+       operation is the proof.
   - **Products**
     5. **Indie SaaS** — TL builds and operates its own products (NewsNook); product know-how applied
        to client bets.
@@ -84,16 +85,22 @@ URL parity for `/patents`, `/team`, `/contact`, `/privacy-policy`, `/terms` is m
   then link out. **Selling NewsNook is newsnook.ai's job, not this page's.**
 
 ### Work (case studies)  *(Dana, Wren, Jordan; J1/J4/J5)*
-- **Five at launch**, spanning engagement types so every persona sees themselves:
-  | Case study | Type | Notes |
-  |---|---|---|
-  | **NewsNook** | Owned product | Live; strongest proof of shipping + operating |
-  | **Faith portfolio** | Web/portfolio build | Author site; end-to-end craft |
-  | **KPMG** | AI advisory | **Anonymized** per confidentiality |
-  | **Verbaly** | TBD | **Content needed from Bill** (what/role/outcome/shareable) |
-  | **Clip Automation** | Contract Product & Program Mgmt | First 6 months as contracted PM/PgM. **Content needed from Bill** |
-- Each card: client/logo · one-line outcome · type tag. Each page: problem → approach → outcome (+
-  role). Honor confidentiality (no terms/pricing/prospect-stage detail).
+- **Four at launch**, spanning engagement types so every persona sees themselves:
+  Order matters: **lead with Clip Automation — the most impactful proof.** Then NewsNook, journalism
+  portfolio, Verbaly.
+  | Order | Case study | Type tag | Notes / outcome |
+  |---|---|---|---|
+  | 1 | **Clip Automation** | "Startup MVP" | **Lead — most impactful.** Contract PM/PgM (first 6 months) — **delivered the MVP, the founding engineering team, and 7-figure ARR**. (Lead with delivered value, not "leadership.") |
+  | 2 | **NewsNook** | "Our product" | Live; strongest proof of shipping + operating an owned SaaS |
+  | 3 | **Journalism portfolio** | "Website" | **Client unnamed on the site** — present as "Journalism portfolio," no client name (internally: the Faith engagement) |
+  | 4 | **Verbaly** | TBD | **Content needed from Bill** (what/role/outcome/shareable) |
+- **Type-tag labels** revised for clarity (prospect-plain): "Our product" · "Website" · "Startup MVP"
+  (not "owned product / web build / product & program," which read unclearly).
+- **Held back — KPMG.** Do **not** publish a KPMG case study yet — needs KPMG's permission first.
+  Add once approved.
+- Each card: title/logo · one-line **outcome** (the value delivered) · type tag. Each page: problem →
+  approach → outcome (+ role). Honor confidentiality (no client names where withheld; no terms/pricing/
+  prospect-stage detail).
 
 ### About  *(Jordan, Hugh; J5/J2)*
 - Founder story (Bill — product leader, 3x founder, issued patents), the studio's operating model
@@ -108,8 +115,8 @@ URL parity for `/patents`, `/team`, `/contact`, `/privacy-policy`, `/terms` is m
   of invention capability, not the company's purpose.
 
 ### Contact  *(Dana, Hugh, Wren; conversion)*
-- **Intent router:** "Hire us to build something" · "Startup advisory (product/PMF/fundraising/AI)" ·
-  "Enterprise AI advisory" · "Web/portfolio site" · "About NewsNook" · "Something else." Tag
+- **Intent router:** "Hire us to build something" · "Advisory — product & go-to-market execution" ·
+  "Web/portfolio site" · "Applying AI in my org (secondary)" · "About NewsNook" · "Something else." Tag
   submissions by intent (PostHog + email). Keep Turnstile + server-side validation. Add a **booking
   link** for warm advisory leads.
 
@@ -134,12 +141,14 @@ URL parity for `/patents`, `/team`, `/contact`, `/privacy-policy`, `/terms` is m
   `decisions/ADR-0004-allow-ai-crawlers.md` + **dynamic `sitemap.xml`**.
 - **Entity consistency** — same name/role/links everywhere; link out to LinkedIn, the patents, and
   newsnook.ai so engines disambiguate the TL entity and represent it correctly.
-- **Targets:** high-intent queries per offering (build · startup advisory · enterprise AI advisory ·
-  web builds) + the founder's name. Goal: surface, get cited accurately, earn the click → primary
+- **Targets:** high-intent queries per offering (build · product & go-to-market advisory · web builds;
+  applying-AI secondary) + the founder's name. Goal: surface, get cited accurately, earn the click → primary
   funnel.
 
 ## Open content tasks (Phase 2 inputs)
 - **Verbaly** and **Clip Automation** case-study content (no docs exist yet) — from Bill.
-- Confirm public wording for **KPMG** and **Faith**.
-- Draft/confirm the four service descriptions and the engagement-model copy.
+- **Journalism portfolio** case study — confirm what's shareable **without naming the client**.
+- **KPMG** — held back until KPMG grants permission; don't publish until then.
+- Draft/confirm the service descriptions (Build / Advise — product & GTM execution / Products) and the
+  engagement-model copy.
 - Confirm whether `/team` folds into `/about` or remains a standalone preserved URL.
