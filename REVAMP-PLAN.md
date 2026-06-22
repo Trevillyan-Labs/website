@@ -120,8 +120,8 @@ represented accurately by AI answer engines and LLMs to drive client referrals)
 
 | Phase | Outcome | Key work |
 |---|---|---|
-| **0 — Plan & content** *(this doc)* | Agreed scope, IA, copy outline | Lock stack ✅, draft home/services copy, inventory assets to port |
-| **1 — Scaffold & brand** | Running Next.js app with brand shell | App Router skeleton, Tailwind + brand tokens, Ubuntu fonts, nav/footer, port logo SVG |
+| **0 — Plan & content** ✅ | Agreed scope, IA, copy, design language | Stack locked, strategy + `.agents/` written, mockups approved |
+| **1 — Scaffold & brand** ✅ | Running Next.js app with brand shell + home | App Router + Tailwind v4 + brand tokens, Ubuntu (`next/font`), nav/footer, home (hero/services/work/CTA). Live preview via PR #2 |
 | **2 — Content & narrative** | All pages live with real copy | Home studio story (hire-first), `/services` (Build/Advise/Products), `/products/newsnook` (proof page), `/about`, `/work` + case studies (MDX), `/faq`, migrate patents/team to typed content, port legal pages |
 | **3 — SEO/AEO/analytics/security** | NewsNook-grade non-functional layer | Metadata + JSON-LD + robots/sitemap, **AEO/LLM layer (FAQ, `llms.txt`, AI-crawler allowlist, entity consistency)**, env-config analytics, security headers + rate-limit, `.agents/` + SECURITY.md + CODEOWNERS |
 | **4 — QA & launch** | Production on Vercel | URL/redirect parity check, Lighthouse + a11y pass, contact-form e2e, preview → promote |
