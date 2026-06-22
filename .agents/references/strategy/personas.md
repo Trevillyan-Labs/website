@@ -12,10 +12,12 @@ related_docs:
 # Visitor Personas — trevillyanlabs.io
 
 Who the site is designed for. Personas are referenced by name in user stories (`user_journeys.md`)
-and page-content decisions (`content_plan.md`). Six personas; **Dana**, **Priya**, and **Hugh** are P0.
+and page-content decisions (`content_plan.md`). Six personas; **Dana** and **Priya** are P0. The
+**Advise** offering focuses on **product & go-to-market execution** (Priya); enterprise AI advice
+(Hugh) is a *secondary* line — Hugh is now a P2 persona.
 
 Grounded in real engagements (see `docs/company/pipeline.md`): Dana ≈ Vaquero's Peter, Hugh ≈ the
-KPMG advisee, Wren ≈ Faith Bottum, Sam ≈ a NewsNook user. Priya (startup-founder advisory) reflects
+KPMG advisee, Wren ≈ the journalism-portfolio client, Sam ≈ a NewsNook user. Priya (startup-founder advisory) reflects
 TL's product-strategy/PMF/fundraising/agentic-AI advisory line.
 
 > **Cross-persona proof:** Trevillyan Labs is run by Bill and operated day-to-day by **Ren**, an AI
@@ -37,7 +39,7 @@ TL's product-strategy/PMF/fundraising/agentic-AI advisory line.
   speaks in business terms, a clear engagement path, and the site itself proving craft.
 - **Primary CTA:** *Work with us* → intent-routed contact / discovery call.
 
-## P0 — Priya · the startup founder (advisory)
+## P0 — Priya · the startup founder (product & GTM execution)
 
 - **Role:** Early-stage founder (pre-seed → Series A) wearing every hat; technical or not, but without
   a senior product partner.
@@ -47,12 +49,16 @@ TL's product-strategy/PMF/fundraising/agentic-AI advisory line.
   ships its own product) and a credible, modern take on running AI-native — not generic startup advice.
 - **Pains / objections:** Advisors who've never shipped; generic "fractional" help; burning cash on
   headcount; AI hype with no practical path.
-- **What converts her:** A startup-advisory offering covering product strategy, PMF, fundraising, team
-  building, and agentic-AI adoption — plus the proof that TL itself runs on an AI assistant (Ren). A
-  booking link.
-- **Primary CTA:** *Book an intro call* / contact (startup advisory intent).
+- **What converts her:** A **product & go-to-market execution** offering — product strategy, PMF, GTM,
+  fundraising, team building — from a founder who ships, with running lean on AI as a means (and the
+  proof that TL itself runs on an AI assistant, Ren). A booking link.
+- **Primary CTA:** *Book an intro call* / contact (product & GTM execution intent).
 
-## P0 — Hugh · the enterprise AI leader (advisory)
+## P2 — Hugh · the enterprise AI leader (secondary)
+
+> **Secondary persona.** Advise now focuses on **product & go-to-market execution** (Priya).
+> Enterprise AI advice is a secondary line, so Hugh is no longer a P0 target — keep the content, but
+> don't let it headline the Advise pillar.
 
 - **Role:** Senior professional / partner / executive (e.g. consulting, manufacturing, finance) who
   must apply AI in their work but isn't technical.
@@ -65,7 +71,7 @@ TL's product-strategy/PMF/fundraising/agentic-AI advisory line.
 - **What converts him:** A clear enterprise-AI advisory offering framed around outcomes (sound
   credible with clients, be more productive, deploy agents/automation safely), a trustworthy voice,
   and the lived proof that TL operates on agentic AI itself. A booking link.
-- **Primary CTA:** *Book an intro call* / contact (enterprise AI advisory intent).
+- **CTA (secondary):** *Book an intro call* / contact (applying-AI intent — secondary).
 
 ## P3 — Sam · the product buyer (NewsNook)
 
@@ -89,7 +95,8 @@ TL's product-strategy/PMF/fundraising/agentic-AI advisory line.
 - **What they need from the site:** Evidence TL builds beautiful, well-crafted sites end-to-end
   (design → build → maintain), and that the process is hands-off for them.
 - **Pains / objections:** DIY builders look generic; doesn't want to manage a project or learn tools.
-- **What converts them:** A portfolio/web-build case study (Faith), visible craft, end-to-end framing.
+- **What converts them:** A portfolio/web-build case study (the journalism portfolio, client unnamed),
+  visible craft, end-to-end framing.
 - **Primary CTA:** *Work with us* → contact (web/portfolio intent).
 
 ## P2 — Jordan · the evaluator (investor / peer / press / talent)
@@ -111,7 +118,7 @@ TL's product-strategy/PMF/fundraising/agentic-AI advisory line.
   *See what we ship → NewsNook* is the secondary, proof-oriented door (it links out to newsnook.ai;
   it isn't a co-equal buyer funnel — selling NewsNook is its own site's job).
 - **Intent-routed contact** so each client persona lands in the right conversation (build, startup
-  advisory, enterprise AI advisory, web/portfolio) — and we can measure which engine/line each visit
+  product & GTM execution, applying-AI (secondary), web/portfolio) — and we can measure which line each visit
   was about.
 - **Case studies must span engagement types** (product, custom build, advisory, web/portfolio) so
   every client persona sees themselves.

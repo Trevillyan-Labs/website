@@ -17,7 +17,8 @@ Shared vocabulary for the website repo — Trevillyan Labs business terms and re
   advisory, web/portfolio builds). The site's core narrative.
 - **Owned products** — software TL builds for itself (NewsNook). Primary path to recurring revenue.
 - **Client work** — two groups: **Build** (contract software development, web/portfolio builds) and
-  **Advise** (startup advisory, enterprise AI advisory). See *Advisory practice*.
+  **Advise** (product & go-to-market execution; applying AI for leaders is a secondary line). See
+  *Advisory practice*.
 - **NewsNook** — TL's flagship owned product; "the AI newsletter reader for thought leaders." Live at
   newsnook.ai. The site routes buyers to it.
 - **Leverage, not headcount** — the studio's operating model: senior-quality delivery via automation
@@ -25,16 +26,18 @@ Shared vocabulary for the website repo — Trevillyan Labs business terms and re
 - **Operated by Ren** — Trevillyan Labs is run by Bill but managed day-to-day by **Ren**, his AI
   assistant. The studio is a living example of the agentic-AI operating model it advises clients to
   adopt — a core selling point, strongest on the advisory offerings.
-- **Advisory practice** — TL's consulting lines beyond building: **startup advisory** (product
-  strategy, PMF, fundraising, team building, agentic-AI adoption) and **enterprise AI advisory** (AI
-  strategy, agentic employees/assistants, automation, tooling).
+- **Advisory practice** — TL's consulting beyond building. **Focus:** product & go-to-market
+  execution for founders / early-stage startups (product strategy, PMF, GTM, fundraising, team
+  building; running lean with AI as a means). **Secondary:** applying AI for leaders (agents,
+  assistants, automation, tooling) — not a headline.
 - **North star** — recurring revenue replacing Bill's day-job income at ≤20 hrs/week.
 
 ## Personas (see `strategy/personas.md`)
 
 - **Dana** — prospective client needing a custom build (P0).
-- **Priya** — early-stage startup founder seeking advisory: product/PMF/fundraising/agentic AI (P0).
-- **Hugh** — enterprise AI leader seeking advisory: agents, automation, tooling (P0).
+- **Priya** — early-stage startup founder seeking **product & go-to-market execution**: product/PMF/
+  GTM/fundraising/team (AI as a means) (P0).
+- **Hugh** — enterprise AI leader seeking advisory: agents, automation, tooling (P2, secondary).
 - **Sam** — product buyer; **P3, not a conversion target here** (NewsNook is sold on newsnook.ai). On
   this site he's proof + a hand-off link.
 - **Wren** — web/portfolio client (P1).

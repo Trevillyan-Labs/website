@@ -56,19 +56,21 @@ in Phase 2; this is the source of truth for it.
   *Proof:* the studio builds and operates its own product (NewsNook) on this exact stack.
 - **Web & portfolio builds.** Focused, high-craft marketing and portfolio sites, handled end-to-end
   (design → build → maintain). For authors, creators, and small teams who want to look credible online
-  without running a project themselves. *Proof:* this site, and the Faith Bottum portfolio build.
+  without running a project themselves. *Proof:* this site, and a journalism portfolio build (client
+  unnamed publicly).
 
-### Advise — product and go-to-market execution
+### Advise — product & go-to-market execution
 
-- **Startup advisory.** Hands-on help for founders and early-stage startups on what decides whether a
-  company makes it: product strategy and the path to product-market fit, fundraising, team building,
-  and running lean with agentic AI. From a 3x founder who ships a live product — not a career
-  consultant.
-- **Enterprise AI advisory.** Practical AI strategy and adoption for non-technical leaders — where
-  agents, assistants, automation, and tooling fit, what they can't do, and how to apply them credibly
-  within real constraints. Outcome-framed: sound credible with clients, get more productive. *Proof:*
-  the studio itself runs on agentic AI. *(Supporting offering — kept off the hero per the positioning
-  above.)*
+The focus is **product and go-to-market execution** — not "AI advisory." AI is a *means* of executing
+lean and the studio's operating differentiator (operated by Ren), not the headline of this offering.
+
+- **Startup & founder advisory (the offering).** Hands-on help for founders and early-stage startups
+  on what decides whether a company makes it: product strategy and the path to product-market fit,
+  go-to-market, fundraising, and team building — running lean with agentic AI as a means, not the
+  pitch. From a 3x founder who ships a live product, not a career consultant.
+- **Applying AI for leaders (secondary).** TL also advises leaders on where agents, assistants,
+  automation, and tooling fit (and what they can't do) — a secondary line, not a headline pillar, and
+  kept off the hero. *Proof:* the studio itself runs on agentic AI.
 
 ### Products — owned software (the credibility engine)
 
@@ -122,7 +124,8 @@ objectives:
 1. **Drive client referrals & customers (acquisition).** When a prospect — or their AI assistant —
    asks "who can build my MVP," "a studio that ships Next.js products," "someone to advise our startup
    on product and AI," TL should surface, get recommended, and earn the click. Target high-intent
-   queries per offering (build · startup advisory · enterprise AI advisory · web builds) and the
+   queries per offering (build · product & go-to-market advisory · web builds; applying-AI secondary)
+   and the
    founder's name/entity.
 2. **Convey credibility accurately (representation).** Make engines and LLMs describe TL correctly and
    favorably from **docs-supported facts**: an independent software studio that builds and advises,
@@ -161,14 +164,15 @@ spot-checked appearance/citation in answer engines for target prompts; all feedi
 | Priority | Persona | What they want | Where they go |
 |---|---|---|---|
 | P0 | **Prospective build client** (Dana) | "Can this studio build my thing, and how do I start?" | Services → Work → Contact |
-| P0 | **Startup founder** (Priya) | "Help with product/PMF/fundraising — and running lean with agentic AI." | Services (startup advisory) → Contact/booking |
-| P0 | **Enterprise AI leader** (Hugh) | "A credible guide to apply AI — agents, automation, tooling — in my world." | Services (enterprise AI advisory) → Contact/booking |
-| P1 | **Web/portfolio client** (Wren) | "Will they make me look great, end to end?" | Services → Work (Faith) → Contact |
+| P0 | **Startup founder** (Priya) | "Help me execute — product, PMF, GTM, fundraising — and run lean with AI." | Services (product & GTM execution) → Contact/booking |
+| P2 | **Enterprise AI leader** (Hugh) | "A credible guide to apply AI — agents, automation, tooling — in my world." | Services (applying AI — secondary) → Contact/booking |
+| P1 | **Web/portfolio client** (Wren) | "Will they make me look great, end to end?" | Services → Work (journalism portfolio) → Contact |
 | P2 | **Evaluator** (Jordan: investor / peer / press / talent) | "Is this legit? Who's behind it?" | About → Work → Patents |
 | P3 | **Product buyer** (Sam) | "Does this solve my problem?" | Discovers NewsNook as proof → **hands off to newsnook.ai** (not converted here) |
 
-> **Priority:** P0–P1 are all *hire-the-studio* clients — the site's job. Sam (P3) isn't a conversion
-> target here; the product's own marketing site (newsnook.ai) sells the product.
+> **Priority:** P0–P2 are all *hire-the-studio* clients — the site's job (P0–P1 lead; Hugh/enterprise-AI
+> is P2, a secondary line). Sam (P3) isn't a conversion target here; the product's own marketing site
+> (newsnook.ai) sells the product.
 
 ## Success metrics (what "working" means)
 
@@ -185,7 +189,7 @@ spot-checked appearance/citation in answer engines for target prompts; all feedi
 ## Scope guardrails
 
 - **Must ship (v1):** the studio story (home, hire-first), Services, a NewsNook proof page (credibility
-  + link out to newsnook.ai — not a product sales page), Work (5 case studies), About/founder, Patents
+  + link out to newsnook.ai — not a product sales page), Work (4 case studies; KPMG held back), About/founder, Patents
   (preserved), Contact (intent-routed, Turnstile), legal — **plus the discoverability layer**: per-page
   metadata + JSON-LD, an FAQ for AEO, `sitemap.xml`, `robots.txt` (AI crawlers allowed), and
   `llms.txt`.
