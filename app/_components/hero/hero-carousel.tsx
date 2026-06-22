@@ -89,13 +89,8 @@ function Column({ shots, dir, align }: { shots: Shot[]; dir: "up" | "down"; alig
       }
       const anchorDelta = scaledQ - q;
       for (const it of items) {
-        const displayCenter = it.center - anchorDelta;
-        const ty = displayCenter - H / 2;
-        // Vertical fade/containment via opacity (no clipping box) so magnified
-        // images can grow past the carousel edges horizontally without being cut.
-        const edge = Math.min(displayCenter, ch - displayCenter);
+        const ty = it.center - anchorDelta - H / 2;
         it.c.style.transform = `translateY(${ty.toFixed(2)}px) scale(${it.s.toFixed(3)})`;
-        it.c.style.opacity = Math.max(0, Math.min(1, edge / 64)).toFixed(2);
         it.c.style.zIndex = it.s > 1.02 ? String(Math.round(it.s * 100)) : "1";
       }
     };
@@ -165,7 +160,12 @@ export function HeroCarousel() {
   const colA = [...a, ...a];
   const colB = [...b, ...b];
   return (
-    <div className="grid h-[440px] grid-cols-2 gap-4 sm:h-[520px]">
+    <div
+      className="grid h-[440px] grid-cols-2 gap-4 sm:h-[520px]"
+      // Clip only top/bottom (hard edge — images partially show as they cross);
+      // the huge negative left/right insets leave horizontal growth unclipped.
+      style={{ clipPath: "inset(0px -2000px)" }}
+    >
       <Column shots={colA} dir="up" align="right" />
       <Column shots={colB} dir="down" align="left" />
     </div>
