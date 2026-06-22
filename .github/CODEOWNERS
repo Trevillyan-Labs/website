@@ -1,0 +1,14 @@
+# Code owners — auto-requests review from the listed owners when matching paths change.
+# https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Owned by Bill Trevillyan (@wgtrevillyan). Ren — Bill's AI assistant (ren@trevillyanlabs.io) —
+# co-maintains this repo and commits under the same @wgtrevillyan GitHub account.
+
+# Default owner for everything in the repo.
+* @wgtrevillyan
+
+# Agent context and operating contract — keep reviewed by the owner.
+/.agents/        @wgtrevillyan
+/CLAUDE.md       @wgtrevillyan
+/AGENTS.md       @wgtrevillyan
+/REVAMP-PLAN.md  @wgtrevillyan
