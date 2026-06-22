@@ -21,7 +21,7 @@ export function Work() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {caseStudies.map((item) => (
+          {caseStudies.slice(0, 3).map((item) => (
             <CaseStudyCard key={item.slug} item={item} />
           ))}
         </div>

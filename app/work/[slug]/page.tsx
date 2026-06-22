@@ -54,6 +54,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <section className="bg-white">
         <Container className="py-16">
+          {study.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={study.image}
+              alt={`${study.title} — ${study.tag}`}
+              className="mb-14 w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-surface-2)] object-cover"
+            />
+          ) : null}
           <div className="grid gap-12 md:grid-cols-3">
             <div>
               <h2 className="text-sm font-medium uppercase tracking-wide text-muted">The problem</h2>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/app/_components/container";
+import { Icon } from "@/app/_components/icon";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
 import { type Group, services } from "@/lib/content";
@@ -50,7 +51,10 @@ export default function ServicesPage() {
                       s.secondary ? "border-[var(--color-line)] opacity-90" : "border-[var(--color-line)]"
                     }`}
                   >
-                    <div className="flex items-center gap-2">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
+                      <Icon name={s.icon} className="h-[22px] w-[22px]" />
+                    </span>
+                    <div className="mt-4 flex items-center gap-2">
                       <h3 className="text-lg font-medium text-ink">{s.title}</h3>
                       {s.secondary ? (
                         <span className="rounded-full bg-[var(--color-surface-2)] px-2 py-0.5 text-[11px] text-muted">

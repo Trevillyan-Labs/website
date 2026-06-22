@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/app/_components/container";
+import { Logo } from "@/app/_components/logo";
 import { nav, site } from "@/lib/site";
 
 export function SiteFooter() {
@@ -8,11 +9,8 @@ export function SiteFooter() {
       <Container className="py-14">
         <div className="flex flex-col justify-between gap-10 sm:flex-row">
           <div className="max-w-sm">
-            <div className="flex items-center gap-2.5">
-              <span className="block h-3.5 w-3.5 rounded-[3px] bg-brand" aria-hidden="true" />
-              <span className="text-[15px] font-medium text-white">Trevillyan Labs</span>
-            </div>
-            <p className="mt-3 text-sm text-[var(--color-hero-muted)]">
+            <Logo tone="dark" />
+            <p className="mt-4 text-sm text-[var(--color-hero-muted)]">
               An independent software studio. We build and run software — ours and yours.
             </p>
           </div>

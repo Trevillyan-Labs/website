@@ -7,6 +7,7 @@ export type Group = "Build" | "Advise" | "Products";
 export type Service = {
   slug: string;
   group: Group;
+  icon: string;
   title: string;
   summary: string;
   whatYouGet: string[];
@@ -18,6 +19,7 @@ export const services: Service[] = [
   {
     slug: "contract-software-development",
     group: "Build",
+    icon: "Code",
     title: "Contract software development",
     summary:
       "Full-stack web apps in the studio's own stack (Next.js / React / TypeScript; Python for scripting) — MVPs, internal tools, and custom products taken from idea to production.",
@@ -31,6 +33,7 @@ export const services: Service[] = [
   {
     slug: "web-and-portfolio-builds",
     group: "Build",
+    icon: "Globe",
     title: "Web & portfolio builds",
     summary:
       "Focused, high-craft marketing and portfolio sites, handled end-to-end — design, build, and maintain — so you look credible online without running a project.",
@@ -44,6 +47,7 @@ export const services: Service[] = [
   {
     slug: "product-and-gtm-execution",
     group: "Advise",
+    icon: "Rocket",
     title: "Product & go-to-market execution",
     summary:
       "Hands-on help for founders and early-stage startups on what decides whether a company makes it: product strategy, the path to product-market fit, go-to-market, fundraising, and team building — running lean with AI as a means, not the pitch. From a 3x founder who ships a live product.",
@@ -57,6 +61,7 @@ export const services: Service[] = [
   {
     slug: "applying-ai-for-leaders",
     group: "Advise",
+    icon: "Sparkles",
     title: "Applying AI for leaders",
     summary:
       "A secondary line: advising leaders on where agents, assistants, automation, and tooling fit — and what they can't do. The studio runs on agentic AI itself, which is the proof.",
@@ -71,6 +76,7 @@ export const services: Service[] = [
   {
     slug: "indie-saas",
     group: "Products",
+    icon: "Package",
     title: "Indie SaaS — our own products",
     summary:
       "We build and operate our own products. NewsNook is live in production today. It's proof we ship and run real software — and the know-how feeds every client build and advisory engagement.",
@@ -88,6 +94,8 @@ export type CaseStudy = {
   title: string;
   tag: string;
   dark: boolean;
+  /** Screenshot/photo for the card + detail header. Falls back to a styled block when absent. */
+  image?: string;
   summary: string;
   problem: string;
   approach: string;
@@ -120,6 +128,7 @@ export const caseStudies: CaseStudy[] = [
     title: "NewsNook",
     tag: "Our product",
     dark: true,
+    image: "/images/work/newsnook.webp",
     summary: "An AI newsletter reader — built, shipped, and live in production.",
     problem:
       "Knowledge workers drown in newsletters. We wanted a product that lets people read more of what matters without the inbox overload — and that proves the studio ships and operates real software.",
@@ -131,6 +140,24 @@ export const caseStudies: CaseStudy[] = [
       "The studio's clearest proof it builds and runs real products",
     ],
     role: "Owned product — built and operated by Trevillyan Labs",
+  },
+  {
+    slug: "trevillyan-dev",
+    title: "trevillyan.dev",
+    tag: "Website",
+    dark: false,
+    image: "/images/work/trevillyan-dev.png",
+    summary: "The founder's own developer portfolio — designed and built end-to-end.",
+    problem:
+      "A founder and product leader needed a sharp personal site to showcase his work, writing, and the projects behind Trevillyan Labs.",
+    approach:
+      "Designed and built trevillyan.dev end-to-end — a fast, modern portfolio that doubles as a live sample of the studio's web work.",
+    outcome: [
+      "A polished personal portfolio, shipped end-to-end",
+      "Fast, modern, and easy to keep current",
+      "A live sample of the studio's web/portfolio craft",
+    ],
+    role: "Web/portfolio build — design through delivery",
   },
   {
     slug: "journalism-portfolio",

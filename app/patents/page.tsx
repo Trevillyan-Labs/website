@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
 import { patents } from "@/lib/patents";
@@ -22,9 +21,11 @@ export default function PatentsPage() {
         <Container className="py-16">
           <div className="grid gap-6 md:grid-cols-2">
             {patents.map((p) => (
-              <Link
+              <a
                 key={p.slug}
-                href={`/patents/${p.slug}`}
+                href={p.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group overflow-hidden rounded-xl border border-[var(--color-line)] bg-white"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -35,8 +36,11 @@ export default function PatentsPage() {
                     {p.title}
                   </h2>
                   <p className="mt-2 text-[13px] text-muted">{p.summary}</p>
+                  <span className="mt-3 inline-block text-[12.5px] font-medium text-brand">
+                    View on Google Patents →
+                  </span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </Container>

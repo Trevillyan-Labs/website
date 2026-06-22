@@ -1,5 +1,6 @@
 import { Button } from "@/app/_components/button";
 import { Container } from "@/app/_components/container";
+import { Icon } from "@/app/_components/icon";
 import { offerings } from "@/lib/site";
 
 export function Hero() {
@@ -29,7 +30,9 @@ export function Hero() {
               key={o.title}
               className="rounded-xl border border-[var(--color-hero-line)] bg-[var(--color-hero-card)] p-5"
             >
-              <span className="block h-[3px] w-6 rounded-full bg-brand" aria-hidden="true" />
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/15 text-[var(--color-hero-accent)]">
+                <Icon name={o.icon} className="h-5 w-5" />
+              </span>
               <h3 className="mt-4 text-[15px] font-medium text-white">{o.title}</h3>
               <p className="mt-2 text-[12.5px] leading-snug text-[var(--color-hero-muted)]">
                 {o.body}

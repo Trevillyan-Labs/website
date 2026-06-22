@@ -1,21 +1,25 @@
 import Link from "next/link";
 import { Container } from "@/app/_components/container";
+import { Icon } from "@/app/_components/icon";
 
 const services = [
   {
     title: "Build",
+    icon: "Hammer",
     body: "Custom software development and web/portfolio builds.",
     detail: "MVPs · internal tools · sites",
-    cta: { label: "Start a project →", href: "/contact" },
+    cta: { label: "Start a project →", href: "/services" },
   },
   {
     title: "Advise",
+    icon: "Compass",
     body: "Product & go-to-market execution for founders and early-stage startups.",
     detail: "product · PMF · raise · GTM",
-    cta: { label: "Book a call →", href: "/contact" },
+    cta: { label: "Book a call →", href: "/services" },
   },
   {
     title: "Products",
+    icon: "Package",
     body: "We build and operate our own (NewsNook, live today).",
     detail: "Proof we ship & run",
     cta: { label: "See NewsNook →", href: "/products/newsnook" },
@@ -36,8 +40,8 @@ export function Services() {
               key={s.title}
               className="flex flex-col rounded-xl border border-[var(--color-line)] bg-white p-6"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-brand-tint)]">
-                <span className="block h-2.5 w-2.5 rounded-sm bg-brand" aria-hidden="true" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
+                <Icon name={s.icon} className="h-[22px] w-[22px]" />
               </span>
               <h3 className="mt-5 text-lg font-medium text-ink">{s.title}</h3>
               <p className="mt-2 text-[13px] leading-snug text-[#475569]">{s.body}</p>
