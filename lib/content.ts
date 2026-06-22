@@ -111,6 +111,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Clip Automation",
     tag: "Startup MVP",
     dark: true,
+    image: "/images/work/products/clip-nexus-project.webp",
     summary: "Delivered the MVP, the founding engineering team, and 7-figure ARR.",
     problem:
       "An early-stage industrial-IoT startup needed to get from concept to a real, shippable product — and to a team that could build it — without the months of overhead a traditional hire-and-ramp takes.",
@@ -128,7 +129,7 @@ export const caseStudies: CaseStudy[] = [
     title: "NewsNook",
     tag: "Our product",
     dark: true,
-    image: "/images/work/newsnook.webp",
+    image: "/images/work/products/newsnook-project.webp",
     summary: "An AI newsletter reader — built, shipped, and live in production.",
     problem:
       "Knowledge workers drown in newsletters. We wanted a product that lets people read more of what matters without the inbox overload — and that proves the studio ships and operates real software.",

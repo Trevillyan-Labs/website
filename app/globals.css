@@ -51,6 +51,104 @@ body {
   background: color-mix(in srgb, var(--color-brand) 22%, transparent);
 }
 
+/* ── Hero motion ─────────────────────────────────────────── */
+
+/* Entrance: staggered rise/fade. Add inline animation-delay per element. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal {
+  opacity: 0;
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Aurora: slow-drifting brand-blue light. */
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 140%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+.aurora::before {
+  width: 52%;
+  height: 60%;
+  left: -8%;
+  top: -10%;
+  background: radial-gradient(circle, #1583fa 0%, transparent 70%);
+  animation: aurora-a 18s ease-in-out infinite alternate;
+}
+.aurora::after {
+  width: 46%;
+  height: 55%;
+  right: 6%;
+  top: 8%;
+  background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+  opacity: 0.32;
+  animation: aurora-b 22s ease-in-out infinite alternate;
+}
+@keyframes aurora-a {
+  to {
+    transform: translate3d(12%, 10%, 0) scale(1.15);
+  }
+}
+@keyframes aurora-b {
+  to {
+    transform: translate3d(-10%, 6%, 0) scale(1.1);
+  }
+}
+
+/* Carousel: vertical loops + edge fade. */
+@keyframes hero-scroll-up {
+  to {
+    transform: translateY(-50%);
+  }
+}
+@keyframes hero-scroll-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.hero-carousel-mask {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+  }
+  .aurora::before,
+  .aurora::after {
+    animation: none;
+  }
+}
+
 /* Legal pages — faithful rich-text from the original export */
 .legal {
   color: var(--color-ink);
