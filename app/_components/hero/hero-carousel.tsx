@@ -4,103 +4,146 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { type Shot, showcase } from "@/lib/showcase";
 
-function Card({ shot, priority }: { shot: Shot; priority?: boolean }) {
-  return (
-    <div className="hero-shot relative aspect-[16/10] origin-center overflow-hidden rounded-xl border border-white/10 bg-[var(--color-hero-card)] shadow-lg shadow-black/30 will-change-transform">
-      <Image
-        src={shot.src}
-        alt={shot.alt}
-        fill
-        sizes="(max-width: 1024px) 45vw, 260px"
-        className="object-cover object-top"
-        priority={priority}
-      />
-    </div>
-  );
-}
+const GAP = 16; // constant gap between images (px), preserved while scaling
+const SPEED = 20; // auto-scroll px/sec
+const SIGMA = 150; // falloff width — how far the magnify reaches
+const BOOST = 0.5; // max extra scale for the image right under the cursor
 
-function Column({ shots, dir }: { shots: Shot[]; dir: "up" | "down" }) {
-  const loop = [...shots, ...shots];
+type Align = "left" | "right";
+
+/** One scrolling, fisheye-magnifying column. Cards are positioned analytically
+ *  (no layout reads) so gaps stay constant and images never overlap. */
+function Column({ shots, dir, align }: { shots: Shot[]; dir: "up" | "down"; align: Align }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const cards = Array.from(wrap.querySelectorAll<HTMLElement>(".shot"));
+    const n = cards.length;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let H = 0;
+    let slot = 0;
+    let period = 0;
+    let rect = wrap.getBoundingClientRect();
+    const measure = () => {
+      const w = wrap.clientWidth;
+      H = (w * 10) / 16; // 16:10 cards
+      slot = H + GAP;
+      period = n * slot;
+      rect = wrap.getBoundingClientRect();
+    };
+    measure();
+
+    let scroll = dir === "down" ? period / 2 : 0;
+    const cursor = { x: -99999, y: -99999 };
+
+    const frame = () => {
+      measure(); // keep H/slot/period in sync with the laid-out width
+      const ch = wrap.clientHeight;
+      const colCx = rect.left + wrap.clientWidth / 2;
+
+      // 1) base positions (wrapped) + scale from 2-D distance to cursor
+      const items = cards.map((c, i) => {
+        let bp = (((i * slot - scroll) % period) + period) % period; // 0..period
+        if (bp > ch + slot) bp -= period; // lift off-screen cards above
+        const baseCenterY = rect.top + bp + H / 2;
+        const d = Math.hypot(colCx - cursor.x, baseCenterY - cursor.y);
+        const s = 1 + BOOST * Math.exp(-(d * d) / (2 * SIGMA * SIGMA));
+        return { c, bp, s, top: 0 };
+      });
+
+      // 2) cumulative layout (top→down): constant GAP, no overlap
+      items.sort((a, b) => a.bp - b.bp);
+      let y = items[0].bp;
+      let anchorDelta = 0;
+      let best = Infinity;
+      for (const it of items) {
+        it.top = y;
+        const dc = Math.abs(rect.top + it.bp + H / 2 - cursor.y);
+        if (dc < best) {
+          best = dc;
+          anchorDelta = y - it.bp; // keep the card nearest the cursor at its base spot
+        }
+        y += H * it.s + GAP;
+      }
+
+      // 3) write transforms
+      for (const it of items) {
+        it.c.style.transform = `translateY(${(it.top - anchorDelta).toFixed(2)}px) scale(${it.s.toFixed(3)})`;
+        it.c.style.zIndex = it.s > 1.02 ? String(Math.round(it.s * 100)) : "1";
+      }
+    };
+
+    let raf = 0;
+    let last = performance.now();
+    const loop = (t: number) => {
+      const dt = Math.min(0.05, (t - last) / 1000);
+      last = t;
+      scroll += (dir === "down" ? -SPEED : SPEED) * dt;
+      frame();
+      raf = requestAnimationFrame(loop);
+    };
+
+    const onMove = (e: PointerEvent) => {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
+      frame();
+    };
+    const onScrollResize = () => {
+      measure();
+      frame();
+    };
+
+    measure();
+    frame();
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("resize", onScrollResize);
+    window.addEventListener("scroll", onScrollResize, { passive: true });
+    if (!reduce) raf = requestAnimationFrame(loop);
+
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("resize", onScrollResize);
+      window.removeEventListener("scroll", onScrollResize);
+      cancelAnimationFrame(raf);
+    };
+  }, [dir, align]);
+
+  const originX = align === "right" ? "right" : "left";
   return (
-    <div
-      className="flex flex-col gap-4 will-change-transform motion-reduce:animate-none"
-      style={{ animation: `hero-scroll-${dir} 46s linear infinite` }}
-    >
-      {loop.map((shot, i) => (
-        <Card key={`${shot.src}-${i}`} shot={shot} priority={i < 2} />
+    <div ref={wrapRef} className="relative h-full">
+      {shots.map((shot, i) => (
+        <div
+          key={`${shot.src}-${i}`}
+          className="shot absolute inset-x-0 top-0 aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-[var(--color-hero-card)] shadow-lg shadow-black/30 will-change-transform"
+          style={{ transformOrigin: `top ${originX}` }}
+        >
+          <Image
+            src={shot.src}
+            alt={shot.alt}
+            fill
+            sizes="(max-width: 1024px) 45vw, 260px"
+            className="object-cover object-top"
+            priority={i < 2}
+          />
+        </div>
       ))}
     </div>
   );
 }
 
 export function HeroCarousel() {
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const cards = Array.from(root.querySelectorAll<HTMLElement>(".hero-shot"));
-    const cursor = { x: -99999, y: -99999 };
-    const R = 240; // influence radius (px)
-    const BOOST = 0.22; // max extra scale near the cursor
-
-    // Read all centers, then write transforms — avoids layout thrash.
-    const apply = () => {
-      const centers = cards.map((c) => {
-        const r = c.getBoundingClientRect();
-        return { c, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
-      });
-      for (const { c, cx, cy } of centers) {
-        const dist = Math.hypot(cx - cursor.x, cy - cursor.y);
-        const t = Math.max(0, 1 - dist / R);
-        const scale = 1 + BOOST * t * t; // ease-in: growth concentrated near cursor
-        c.style.transform = scale > 1.001 ? `scale(${scale.toFixed(3)})` : "";
-        c.style.zIndex = t > 0.02 ? String(10 + Math.round(t * 10)) : "";
-      }
-    };
-
-    const onMove = (e: PointerEvent) => {
-      cursor.x = e.clientX;
-      cursor.y = e.clientY;
-      apply(); // immediate response (also keeps it working if rAF is throttled)
-    };
-    const onLeave = () => {
-      cursor.x = -99999;
-      cursor.y = -99999;
-      apply();
-    };
-
-    // rAF keeps the magnify in sync as cards auto-scroll under a still cursor.
-    let raf = 0;
-    const tick = () => {
-      apply();
-      raf = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("pointermove", onMove);
-    document.addEventListener("pointerleave", onLeave);
-    raf = requestAnimationFrame(tick);
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      document.removeEventListener("pointerleave", onLeave);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  const colA = showcase.filter((_, i) => i % 2 === 0);
-  const colB = showcase.filter((_, i) => i % 2 === 1);
-
+  // duplicate so each column has enough cards to fill + loop
+  const a = showcase.filter((_, i) => i % 2 === 0);
+  const b = showcase.filter((_, i) => i % 2 === 1);
+  const colA = [...a, ...a];
+  const colB = [...b, ...b];
   return (
-    <div
-      ref={rootRef}
-      className="hero-carousel-mask relative h-[440px] overflow-hidden px-4 sm:h-[520px]"
-    >
-      <div className="grid grid-cols-2 gap-4">
-        <Column shots={colA} dir="up" />
-        <Column shots={colB} dir="down" />
-      </div>
+    <div className="hero-carousel-mask grid h-[440px] grid-cols-2 gap-4 overflow-hidden px-2 sm:h-[520px]">
+      <Column shots={colA} dir="up" align="right" />
+      <Column shots={colB} dir="down" align="left" />
     </div>
   );
 }
