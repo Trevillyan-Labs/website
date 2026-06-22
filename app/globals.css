@@ -127,25 +127,6 @@ body {
     transform: translateY(0);
   }
 }
-/* Fades + contains the loop vertically, but stays opaque well beyond the box
-   horizontally so magnified images can grow sideways without being clipped. */
-.hero-carousel-mask {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent,
-    #000 12%,
-    #000 88%,
-    transparent
-  );
-  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-size: 300% 100%;
-  mask-size: 300% 100%;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     animation: none;
