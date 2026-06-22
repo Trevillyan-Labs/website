@@ -7,7 +7,7 @@ import { type Shot, showcase } from "@/lib/showcase";
 const GAP = 16; // constant gap between images (px), preserved while scaling
 const SPEED = 20; // auto-scroll px/sec
 const SIGMA = 150; // falloff width — how far the magnify reaches
-const BOOST = 0.5; // max extra scale for the image right under the cursor
+const BOOST = 0.25; // max extra scale for the image right under the cursor
 
 type Align = "left" | "right";
 
@@ -141,7 +141,7 @@ export function HeroCarousel() {
   const colA = [...a, ...a];
   const colB = [...b, ...b];
   return (
-    <div className="hero-carousel-mask grid h-[440px] grid-cols-2 gap-4 overflow-hidden px-2 sm:h-[520px]">
+    <div className="hero-carousel-mask grid h-[440px] grid-cols-2 gap-4 sm:h-[520px]">
       <Column shots={colA} dir="up" align="right" />
       <Column shots={colB} dir="down" align="left" />
     </div>
