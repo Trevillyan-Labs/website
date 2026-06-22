@@ -67,16 +67,27 @@ function Column({ shots, dir, align }: { shots: Shot[]; dir: "up" | "down"; alig
         cy += (H * items[i].s) / 2 + GAP + (H * sNext) / 2;
       }
 
-      // 3) anchor the card nearest the cursor at its base center, then write
-      let anchorDelta = 0;
-      let best = Infinity;
-      for (const it of items) {
-        const dc = Math.abs(rect.top + it.bp + H / 2 - cursor.y);
-        if (dc < best) {
-          best = dc;
-          anchorDelta = it.center - (it.bp + H / 2);
+      // 3) anchor smoothly: map the cursor's base position to its scaled position
+      //    by piecewise-linear interpolation between card centers. Continuous, so
+      //    there's no jump when the nearest card changes or a card scrolls past.
+      const q = cursor.y - rect.top; // cursor Y in column-local space
+      const first = items[0];
+      const last = items[items.length - 1];
+      let scaledQ = first.center + (q - (first.bp + H / 2));
+      if (q > last.bp + H / 2) {
+        scaledQ = last.center + (q - (last.bp + H / 2));
+      } else if (q > first.bp + H / 2) {
+        for (let i = 0; i < items.length - 1; i++) {
+          const cb0 = items[i].bp + H / 2;
+          const cb1 = items[i + 1].bp + H / 2;
+          if (q >= cb0 && q <= cb1) {
+            const t = (q - cb0) / (cb1 - cb0 || 1);
+            scaledQ = items[i].center + t * (items[i + 1].center - items[i].center);
+            break;
+          }
         }
       }
+      const anchorDelta = scaledQ - q;
       for (const it of items) {
         const displayCenter = it.center - anchorDelta;
         const ty = displayCenter - H / 2;
