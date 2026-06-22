@@ -31,31 +31,4 @@ export const offerings = [
   },
 ] as const;
 
-export type WorkItem = {
-  title: string;
-  tag: string;
-  outcome: string;
-  dark: boolean;
-};
-
-// Order matters — lead with Clip Automation (most impactful). See content_plan.md.
-export const work: WorkItem[] = [
-  {
-    title: "Clip Automation",
-    tag: "Startup MVP",
-    outcome: "Delivered the MVP, the founding engineering team, and 7-figure ARR.",
-    dark: true,
-  },
-  {
-    title: "NewsNook",
-    tag: "Our product",
-    outcome: "An AI newsletter reader — built, shipped, and live in production.",
-    dark: true,
-  },
-  {
-    title: "Journalism portfolio",
-    tag: "Website",
-    outcome: "A writer's portfolio site, designed and shipped end-to-end.",
-    dark: false,
-  },
-];
+// Case studies live in lib/content.ts (caseStudies).
