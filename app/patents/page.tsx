@@ -70,7 +70,7 @@ export default function PatentsPage() {
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
-                href="/contact?subject=Patent+Licensing"
+                href="/contact?intent=licensing"
                 className="inline-flex items-center rounded-lg bg-[var(--color-brand)] px-6 py-3 text-[14px] font-medium text-white transition hover:bg-[var(--color-brand-hover)]"
               >
                 Inquire about licensing →
