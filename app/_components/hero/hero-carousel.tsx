@@ -160,14 +160,24 @@ export function HeroCarousel() {
   const colA = [...a, ...a];
   const colB = [...b, ...b];
   return (
-    <div
-      className="grid h-[440px] grid-cols-2 gap-4 sm:h-[520px]"
-      // Clip only top/bottom (hard edge — images partially show as they cross);
-      // the huge negative left/right insets leave horizontal growth unclipped.
-      style={{ clipPath: "inset(0px -2000px)" }}
-    >
-      <Column shots={colA} dir="up" align="right" />
-      <Column shots={colB} dir="down" align="left" />
+    <div className="relative h-[440px] sm:h-[520px]">
+      <div
+        className="grid h-full grid-cols-2 gap-4"
+        // Hard-clip top/bottom for containment; huge L/R insets keep the sides free.
+        style={{ clipPath: "inset(0px -2000px)" }}
+      >
+        <Column shots={colA} dir="up" align="right" />
+        <Column shots={colB} dir="down" align="left" />
+      </div>
+      {/* Soft gradient overlays hide the clip line — images fade into the bg. */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[200] h-20 bg-gradient-to-b from-[var(--color-hero)] to-transparent"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[200] h-20 bg-gradient-to-t from-[var(--color-hero)] to-transparent"
+        aria-hidden="true"
+      />
     </div>
   );
 }
