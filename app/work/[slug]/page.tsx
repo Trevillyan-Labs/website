@@ -1,3 +1,4 @@
+import { CaseStudyGallery } from "@/app/_components/case-study-gallery";
 import { Container } from "@/app/_components/container";
 import { JsonLd } from "@/app/_components/json-ld";
 import { caseStudies } from "@/lib/content";
@@ -101,17 +102,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
                 A closer look
               </h2>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {study.gallery.map((src) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`${study.title} — reference`}
-                    className="aspect-[4/3] w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-surface-2)] object-cover"
-                  />
-                ))}
-              </div>
+              <CaseStudyGallery images={study.gallery} title={study.title} />
             </div>
           ) : null}
         </Container>

@@ -125,8 +125,6 @@ export const caseStudies: CaseStudy[] = [
     ],
     role: "Contract Product Lead",
     gallery: [
-      "/images/work/clip/clip-nexus-project.webp",
-      "/images/work/clip/clip-telescript-project.webp",
       "/images/work/clip/clip-real-time-map.webp",
       "/images/work/clip/clip-equipment-analysis.webp",
       "/images/work/clip/clip-nexus-server-rack.webp",
