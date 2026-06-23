@@ -1,6 +1,16 @@
-# Trevillyan Labs — Webflow Export
+# Trevillyan Labs — Website
 
-Static export of the **Trevillyan Labs** website from Webflow. The site is for a research and development company that invents and licenses technologies. CMS-style content is provided by `data/*.json` and rendered client-side; the contact form posts to a Vercel serverless function.
+The marketing site for **Trevillyan Labs**, an independent software studio that ships custom software for clients, operates its own products (NewsNook), and advises founders and early-stage startups on product and go-to-market execution. The site's primary job is to get visitors to **hire the studio**; owned products appear as credibility proof and link out to their own sites. CMS-style content is provided by `data/*.json` and rendered client-side; the contact form posts to a Vercel serverless function and is protected by Cloudflare Turnstile against bots.
+
+> **🚧 Mid-revamp.** This README documents the **current** site — a Webflow static export. The site is being re-narrated and rebuilt on **Next.js + TypeScript + Tailwind** to reflect what Trevillyan Labs does today. See **[`REVAMP-PLAN.md`](REVAMP-PLAN.md)** for the plan and **[`.agents/references/decisions/`](.agents/references/decisions/)** for the decisions behind it.
+
+## For AI agents & contributors
+
+- **Agent operating contract:** [`CLAUDE.md`](CLAUDE.md) (and [`AGENTS.md`](AGENTS.md)).
+- **Agent context (progressive disclosure):** [`.agents/README.md`](.agents/README.md) → start at [`.agents/references/INDEX.md`](.agents/references/INDEX.md).
+- **Strategy / marketing exercise:** vision, personas, journeys, content plan, brand guide under [`.agents/references/strategy/`](.agents/references/strategy/).
+- **Branch / commit / PR conventions:** [`CONTRIBUTING.md`](CONTRIBUTING.md). **Security:** [`SECURITY.md`](SECURITY.md).
+- **What Trevillyan Labs does (canonical):** the company `docs` repo, `company/identity-and-positioning.md`.
 
 ---
 
@@ -9,7 +19,18 @@ Static export of the **Trevillyan Labs** website from Webflow. The site is for a
 ```bash
 npm install
 npm run build
+```
+
+**Static only** (contact form will not submit — no API):
+
+```bash
 npx serve .
+```
+
+**Full local dev** (includes `/api/contact`; needs [Vercel CLI](https://vercel.com/docs/cli) and env vars in `.env` or `.env.local`):
+
+```bash
+vercel dev
 ```
 
 Then open the root URL (e.g. http://localhost:3000). The site must be served over HTTP so `fetch()` can load the JSON data; `file://` won’t work.
@@ -20,7 +41,8 @@ Then open the root URL (e.g. http://localhost:3000). The site must be served ove
 
 Serve the folder over HTTP so `fetch()` can load the JSON data (file:// won’t work). Examples:
 
-- **Node:** `npx serve .` or `npx http-server` → open the root URL (e.g. http://localhost:3000)
+- **Vercel (recommended if testing the contact form):** `vercel dev` — runs the static site and the `api/` serverless function. Set `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `TURNSTILE_SECRET_KEY` in `.env` or `.env.local` for the contact form to work.
+- **Node (static only):** `npx serve .` or `npx http-server` → open the root URL (e.g. http://localhost:3000)
 - **Python:** `python3 -m http.server 8000` → http://localhost:8000
 - **VS Code:** “Live Server” extension → “Open with Live Server”
 
@@ -123,7 +145,7 @@ website/
      - **`GMAIL_USER`** — Gmail address used to send mail
      - **`GMAIL_APP_PASSWORD`** — [App password](https://support.google.com/accounts/answer/185833) (2FA required)
      - **`CONTACT_EMAIL`** — Optional; defaults to `GMAIL_USER` (e.g. use `bill@trevillyanlabs.io` if different)
-     - **`TURNSTILE_SECRET_KEY`** — [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile) secret key for server-side verification. Create a widget in the dashboard, add your domain, and copy the secret key. The **site key** is embedded in the contact page HTML (`src/contact.html`; replace the test key `1x00000000000000000000AA` with your production site key for production).
+     - **`TURNSTILE_SECRET_KEY`** — [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile) secret key for server-side verification (required). Create a widget in the dashboard, add your domain, copy the secret key here and the **site key** into `src/contact.html` (the `data-sitekey` attribute on the `.cf-turnstile` div). After editing the site key, run `npm run build:html` so the root `contact.html` is updated.
 
 ---
 
@@ -132,7 +154,17 @@ website/
 - **Frontend:** Static HTML/CSS/JS (Webflow export). Layout and styling: `css/normalize.css`, `css/webflow.css`, `css/trevillyan-labs.webflow.css`. Interactivity: `js/webflow.js`, jQuery.
 - **Content:** JSON in `data/` (patents, team) rendered client-side by `js/cms-render.js`. No CMS backend; edit JSON and run `npm run build:data` to refresh the sitemap.
 - **Build:** Node scripts in `scripts/` — `build-data.js` (sitemap from JSON), `inject-components.js` (header/footer into pages), optional `migrate-webflow-assets.js` (localize CDN assets).
-- **Hosting:** Static site on Vercel; rewrites in `vercel.json` for clean URLs. Contact form: serverless `api/contact.js` (Node, Nodemailer, Gmail SMTP).
+- **Hosting:** Static site on Vercel; rewrites in `vercel.json` for clean URLs. Contact form: serverless `api/contact.js` (Node, Nodemailer, Gmail SMTP), protected by [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) for bot prevention.
 - **Fonts:** Google Fonts (Ubuntu) from `fonts.googleapis.com`.
 - **Analytics / third-party:** Mixpanel, Hotjar, LogRocket. All IDs and options live in **`js/analytics/analytics-config.js`**; event mapping and scroll tracking in **`js/analytics/mixpanel-events.js`**. Update or remove there if the project/domain changes.
 - **Assets:** All site images (homepage patent block, hero/backgrounds, OG/Twitter meta images, data-driven patent and team images) use local paths under `images/`; no Webflow CDN or external image URLs.
+
+---
+
+## Notes for AI / automated tooling
+
+- **Source of truth for page content:** Edit **`src/*.html`** (e.g. `src/contact.html`), not the root `*.html` files. Root HTML is generated by `npm run build:html` from `src/` plus `components/header.html` and `components/footer.html`. Any direct edits to root HTML will be overwritten on the next build. After changing `src/`, run `npm run build:html` so the root files stay in sync.
+- **Contact form:** Frontend (form markup, Turnstile widget, submit script) lives in **`src/contact.html`**. Backend is **`api/contact.js`**. To change the Turnstile site key, edit the `data-sitekey` attribute in `src/contact.html`, then run `npm run build:html`.
+- **Generated artifacts:** `sitemap.xml` is generated by `npm run build:data` (from `data/*.json`). Root `index.html`, `contact.html`, `patents.html`, `team.html`, etc. are generated by `npm run build:html`. Do not treat root HTML as the source for page body content.
+- **Stack:** No React, Next.js, or other framework. Frontend is static HTML/CSS and vanilla JS + jQuery. Serverless is Node in `api/`. CMS content is JSON in `data/` rendered client-side by `js/cms-render.js`.
+- **Secrets:** `TURNSTILE_SECRET_KEY`, `GMAIL_USER`, `GMAIL_APP_PASSWORD` are server-only (Vercel env). The Turnstile site key is public and lives in the contact page HTML.
