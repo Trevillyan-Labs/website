@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 type Step = { cmd: string; out: string };
 
 const steps: Step[] = [
-  { cmd: "scaffold landing page", out: "Next.js + Tailwind … done ✓" },
-  { cmd: "run the test suite", out: "42 passed ✓" },
-  { cmd: "deploy to vercel", out: "live in 38s ✓" },
-  { cmd: "triage the inbox", out: "4 new · 3 handled, 1 for Bill ✓" },
-  { cmd: "summarize the week", out: "3 PRs · 1 client call · MRR +6% ✓" },
+  { cmd: "spec & build the 3D modeling feature", out: "designed, built, shipped ✓" },
+  { cmd: "run the security checks", out: "347 checks passed ✓" },
+  { cmd: "run the test suite", out: "2,384 passed ✓" },
+  { cmd: "deploy to production", out: "live in 38s ✓" },
+  { cmd: "summarize the release notes", out: "v2.4 notes drafted ✓" },
 ];
 
 type Line = { prompt: boolean; text: string };
@@ -20,7 +20,12 @@ export function RenConsole() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setLines(steps.flatMap((s) => [{ prompt: true, text: s.cmd }, { prompt: false, text: s.out }]));
+      setLines(
+        steps.flatMap((s) => [
+          { prompt: true, text: s.cmd },
+          { prompt: false, text: s.out },
+        ]),
+      );
       return;
     }
     let cancelled = false;
@@ -57,7 +62,9 @@ export function RenConsole() {
         <span className="h-2.5 w-2.5 rounded-full bg-[#3a4658]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#3a4658]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#3a4658]" />
-        <span className="ml-2 text-[12px] text-[var(--color-hero-muted)]">ren — trevillyan labs</span>
+        <span className="ml-2 text-[12px] text-[var(--color-hero-muted)]">
+          ren — trevillyan labs
+        </span>
       </div>
       <div className="min-h-[260px] space-y-1.5 p-5 leading-relaxed">
         {lines.map((l, i) =>
