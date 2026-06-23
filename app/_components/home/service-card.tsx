@@ -23,7 +23,7 @@ const CODE: Seg[] = [
   { t: "function ", c: "text-[var(--color-hero-accent)]" },
   { t: "shipIt", c: "text-[#e2c08d]" },
   { t: "() {\n", c: "text-[#8597ad]" },
-  { t: "  // works on my machine\n", c: "text-[#5f7488]" },
+  { t: "  // fueled by coffee & focus\n", c: "text-[#5f7488]" },
   { t: "  return ", c: "text-[var(--color-hero-accent)]" },
   { t: "deploy", c: "text-[#e2c08d]" },
   { t: "()\n", c: "text-[#8597ad]" },
@@ -173,50 +173,70 @@ function GraphMotif() {
   );
 }
 
-/* ── Products: NewsNook growth (animated bars) ───────────────────────── */
+/* ── Products: live KPI dashboard (fluctuating SaaS metrics) ──────────── */
 
-const BARS = [34, 46, 40, 58, 52, 68, 74, 92];
+type Kpi = { key: string; base: number; up: boolean; fmt: (v: number) => string };
+const KPIS: Kpi[] = [
+  { key: "MRR", base: 48.3, up: true, fmt: (v) => `$${v.toFixed(1)}k` },
+  { key: "NRR", base: 112, up: true, fmt: (v) => `${Math.round(v)}%` },
+  { key: "WAU", base: 12.4, up: true, fmt: (v) => `${v.toFixed(1)}k` },
+  { key: "LTV", base: 4.9, up: true, fmt: (v) => `$${v.toFixed(1)}k` },
+  { key: "CAC", base: 342, up: false, fmt: (v) => `$${Math.round(v)}` },
+];
 
-function ProductMotif({ shown }: { shown: boolean }) {
+function ProductMotif() {
+  const [vals, setVals] = useState<number[]>(() => KPIS.map((k) => k.base));
+  const [dirs, setDirs] = useState<number[]>(() => KPIS.map(() => 1));
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    const id = setInterval(() => {
+      setVals((prev) => {
+        const next = prev.map((v, i) => {
+          const k = KPIS[i];
+          const drift = (k.up ? 1 : -1) * 0.004;
+          const noise = (Math.random() - 0.5) * 0.03;
+          const nv = v * (1 + drift + noise);
+          return Math.max(k.base * 0.9, Math.min(k.base * 1.12, nv));
+        });
+        setDirs(next.map((v, i) => (v >= prev[i] ? 1 : -1)));
+        return next;
+      });
+    }, 1100);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <div className="relative h-24 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
-      <div className="flex items-center justify-between border-b border-[var(--color-line)] px-3 py-1.5">
-        <div className="flex gap-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
-        </div>
-        <span className="flex items-center gap-1 text-[10px] font-medium text-[#16a34a]">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="svc-pulse absolute inline-flex h-full w-full rounded-full bg-[#16a34a]" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
-          </span>
-          <i className="not-italic">▲ growth</i>
+    <div className="relative grid h-24 grid-cols-2 grid-rows-3 gap-x-3 gap-y-0.5 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white px-3 py-2 font-mono text-[10px]">
+      <div className="flex items-center gap-1 font-medium text-[#16a34a]">
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="svc-pulse absolute inline-flex h-full w-full rounded-full bg-[#16a34a]" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
         </span>
+        live
       </div>
-      <div className="flex h-[44px] items-end gap-1 px-3 pb-2">
-        {BARS.map((h, i) => (
-          <div
-            key={h}
-            className={`flex-1 rounded-sm origin-bottom transition-transform duration-700 ease-out ${
-              i === BARS.length - 1 ? "bg-brand" : "bg-[#bcd9fb]"
-            }`}
-            style={{
-              height: `${h}%`,
-              transform: shown ? "scaleY(1)" : "scaleY(0)",
-              transitionDelay: `${i * 70}ms`,
-            }}
-          />
-        ))}
-      </div>
+      {KPIS.map((k, i) => {
+        const good = k.up ? dirs[i] > 0 : dirs[i] < 0;
+        return (
+          <div key={k.key} className="flex items-center justify-between">
+            <span className="text-[var(--color-muted-2)]">{k.key}</span>
+            <span className="font-medium text-ink">
+              {k.fmt(vals[i])}{" "}
+              <span className={good ? "text-[#16a34a]" : "text-[#dc2626]"}>
+                {dirs[i] > 0 ? "▲" : "▼"}
+              </span>
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-function Motif({ kind, shown }: { kind: Service["motif"]; shown: boolean }) {
+function Motif({ kind }: { kind: Service["motif"] }) {
   if (kind === "code") return <CodeMotif />;
   if (kind === "graph") return <GraphMotif />;
-  return <ProductMotif shown={shown} />;
+  return <ProductMotif />;
 }
 
 export function ServiceCard({ service, index }: { service: Service; index: number }) {
@@ -279,7 +299,7 @@ export function ServiceCard({ service, index }: { service: Service; index: numbe
               "radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(21,131,250,0.10), transparent 70%)",
           }}
         />
-        <Motif kind={service.motif} shown={shown} />
+        <Motif kind={service.motif} />
         <div className="mt-5 flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
             <Icon name={service.icon} className="h-[18px] w-[18px]" />
