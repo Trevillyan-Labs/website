@@ -117,7 +117,7 @@ export const caseStudies: CaseStudy[] = [
     problem:
       "The founder of an early-stage industrial-IoT startup needed to get from concept to a real, shippable product for a prospective Fortune 50 enterprise client — and to a team that could build it.",
     approach:
-      "Hire #1, brought on as a contract product leader: defined the product, drove execution end-to-end, and stood up the founding engineering team.",
+      "Bill, hire #1, was brought on as a contract product leader: defined the product, drove execution end-to-end, and stood up the founding engineering team.",
     outcome: [
       "Shipped the MVP",
       "Built the founding engineering team",
