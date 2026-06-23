@@ -2,6 +2,7 @@ import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { withUtm } from "@/lib/utm";
 import Link from "next/link";
 
 export const metadata = pageMeta({
@@ -28,7 +29,11 @@ const products: Product[] = [
     summary:
       "An AI newsletter reader for thought leaders — built, shipped, and operated by the studio. Our clearest proof we run real software, not just ship it.",
     image: "/images/work/products/newsnook-project.webp",
-    href: site.newsnookUrl,
+    href: withUtm(site.newsnookUrl, {
+      medium: "referral",
+      campaign: "studio_site",
+      content: "products_page",
+    }),
     cta: "Visit newsnook.ai →",
     external: true,
   },
