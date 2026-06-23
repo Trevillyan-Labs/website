@@ -67,42 +67,88 @@ function CodeMotif() {
   );
 }
 
-/* ── Advise: live climbing sparkline ─────────────────────────────────── */
+/* ── Advise: live climbing sparkline (rAF, 60fps) ────────────────────── */
 
-const N = 16;
-const seedSeries = () => Array.from({ length: N }, (_, i) => 30 + i * 1.6);
+const GW = 120;
+const GH = 64;
+const GPAD = 10;
+const GN = 22;
+const GSTEP = GW / (GN - 2);
+const GPERIOD = 620; // ms per new sample
 
 function GraphMotif() {
-  const [vals, setVals] = useState<number[]>(seedSeries);
+  const polyRef = useRef<SVGPolylineElement>(null);
+  const areaRef = useRef<SVGPolygonElement>(null);
+  const dotRef = useRef<SVGCircleElement>(null);
+  const pulseRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
-    const id = setInterval(() => {
-      setVals((prev) => {
-        const last = prev[prev.length - 1];
-        const dip = Math.random() < 0.28;
-        const next = last + (dip ? -(3 + Math.random() * 5) : 2 + Math.random() * 4);
-        return [...prev.slice(1), next];
-      });
-    }, 320);
-    return () => clearInterval(id);
-  }, []);
+    const vals = Array.from({ length: GN }, (_, i) => 30 + i * 1.3);
+    let dispMin = Math.min(...vals);
+    let dispMax = Math.max(...vals);
 
-  const W = 120;
-  const H = 64;
-  const pad = 8;
-  const min = Math.min(...vals);
-  const max = Math.max(...vals);
-  const range = max - min || 1;
-  const x = (i: number) => (i / (N - 1)) * W;
-  const y = (v: number) => H - pad - ((v - min) / range) * (H - 2 * pad);
-  const pts = vals.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`);
-  const lastX = x(N - 1);
-  const lastY = y(vals[vals.length - 1]);
+    const nextVal = () => {
+      const last = vals[vals.length - 1];
+      const dip = Math.random() < 0.3;
+      return last + (dip ? -(2 + Math.random() * 5) : 1.5 + Math.random() * 4);
+    };
+
+    const render = (phase: number) => {
+      // Smoothly track the value window so the curve never jumps vertically.
+      const tMin = Math.min(...vals);
+      const tMax = Math.max(...vals);
+      dispMin += (tMin - dispMin) * 0.08;
+      dispMax += (tMax - dispMax) * 0.08;
+      const range = dispMax - dispMin || 1;
+      const yOf = (v: number) => GH - GPAD - ((v - dispMin) / range) * (GH - 2 * GPAD);
+
+      const pts: string[] = [];
+      for (let i = 0; i < GN; i++) {
+        const px = i * GSTEP - phase * GSTEP;
+        pts.push(`${px.toFixed(2)},${yOf(vals[i]).toFixed(2)}`);
+      }
+      const ptsStr = pts.join(" ");
+      polyRef.current?.setAttribute("points", ptsStr);
+      areaRef.current?.setAttribute("points", `${-GSTEP},${GH} ${ptsStr} ${GW + GSTEP},${GH}`);
+
+      // Dot pinned just inside the right edge, riding the curve smoothly.
+      const dotX = GW - 3;
+      const fi = dotX / GSTEP + phase;
+      const i0 = Math.max(0, Math.min(GN - 2, Math.floor(fi)));
+      const frac = Math.min(1, Math.max(0, fi - i0));
+      const dotY = yOf(vals[i0]) + (yOf(vals[i0 + 1]) - yOf(vals[i0])) * frac;
+      dotRef.current?.setAttribute("cx", `${dotX}`);
+      dotRef.current?.setAttribute("cy", `${dotY.toFixed(2)}`);
+      pulseRef.current?.setAttribute("cx", `${dotX}`);
+      pulseRef.current?.setAttribute("cy", `${dotY.toFixed(2)}`);
+    };
+
+    render(0); // draw immediately so there's never an empty frame
+    if (prefersReducedMotion()) return;
+
+    let raf = 0;
+    let last = 0;
+    let phase = 0;
+    const loop = (t: number) => {
+      if (!last) last = t;
+      const dt = Math.min(t - last, 64); // clamp after tab-throttle pauses
+      last = t;
+      phase += dt / GPERIOD;
+      while (phase >= 1) {
+        phase -= 1;
+        vals.shift();
+        vals.push(nextVal());
+      }
+      render(phase);
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <div className="relative h-24 overflow-hidden rounded-lg bg-[var(--color-surface-2)] p-3">
-      <svg viewBox={`0 0 ${W} ${H}`} className="h-full w-full" aria-hidden="true">
+      <svg viewBox={`0 0 ${GW} ${GH}`} className="h-full w-full" aria-hidden="true">
         <title>Live growth</title>
         <defs>
           <linearGradient id="svc-area" x1="0" y1="0" x2="0" y2="1">
@@ -110,17 +156,18 @@ function GraphMotif() {
             <stop offset="100%" stopColor="#1583fa" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <polygon points={`0,${H} ${pts.join(" ")} ${W},${H}`} fill="url(#svc-area)" />
+        <polygon ref={areaRef} points="" fill="url(#svc-area)" />
         <polyline
-          points={pts.join(" ")}
+          ref={polyRef}
+          points=""
           fill="none"
           stroke="#1583fa"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx={lastX} cy={lastY} r="3.5" fill="#1583fa" />
-        <circle cx={lastX} cy={lastY} r="3.5" fill="#1583fa" className="svc-pulse" />
+        <circle ref={dotRef} r="3.5" fill="#1583fa" />
+        <circle ref={pulseRef} r="3.5" fill="#1583fa" className="svc-pulse" />
       </svg>
     </div>
   );
@@ -134,13 +181,17 @@ function ProductMotif({ shown }: { shown: boolean }) {
   return (
     <div className="relative h-24 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
       <div className="flex items-center justify-between border-b border-[var(--color-line)] px-3 py-1.5">
-        <span className="text-[10px] font-medium text-brand">NewsNook</span>
+        <div className="flex gap-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
+        </div>
         <span className="flex items-center gap-1 text-[10px] font-medium text-[#16a34a]">
           <span className="relative flex h-1.5 w-1.5">
             <span className="svc-pulse absolute inline-flex h-full w-full rounded-full bg-[#16a34a]" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
           </span>
-          <i className="not-italic">▲ MRR</i>
+          <i className="not-italic">▲ growth</i>
         </span>
       </div>
       <div className="flex h-[44px] items-end gap-1 px-3 pb-2">
