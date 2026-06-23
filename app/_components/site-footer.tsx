@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { Container } from "@/app/_components/container";
 import { Logo } from "@/app/_components/logo";
+import { SocialIcons } from "@/app/_components/social-icons";
 import { nav, site } from "@/lib/site";
+import Link from "next/link";
 
 export function SiteFooter() {
   return (
@@ -13,6 +14,10 @@ export function SiteFooter() {
             <p className="mt-4 text-sm text-[var(--color-hero-muted)]">
               An independent software studio. We build and run software — ours and yours.
             </p>
+            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-[var(--color-hero-muted)]">
+              Follow us
+            </p>
+            <SocialIcons className="mt-3" />
           </div>
           <div className="flex gap-16">
             <div>
@@ -28,11 +33,6 @@ export function SiteFooter() {
                   </li>
                 ))}
                 <li>
-                  <Link href="/patents" className="hover:text-white">
-                    Patents
-                  </Link>
-                </li>
-                <li>
                   <Link href="/contact" className="hover:text-white">
                     Contact
                   </Link>
@@ -47,14 +47,6 @@ export function SiteFooter() {
                 <li>
                   <a href={site.newsnookUrl} className="hover:text-white">
                     NewsNook
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/williamtrevillyan/"
-                    className="hover:text-white"
-                  >
-                    LinkedIn
                   </a>
                 </li>
               </ul>

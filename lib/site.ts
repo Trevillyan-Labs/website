@@ -11,6 +11,16 @@ export const nav = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
+  { label: "Patents", href: "/patents" },
+] as const;
+
+export const socials = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/trevillyan-labs/about/",
+    icon: "linkedin",
+  },
+  { label: "X", href: "https://twitter.com/wgtrevillyan", icon: "x" },
 ] as const;
 
 export const offerings = [
