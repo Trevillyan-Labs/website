@@ -1,6 +1,8 @@
 import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
 import { pageMeta } from "@/lib/seo";
+import { site } from "@/lib/site";
+import { withUtm } from "@/lib/utm";
 import Link from "next/link";
 
 export const metadata = pageMeta({
@@ -96,7 +98,11 @@ export default function AboutPage() {
                   LinkedIn ↗
                 </a>
                 <a
-                  href="https://www.trevillyan.dev"
+                  href={withUtm(site.portfolioUrl, {
+                    medium: "referral",
+                    campaign: "studio_site",
+                    content: "about_bio",
+                  })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-lg border border-[var(--color-line)] bg-white px-4 py-2 text-[13px] font-medium text-ink transition-colors hover:border-brand hover:text-brand"
