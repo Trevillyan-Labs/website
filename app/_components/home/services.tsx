@@ -7,7 +7,7 @@ const services: Service[] = [
     icon: "Hammer",
     body: "Custom software development and web/portfolio builds.",
     detail: "MVPs · internal tools · sites",
-    motif: "terminal",
+    motif: "code",
     cta: { label: "Start a project →", href: "/services" },
   },
   {
@@ -15,7 +15,7 @@ const services: Service[] = [
     icon: "Compass",
     body: "Product & go-to-market execution for founders and early-stage startups.",
     detail: "product · PMF · raise · GTM",
-    motif: "trajectory",
+    motif: "graph",
     cta: { label: "Book a call →", href: "/contact?intent=advisory" },
   },
   {
@@ -23,7 +23,7 @@ const services: Service[] = [
     icon: "Package",
     body: "We build and operate our own (NewsNook, live today).",
     detail: "Proof we ship & run",
-    motif: "window",
+    motif: "product",
     cta: { label: "See NewsNook →", href: "/products/newsnook" },
   },
 ];
