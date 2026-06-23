@@ -123,7 +123,7 @@ export const caseStudies: CaseStudy[] = [
       "Built the founding engineering team",
       "Drove the product to 7-figure ARR",
     ],
-    role: "Contract Product & Program lead (first 6 months)",
+    role: "Contract Product Lead",
     gallery: [
       "/images/work/clip/clip-nexus-project.webp",
       "/images/work/clip/clip-telescript-project.webp",

@@ -40,11 +40,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <Container className="pb-14 pt-28 sm:pt-32">
           <Link
             href="/work"
-            className="text-[13px] text-[var(--color-hero-accent)] hover:text-white"
+            className="block w-fit text-[13px] text-[var(--color-hero-accent)] hover:text-white"
           >
             ← Work
           </Link>
-          <span className="mt-5 inline-block rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-[var(--color-hero-accent)]">
+          <span className="mt-8 inline-block rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-[var(--color-hero-accent)]">
             {study.tag}
           </span>
           <h1 className="mt-4 max-w-3xl text-3xl font-medium leading-tight sm:text-4xl">
