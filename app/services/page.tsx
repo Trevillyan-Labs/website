@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { Container } from "@/app/_components/container";
 import { Icon } from "@/app/_components/icon";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
 import { type Group, services } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
+import Link from "next/link";
 
 export const metadata = pageMeta({
   title: "Services",
@@ -15,8 +15,14 @@ export const metadata = pageMeta({
 
 const groups: { group: Group; blurb: string }[] = [
   { group: "Build", blurb: "Custom software and high-craft sites, shipped to production." },
-  { group: "Advise", blurb: "Product & go-to-market execution for founders and early-stage startups." },
-  { group: "Products", blurb: "We build and operate our own — proof we ship and run real software." },
+  {
+    group: "Advise",
+    blurb: "Product & go-to-market execution for founders and early-stage startups.",
+  },
+  {
+    group: "Products",
+    blurb: "We build and operate our own — proof we ship and run real software.",
+  },
 ];
 
 export default function ServicesPage() {
@@ -47,8 +53,10 @@ export default function ServicesPage() {
                 {items.map((s) => (
                   <div
                     key={s.slug}
-                    className={`flex flex-col rounded-xl border bg-white p-6 ${
-                      s.secondary ? "border-[var(--color-line)] opacity-90" : "border-[var(--color-line)]"
+                    className={`group relative flex flex-col rounded-xl border bg-white p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 ${
+                      s.secondary
+                        ? "border-[var(--color-line)] opacity-90"
+                        : "border-[var(--color-line)]"
                     }`}
                   >
                     <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
@@ -66,14 +74,17 @@ export default function ServicesPage() {
                     <ul className="mt-4 space-y-1.5">
                       {s.whatYouGet.map((w) => (
                         <li key={w} className="flex gap-2 text-[13px] text-ink">
-                          <span className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                          <span
+                            className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-brand"
+                            aria-hidden="true"
+                          />
                           {w}
                         </li>
                       ))}
                     </ul>
                     <Link
                       href={s.start.href}
-                      className="mt-5 text-[13px] font-medium text-brand hover:text-brand-hover"
+                      className="mt-5 text-[13px] font-medium text-brand after:absolute after:inset-0 hover:text-brand-hover"
                     >
                       {s.start.label} →
                     </Link>
@@ -90,11 +101,26 @@ export default function ServicesPage() {
           <h2 className="text-[1.6rem] font-medium text-ink">How engagements work</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-3">
             {[
-              { n: "01", t: "Tell us what you need", d: "A short note on the contact page — the problem, not a spec." },
-              { n: "02", t: "We scope it", d: "We come back with a clear, bounded next step and what it costs." },
-              { n: "03", t: "We ship", d: "A fixed-scope build, or an advisory cadence — run lean, at senior quality." },
+              {
+                n: "01",
+                t: "Tell us what you need",
+                d: "A short note on the contact page — the problem, not a spec.",
+              },
+              {
+                n: "02",
+                t: "We scope it",
+                d: "We come back with a clear, bounded next step and what it costs.",
+              },
+              {
+                n: "03",
+                t: "We ship",
+                d: "A fixed-scope build, or an advisory cadence — run lean, at senior quality.",
+              },
             ].map((step) => (
-              <div key={step.n} className="rounded-xl border border-[var(--color-line)] bg-white p-6">
+              <div
+                key={step.n}
+                className="rounded-xl border border-[var(--color-line)] bg-white p-6"
+              >
                 <p className="font-mono text-sm text-brand">{step.n}</p>
                 <h3 className="mt-3 text-base font-medium text-ink">{step.t}</h3>
                 <p className="mt-2 text-[13px] text-muted">{step.d}</p>

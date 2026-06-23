@@ -1,9 +1,9 @@
-import Link from "next/link";
 import type { CaseStudy } from "@/lib/content";
+import Link from "next/link";
 
 export function CaseStudyCard({ item }: { item: CaseStudy }) {
   return (
-    <article className="group overflow-hidden rounded-xl border border-[var(--color-line)] bg-white">
+    <article className="group relative overflow-hidden rounded-xl border border-[var(--color-line)] bg-white transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5">
       {item.image ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -35,7 +35,7 @@ export function CaseStudyCard({ item }: { item: CaseStudy }) {
         <p className="mt-2 text-[12.5px] leading-snug text-[#475569]">{item.summary}</p>
         <Link
           href={`/work/${item.slug}`}
-          className="mt-4 inline-block text-[12.5px] font-medium text-brand hover:text-brand-hover"
+          className="mt-4 inline-block text-[12.5px] font-medium text-brand after:absolute after:inset-0 hover:text-brand-hover"
         >
           Read case study →
         </Link>

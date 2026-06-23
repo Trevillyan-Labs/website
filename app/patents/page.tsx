@@ -30,7 +30,7 @@ export default function PatentsPage() {
                 href={p.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group overflow-hidden rounded-xl border border-[var(--color-line)] bg-white transition hover:border-[var(--color-brand)] hover:shadow-sm"
+                className="group overflow-hidden rounded-xl border border-[var(--color-line)] bg-white transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={p.image} alt={p.title} className="h-44 w-full object-cover" />

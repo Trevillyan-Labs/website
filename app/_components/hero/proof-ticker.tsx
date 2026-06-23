@@ -31,7 +31,6 @@ const stats: { value: React.ReactNode; label: string }[] = [
   { value: <CountUp to={13} />, label: "products shipped" },
   { value: "7-figure", label: "ARR delivered" },
   { value: <CountUp to={2} />, label: "issued patents" },
-  { value: "Live", label: "in production" },
 ];
 
 export function ProofTicker() {
