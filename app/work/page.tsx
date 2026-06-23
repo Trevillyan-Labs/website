@@ -26,7 +26,6 @@ export default function WorkPage() {
               <CaseStudyCard key={item.slug} item={item} />
             ))}
           </div>
-          <p className="mt-8 text-[13px] text-muted">More case studies coming soon.</p>
         </Container>
       </section>
     </>
