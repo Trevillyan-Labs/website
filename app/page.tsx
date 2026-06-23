@@ -24,8 +24,8 @@ export default function HomePage() {
       />
       <Hero />
       <Services />
-      <Work />
       <OperatedByRen />
+      <Work />
       <ClosingCta />
     </>
   );
