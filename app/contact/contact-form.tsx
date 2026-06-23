@@ -1,5 +1,6 @@
 "use client";
 
+import { site } from "@/lib/site";
 import { useState } from "react";
 
 const intents = [
@@ -47,6 +48,14 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
         <p className="mt-2 text-[15px] text-muted">
           We'll come back with a clear, scoped next step. Talk soon.
         </p>
+        <a
+          href={site.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex text-[14px] font-medium text-brand hover:text-brand-hover"
+        >
+          Want to talk sooner? Book a call →
+        </a>
       </div>
     );
   }

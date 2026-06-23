@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Container } from "@/app/_components/container";
 import { Icon } from "@/app/_components/icon";
+import Link from "next/link";
 
 const services = [
   {
@@ -15,7 +15,7 @@ const services = [
     icon: "Compass",
     body: "Product & go-to-market execution for founders and early-stage startups.",
     detail: "product · PMF · raise · GTM",
-    cta: { label: "Book a call →", href: "/services" },
+    cta: { label: "Book a call →", href: "/contact?intent=advisory" },
   },
   {
     title: "Products",

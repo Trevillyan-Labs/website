@@ -3,6 +3,7 @@ export const site = {
   domain: "trevillyanlabs.io",
   url: "https://www.trevillyanlabs.io",
   newsnookUrl: "https://www.newsnook.ai",
+  bookingUrl: "https://calendly.com/bill-trevillyanlabs/30min",
   tagline:
     "Trevillyan Labs ships custom software for clients, operates its own products, and advises founders and early-stage startups on product and go-to-market execution.",
 } as const;
