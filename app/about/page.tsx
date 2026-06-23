@@ -25,10 +25,9 @@ export default function AboutPage() {
             <div>
               <h2 className="text-[1.4rem] font-medium text-ink">Who's behind it</h2>
               <p className="mt-4 text-[15px] leading-relaxed text-ink">
-                The studio is run by <strong className="font-medium">Bill Trevillyan</strong>, a
-                product leader and 3x startup founder. He's built and shipped products for early-
-                and mid-stage startups, holds two issued US patents, and now builds and operates
-                Trevillyan Labs' own products alongside select client engagements.
+                The studio is run by <strong className="font-medium">Bill Trevillyan</strong>. He
+                builds and operates Trevillyan Labs' own products alongside select client
+                engagements.
               </p>
               <p className="mt-4 text-[15px] leading-relaxed text-ink">
                 Day to day, the studio is operated with <strong className="font-medium">Ren</strong>
