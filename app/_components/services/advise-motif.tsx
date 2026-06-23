@@ -108,26 +108,74 @@ function GrowthMotif() {
   );
 }
 
-/* Applying AI for leaders — placeholder pending a new direction. */
+/* Applying AI for leaders — one operator + AI workers = multiplied output. */
+const AGENTS = 4;
+const AGENT_Y = [22, 40, 58, 76];
+
 function AiMotif() {
+  const [active, setActive] = useState(reduced() ? AGENTS : 0);
+
+  useEffect(() => {
+    if (reduced()) return;
+    let i = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      i = i >= AGENTS ? 0 : i + 1;
+      setActive(i);
+      timer = setTimeout(tick, i === 0 ? 1500 : i >= AGENTS ? 2000 : 640);
+    };
+    timer = setTimeout(tick, 700);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="flex h-32 items-center justify-center rounded-lg bg-[var(--color-surface-2)]">
-      <svg viewBox="0 0 100 100" className="h-24 w-24" aria-hidden="true">
-        <title>AI agent network</title>
-        <g className="svc-spin">
-          <line x1="50" y1="50" x2="50" y2="14" stroke="#c2d6ef" strokeWidth="1.5" />
-          <line x1="50" y1="50" x2="81" y2="68" stroke="#c2d6ef" strokeWidth="1.5" />
-          <line x1="50" y1="50" x2="19" y2="68" stroke="#c2d6ef" strokeWidth="1.5" />
-          <circle cx="50" cy="14" r="5" fill="#e8f1fd" stroke="#1583fa" strokeWidth="1.5" />
-          <circle cx="81" cy="68" r="5" fill="#e8f1fd" stroke="#1583fa" strokeWidth="1.5" />
-          <circle cx="19" cy="68" r="5" fill="#e8f1fd" stroke="#1583fa" strokeWidth="1.5" />
-        </g>
-        <circle cx="50" cy="50" r="9" fill="#1583fa" className="svc-pulse" />
-        <circle cx="50" cy="50" r="9" fill="#1583fa" />
-        <path
-          d="M50 43.5 L51.8 48.2 L56.5 50 L51.8 51.8 L50 56.5 L48.2 51.8 L43.5 50 L48.2 48.2 Z"
-          fill="#ffffff"
-        />
+    <div className="flex h-32 items-center justify-center overflow-hidden rounded-lg bg-[var(--color-surface-2)]">
+      <svg viewBox="0 0 200 100" className="h-full w-full" aria-hidden="true">
+        <title>Throughput multiplier</title>
+        {/* operator → agent connectors */}
+        {AGENT_Y.map((y, i) => (
+          <line
+            key={`l-${y}`}
+            x1="40"
+            y1="50"
+            x2="90"
+            y2={y}
+            stroke={i < active ? "#1583fa" : "#c2d6ef"}
+            strokeWidth="1.5"
+          />
+        ))}
+        {/* operator (you) */}
+        <circle cx="27" cy="50" r="13" fill="#1583fa" />
+        <circle cx="27" cy="46" r="3.4" fill="#ffffff" />
+        <path d="M20.5 56 a6.5 6.5 0 0 1 13 0" fill="#ffffff" />
+        <text x="27" y="80" textAnchor="middle" className="font-mono" fontSize="8" fill="#64748b">
+          you
+        </text>
+        {/* AI agent workers */}
+        {AGENT_Y.map((y, i) => {
+          const on = i < active;
+          return (
+            <circle
+              key={`a-${y}`}
+              cx="96"
+              cy={y}
+              r="6"
+              fill={on ? "#e8f1fd" : "#ffffff"}
+              stroke={on ? "#1583fa" : "#c2d6ef"}
+              strokeWidth="1.5"
+            />
+          );
+        })}
+        {active > 0 ? (
+          <circle cx="96" cy={AGENT_Y[active - 1]} r="6" fill="#1583fa" className="svc-pulse" />
+        ) : null}
+        {/* multiplied output */}
+        <text x="158" y="46" textAnchor="middle" fontSize="26" fontWeight="500" fill="#1583fa">
+          {active + 1}×
+        </text>
+        <text x="158" y="62" textAnchor="middle" className="font-mono" fontSize="8" fill="#64748b">
+          output
+        </text>
       </svg>
     </div>
   );
