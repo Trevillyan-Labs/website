@@ -91,10 +91,12 @@ function GraphMotif() {
     let dispMin = Math.min(...trail);
     let dispMax = Math.max(...trail);
 
+    // Persistent upward drift (with occasional dips) so the trend clearly
+    // climbs up-and-to-the-right; the auto-fit window keeps it framed.
     const nextTarget = (prev: number) => {
-      const dip = Math.random() < 0.3;
-      const d = dip ? -(7 + Math.random() * 10) : 5 + Math.random() * 9;
-      return Math.max(12, Math.min(88, prev + d));
+      const dip = Math.random() < 0.22;
+      const d = dip ? -(4 + Math.random() * 6) : 5 + Math.random() * 7;
+      return prev + d;
     };
 
     const render = (subPx: number) => {
@@ -137,22 +139,34 @@ function GraphMotif() {
       }
       lead += (target - lead) * (1 - Math.exp(-dt / TAU));
 
-      // Auto-fit the value window, eased so the curve never snaps vertically.
+      // Auto-fit the value window (with headroom), eased so the climbing
+      // curve never snaps vertically and never leaves the box.
       let tMin = lead;
       let tMax = lead;
       for (const v of trail) {
         if (v < tMin) tMin = v;
         if (v > tMax) tMax = v;
       }
-      const a = 1 - Math.exp(-dt / 150);
-      dispMin += (tMin - dispMin) * a;
-      dispMax += (tMax - dispMax) * a;
+      const padV = (tMax - tMin || 1) * 0.15;
+      const a = 1 - Math.exp(-dt / 130);
+      dispMin += (tMin - padV - dispMin) * a;
+      dispMax += (tMax + padV - dispMax) * a;
 
       subPx += (SPEED * dt) / 1000;
       while (subPx >= GCOLSTEP) {
         subPx -= GCOLSTEP;
         trail.shift();
         trail.push(lead);
+      }
+
+      // Rebase to keep values bounded over long sessions (visual is unchanged).
+      if (lead > 1e6) {
+        const off = lead - 100;
+        for (let i = 0; i < trail.length; i++) trail[i] -= off;
+        lead -= off;
+        target -= off;
+        dispMin -= off;
+        dispMax -= off;
       }
 
       render(subPx);
@@ -214,14 +228,12 @@ function ProductMotif() {
   return (
     <div className="flex h-24 flex-col gap-1.5 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white px-3 py-2">
       <div className="flex items-center justify-between text-[9px]">
-        <span className="flex items-center gap-1 font-medium text-[#16a34a]">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="svc-pulse absolute inline-flex h-full w-full rounded-full bg-[#16a34a]" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
-          </span>
-          live
+        <span className="flex gap-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-line)]" />
         </span>
-        <span className="text-[var(--color-muted-2)]">vs prev 7d</span>
+        <span className="text-[var(--color-muted-2)]">% change · 7d</span>
       </div>
       <div className="grid flex-1 grid-cols-5 gap-1.5">
         {KPIS.map((k, i) => {
