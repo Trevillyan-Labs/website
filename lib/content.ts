@@ -95,6 +95,8 @@ export type CaseStudy = {
   dark: boolean;
   /** Screenshot/photo for the card + detail header. Falls back to a styled block when absent. */
   image?: string;
+  /** Live product URL — renders a "Visit …" CTA on the detail page when set. */
+  liveUrl?: string;
   summary: string;
   problem: string;
   approach: string;
@@ -141,10 +143,10 @@ export const caseStudies: CaseStudy[] = [
     problem:
       "Most people communicate poorly in the moments that matter — interviews, presentations, sales calls — and the usual fix (Toastmasters and the like) is slow and inconvenient.",
     approach:
-      "Designed and built a consumer web app: a humanized AI speech coach that records, evaluates, and trains, powered by LLMs and a retrieval-augmented-generation system — grounded in 70+ customer-discovery interviews.",
+      "Designed and built a consumer web app: a humanized AI speech coach that records, evaluates, and trains, powered by LLMs and a retrieval-augmented-generation system.",
     outcome: [
       "Acquired 2,300+ users",
-      "Raised $25K from Jason Calacanis & LAUNCH (convertible note)",
+      "Raised $25K from Jason Calacanis & LAUNCH",
       "Shipped an LLM + RAG product end-to-end",
     ],
     role: "Founder — product, build, go-to-market, and fundraising",
@@ -156,10 +158,11 @@ export const caseStudies: CaseStudy[] = [
     dark: true,
     image: "/images/work/products/newsnook-project.webp",
     summary: "An AI newsletter reader — built, shipped, and live in production.",
+    liveUrl: "https://www.newsnook.ai",
     problem:
       "Knowledge workers drown in newsletters. We wanted a product that lets people read more of what matters without the inbox overload — and that proves the studio ships and operates real software.",
     approach:
-      "Built and operate NewsNook ourselves on Next.js / TypeScript / Supabase: the marketing site, the product app, and the day-to-day operation — run lean with AI.",
+      "Built and operate NewsNook ourselves: the marketing site, the product app, and the day-to-day operation — run lean with AI.",
     outcome: [
       "Live in production at newsnook.ai",
       "Owned end-to-end: built, shipped, and operated",

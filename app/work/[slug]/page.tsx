@@ -3,6 +3,7 @@ import { Container } from "@/app/_components/container";
 import { JsonLd } from "@/app/_components/json-ld";
 import { caseStudies } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
+import { withUtm } from "@/lib/utm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -53,6 +54,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] text-[var(--color-muted-2)]">{study.summary}</p>
           <p className="mt-3 text-[13px] text-[var(--color-hero-muted)]">{study.role}</p>
+          {study.liveUrl ? (
+            <a
+              href={withUtm(study.liveUrl, {
+                medium: "referral",
+                campaign: "studio_site",
+                content: "case_study",
+              })}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white transition hover:bg-brand-hover"
+            >
+              Visit {new URL(study.liveUrl).hostname.replace(/^www\./, "")} →
+            </a>
+          ) : null}
         </Container>
       </section>
 
