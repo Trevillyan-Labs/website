@@ -2,6 +2,7 @@ import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { withUtm } from "@/lib/utm";
 
 export const metadata = pageMeta({
   title: "NewsNook — our product",
@@ -19,7 +20,13 @@ export default function NewsNookPage() {
         intro="The AI newsletter reader for thought leaders — built, shipped, and operated by Trevillyan Labs. It's live in production today."
       >
         <a
-          href={site.newsnookUrl}
+          href={withUtm(site.newsnookUrl, {
+            medium: "referral",
+            campaign: "studio_site",
+            content: "newsnook_spotlight",
+          })}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-7 inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-hover"
         >
           Visit newsnook.ai →
@@ -34,7 +41,8 @@ export default function NewsNookPage() {
               This page isn't a sales pitch — NewsNook sells itself on its own site. On{" "}
               <span className="font-medium">trevillyanlabs.io</span>, NewsNook is{" "}
               <span className="font-medium">proof</span>: the studio doesn't just build software for
-              clients, it builds and <em>operates</em> its own product, end-to-end, run lean with AI.
+              clients, it builds and <em>operates</em> its own product, end-to-end, run lean with
+              AI.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-ink">
               That ownership is what we bring to client work — we ship like owners, not contractors,
@@ -46,7 +54,10 @@ export default function NewsNookPage() {
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {[
               { t: "Live in production", d: "Real users, real product — not a demo." },
-              { t: "Built & operated by us", d: "Next.js / TypeScript / Supabase, run day-to-day." },
+              {
+                t: "Built & operated by us",
+                d: "Next.js / TypeScript / Supabase, run day-to-day.",
+              },
               { t: "Run lean on AI", d: "The agentic operating model we advise on." },
             ].map((f) => (
               <div key={f.t} className="rounded-xl border border-[var(--color-line)] bg-white p-6">

@@ -93,7 +93,8 @@ URL parity for `/patents`, `/team`, `/contact`, `/privacy-policy`, `/terms` is m
   | 1 | **Clip Automation** | "Startup MVP" | **Lead — most impactful.** Contract PM/PgM (first 6 months) — **delivered the MVP, the founding engineering team, and 7-figure ARR**. (Lead with delivered value, not "leadership.") |
   | 2 | **NewsNook** | "Our product" | Live; strongest proof of shipping + operating an owned SaaS |
   | 3 | **Journalism portfolio** | "Website" | **Client unnamed on the site** — present as "Journalism portfolio," no client name (internally: the Faith engagement) |
-  | 4 | **Verbaly** | TBD | **Content needed from Bill** (what/role/outcome/shareable) |
+  | 2.5 | **Verbaly** | "AI web app" | AI speech coach — 2,300+ users, $25K from Jason Calacanis/LAUNCH, LLM+RAG (content sourced from trevillyan.dev) |
+  | 5 | **trevillyan.dev** | "Website" | Founder's own dev portfolio (also the source of the carousel screencaps) |
 - **Type-tag labels** revised for clarity (prospect-plain): "Our product" · "Website" · "Startup MVP"
   (not "owned product / web build / product & program," which read unclearly).
 - **Held back — KPMG.** Do **not** publish a KPMG case study yet — needs KPMG's permission first.

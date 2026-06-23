@@ -51,6 +51,188 @@ body {
   background: color-mix(in srgb, var(--color-brand) 22%, transparent);
 }
 
+/* ── Hero motion ─────────────────────────────────────────── */
+
+/* Entrance: staggered rise/fade. Add inline animation-delay per element. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal {
+  opacity: 0;
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Aurora: slow-drifting brand-blue light. */
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 140%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+.aurora::before {
+  width: 52%;
+  height: 60%;
+  left: -8%;
+  top: -10%;
+  background: radial-gradient(circle, #1583fa 0%, transparent 70%);
+  animation: aurora-a 18s ease-in-out infinite alternate;
+}
+.aurora::after {
+  width: 46%;
+  height: 55%;
+  right: 6%;
+  top: 8%;
+  background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+  opacity: 0.32;
+  animation: aurora-b 22s ease-in-out infinite alternate;
+}
+@keyframes aurora-a {
+  to {
+    transform: translate3d(12%, 10%, 0) scale(1.15);
+  }
+}
+@keyframes aurora-b {
+  to {
+    transform: translate3d(-10%, 6%, 0) scale(1.1);
+  }
+}
+
+/* Carousel: vertical loops + edge fade. */
+@keyframes hero-scroll-up {
+  to {
+    transform: translateY(-50%);
+  }
+}
+@keyframes hero-scroll-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/* Long, gentle vertical fade for the carousel — images dissolve into the
+   background with no perceptible edge. Applied to a box much wider than the
+   cards so the (border-box) mask never clips the sides. */
+.carousel-fade {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 22%,
+    #000 78%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* Blinking caret for the Ren console */
+@keyframes term-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+.term-caret {
+  animation: term-blink 1s steps(1) infinite;
+}
+
+/* Pulsing accent dot (service-card motifs) */
+@keyframes svc-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.svc-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svc-pulse 2s ease-out infinite;
+}
+
+/* Sheen sweep across the web/portfolio motif hero block */
+@keyframes svc-shimmer {
+  0% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+.svc-shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  background-size: 220% 100%;
+  animation: svc-shimmer 2.8s ease-in-out infinite;
+}
+
+/* Orbiting agent network (advise AI motif) */
+@keyframes svc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.svc-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svc-spin 9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-caret {
+    animation: none;
+  }
+  .svc-pulse {
+    animation: none;
+  }
+  .svc-shimmer {
+    animation: none;
+  }
+  .svc-spin {
+    animation: none;
+  }
+  .reveal {
+    animation: none;
+    opacity: 1;
+  }
+  .aurora::before,
+  .aurora::after {
+    animation: none;
+  }
+}
+
 /* Legal pages — faithful rich-text from the original export */
 .legal {
   color: var(--color-ink);
@@ -67,14 +249,33 @@ body {
   line-height: 1.3;
   color: var(--color-ink);
 }
-.legal h2 { font-size: 1.35rem; }
+.legal h2 {
+  font-size: 1.35rem;
+}
 .legal h3,
-.legal h5 { font-size: 1.1rem; }
+.legal h5 {
+  font-size: 1.1rem;
+}
 .legal h4,
-.legal h6 { font-size: 1rem; }
-.legal p { margin: 0.75rem 0; }
+.legal h6 {
+  font-size: 1rem;
+}
+.legal p {
+  margin: 0.75rem 0;
+}
 .legal ul,
-.legal ol { margin: 0.75rem 0; padding-left: 1.25rem; list-style: disc; }
-.legal li { margin: 0.35rem 0; }
-.legal a { color: var(--color-brand); text-decoration: underline; }
-.legal strong { font-weight: 500; }
+.legal ol {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.legal li {
+  margin: 0.35rem 0;
+}
+.legal a {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
+.legal strong {
+  font-weight: 500;
+}

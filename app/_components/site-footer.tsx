@@ -1,6 +1,9 @@
-import Link from "next/link";
 import { Container } from "@/app/_components/container";
+import { Logo } from "@/app/_components/logo";
+import { SocialIcons } from "@/app/_components/social-icons";
 import { nav, site } from "@/lib/site";
+import { withUtm } from "@/lib/utm";
+import Link from "next/link";
 
 export function SiteFooter() {
   return (
@@ -8,13 +11,14 @@ export function SiteFooter() {
       <Container className="py-14">
         <div className="flex flex-col justify-between gap-10 sm:flex-row">
           <div className="max-w-sm">
-            <div className="flex items-center gap-2.5">
-              <span className="block h-3.5 w-3.5 rounded-[3px] bg-brand" aria-hidden="true" />
-              <span className="text-[15px] font-medium text-white">Trevillyan Labs</span>
-            </div>
-            <p className="mt-3 text-sm text-[var(--color-hero-muted)]">
+            <Logo tone="dark" />
+            <p className="mt-4 text-sm text-[var(--color-hero-muted)]">
               An independent software studio. We build and run software — ours and yours.
             </p>
+            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-[var(--color-hero-muted)]">
+              Follow us
+            </p>
+            <SocialIcons className="mt-3" />
           </div>
           <div className="flex gap-16">
             <div>
@@ -22,13 +26,15 @@ export function SiteFooter() {
                 Studio
               </p>
               <ul className="mt-3 space-y-2 text-sm">
-                {nav.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="hover:text-white">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
+                {[...nav]
+                  .sort((a, b) => (a.href === "/about" ? -1 : b.href === "/about" ? 1 : 0))
+                  .map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="hover:text-white">
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
                 <li>
                   <Link href="/contact" className="hover:text-white">
                     Contact
@@ -42,16 +48,17 @@ export function SiteFooter() {
               </p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li>
-                  <a href={site.newsnookUrl} className="hover:text-white">
-                    NewsNook
-                  </a>
-                </li>
-                <li>
                   <a
-                    href="https://www.linkedin.com/in/williamtrevillyan/"
+                    href={withUtm(site.newsnookUrl, {
+                      medium: "referral",
+                      campaign: "studio_site",
+                      content: "footer",
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-white"
                   >
-                    LinkedIn
+                    NewsNook
                   </a>
                 </li>
               </ul>

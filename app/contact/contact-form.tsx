@@ -1,5 +1,6 @@
 "use client";
 
+import { site } from "@/lib/site";
 import { useState } from "react";
 
 const intents = [
@@ -7,6 +8,7 @@ const intents = [
   { value: "web", label: "A web / portfolio site" },
   { value: "advisory", label: "Advisory — product & go-to-market execution" },
   { value: "applying-ai", label: "Applying AI in my org" },
+  { value: "licensing", label: "Patent licensing" },
   { value: "newsnook", label: "About NewsNook" },
   { value: "other", label: "Something else" },
 ];
@@ -29,7 +31,8 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error((await res.json().catch(() => ({})))?.error || "Something went wrong.");
+      if (!res.ok)
+        throw new Error((await res.json().catch(() => ({})))?.error || "Something went wrong.");
       setStatus("sent");
       form.reset();
     } catch (err) {
@@ -45,11 +48,20 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
         <p className="mt-2 text-[15px] text-muted">
           We'll come back with a clear, scoped next step. Talk soon.
         </p>
+        <a
+          href={site.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex text-[14px] font-medium text-brand hover:text-brand-hover"
+        >
+          Want to talk sooner? Book a call →
+        </a>
       </div>
     );
   }
 
-  const field = "w-full rounded-lg border border-[var(--color-line)] bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
+  const field =
+    "w-full rounded-lg border border-[var(--color-line)] bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
@@ -60,7 +72,13 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
         </label>
         <label className="block">
           <span className="text-[13px] font-medium text-ink">Email</span>
-          <input name="email" type="email" required className={`mt-1.5 ${field}`} autoComplete="email" />
+          <input
+            name="email"
+            type="email"
+            required
+            className={`mt-1.5 ${field}`}
+            autoComplete="email"
+          />
         </label>
       </div>
       <label className="block">
