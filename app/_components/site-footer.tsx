@@ -25,13 +25,15 @@ export function SiteFooter() {
                 Studio
               </p>
               <ul className="mt-3 space-y-2 text-sm">
-                {nav.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="hover:text-white">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
+                {[...nav]
+                  .sort((a, b) => (a.href === "/about" ? -1 : b.href === "/about" ? 1 : 0))
+                  .map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="hover:text-white">
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
                 <li>
                   <Link href="/contact" className="hover:text-white">
                     Contact
