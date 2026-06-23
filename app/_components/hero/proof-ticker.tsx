@@ -28,9 +28,9 @@ function CountUp({ to }: { to: number }) {
 }
 
 const stats: { value: React.ReactNode; label: string }[] = [
+  { value: "7-figure", label: "ARR delivered" },
   { value: <CountUp to={4} />, label: "products built" },
   { value: <CountUp to={6} />, label: "sites shipped" },
-  { value: "7-figure", label: "ARR delivered" },
   { value: <CountUp to={2} />, label: "issued patents" },
 ];
 
