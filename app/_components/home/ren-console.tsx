@@ -66,24 +66,39 @@ export function RenConsole() {
           ren — trevillyan labs
         </span>
       </div>
-      <div className="min-h-[260px] space-y-1.5 p-5 leading-relaxed">
-        {lines.map((l, i) =>
-          l.prompt ? (
-            <p key={i} className="text-white">
-              <span className="text-[var(--color-hero-accent)]">ren ›</span> {l.text}
+      <div className="relative">
+        {/* Invisible ghost of the full transcript reserves the final height so
+            the box is correctly sized from the first frame and never shifts. */}
+        <div className="invisible space-y-1.5 p-5 leading-relaxed" aria-hidden="true">
+          {steps.flatMap((s, i) => [
+            <p key={`g-cmd-${i}`} className="text-white">
+              <span>ren ›</span> {s.cmd}
+            </p>,
+            <p key={`g-out-${i}`} className="pl-5">
+              {s.out}
+            </p>,
+          ])}
+        </div>
+        {/* Animated transcript, layered over the ghost. */}
+        <div className="absolute inset-0 space-y-1.5 p-5 leading-relaxed">
+          {lines.map((l, i) =>
+            l.prompt ? (
+              <p key={i} className="text-white">
+                <span className="text-[var(--color-hero-accent)]">ren ›</span> {l.text}
+              </p>
+            ) : (
+              <p key={i} className="pl-5 text-[#8fb89b]">
+                {l.text}
+              </p>
+            ),
+          )}
+          {typing !== "" || lines.length === 0 ? (
+            <p className="text-white">
+              <span className="text-[var(--color-hero-accent)]">ren ›</span> {typing}
+              <span className="term-caret ml-0.5 inline-block h-[1.05em] w-[7px] translate-y-[2px] bg-[var(--color-hero-accent)]" />
             </p>
-          ) : (
-            <p key={i} className="pl-5 text-[#8fb89b]">
-              {l.text}
-            </p>
-          ),
-        )}
-        {typing !== "" || lines.length === 0 ? (
-          <p className="text-white">
-            <span className="text-[var(--color-hero-accent)]">ren ›</span> {typing}
-            <span className="term-caret ml-0.5 inline-block h-[1.05em] w-[7px] translate-y-[2px] bg-[var(--color-hero-accent)]" />
-          </p>
-        ) : null}
+          ) : null}
+        </div>
       </div>
     </div>
   );
