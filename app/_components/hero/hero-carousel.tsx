@@ -161,23 +161,16 @@ export function HeroCarousel() {
   const colB = [...b, ...b];
   return (
     <div className="relative h-[440px] sm:h-[520px]">
-      <div
-        className="grid h-full grid-cols-2 gap-4"
-        // Hard-clip top/bottom for containment; huge L/R insets keep the sides free.
-        style={{ clipPath: "inset(0px -2000px)" }}
-      >
-        <Column shots={colA} dir="up" align="right" />
-        <Column shots={colB} dir="down" align="left" />
+      {/* The mask clips to this box's edges, so make the box far wider than the
+          cards (negative L/R insets) — vertical fade with no side clipping. The
+          images fade to transparent, revealing the real background (no color
+          matching, no visible line). */}
+      <div className="carousel-fade absolute inset-y-0 -inset-x-[300px]">
+        <div className="mx-[300px] grid h-full grid-cols-2 gap-4">
+          <Column shots={colA} dir="up" align="right" />
+          <Column shots={colB} dir="down" align="left" />
+        </div>
       </div>
-      {/* Soft gradient overlays hide the clip line — images fade into the bg. */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[200] h-20 bg-gradient-to-b from-[var(--color-hero)] to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[200] h-20 bg-gradient-to-t from-[var(--color-hero)] to-transparent"
-        aria-hidden="true"
-      />
     </div>
   );
 }

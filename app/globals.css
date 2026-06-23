@@ -127,6 +127,24 @@ body {
     transform: translateY(0);
   }
 }
+/* Long, gentle vertical fade for the carousel — images dissolve into the
+   background with no perceptible edge. Applied to a box much wider than the
+   cards so the (border-box) mask never clips the sides. */
+.carousel-fade {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 22%,
+    #000 78%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     animation: none;
