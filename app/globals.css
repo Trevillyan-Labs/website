@@ -178,11 +178,34 @@ body {
   animation: svc-pulse 2s ease-out infinite;
 }
 
+/* Sheen sweep across the web/portfolio motif hero block */
+@keyframes svc-shimmer {
+  0% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+.svc-shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  background-size: 220% 100%;
+  animation: svc-shimmer 2.8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .term-caret {
     animation: none;
   }
   .svc-pulse {
+    animation: none;
+  }
+  .svc-shimmer {
     animation: none;
   }
   .reveal {

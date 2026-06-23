@@ -22,10 +22,10 @@ export const services: Service[] = [
     icon: "Code",
     title: "Contract software development",
     summary:
-      "Full-stack web apps in the studio's own stack (Next.js / React / TypeScript; Python for scripting) — MVPs, internal tools, and custom products taken from idea to production.",
+      "Full-stack web apps taken from idea to production — MVPs, internal tools, and custom products, built on the right stack for each project.",
     whatYouGet: [
       "A scoped build, shipped to production",
-      "The same stack we run our own product on",
+      "The same engineering rigor as our own product",
       "A founder-level partner, not a ticket-taker",
     ],
     start: { label: "Start a project", href: "/contact?intent=build" },

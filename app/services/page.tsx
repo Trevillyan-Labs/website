@@ -2,6 +2,7 @@ import { Container } from "@/app/_components/container";
 import { Icon } from "@/app/_components/icon";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
+import { BuildMotif } from "@/app/_components/services/build-motif";
 import { type Group, services } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
@@ -59,9 +60,15 @@ export default function ServicesPage() {
                         : "border-[var(--color-line)]"
                     }`}
                   >
-                    <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
-                      <Icon name={s.icon} className="h-[22px] w-[22px]" />
-                    </span>
+                    {s.group === "Build" ? (
+                      <BuildMotif
+                        kind={s.slug === "contract-software-development" ? "app" : "site"}
+                      />
+                    ) : (
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
+                        <Icon name={s.icon} className="h-[22px] w-[22px]" />
+                      </span>
+                    )}
                     <div className="mt-4 flex items-center gap-2">
                       <h3 className="text-lg font-medium text-ink">{s.title}</h3>
                       {s.secondary ? (
