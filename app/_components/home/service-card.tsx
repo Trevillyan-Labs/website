@@ -72,9 +72,8 @@ function CodeMotif() {
 const GW = 120;
 const GH = 64;
 const GPAD = 10;
-const GN = 22;
-const GSTEP = GW / (GN - 2);
-const GPERIOD = 620; // ms per new sample
+const GCOLS = 46;
+const GCOLSTEP = GW / (GCOLS - 1);
 
 function GraphMotif() {
   const polyRef = useRef<SVGPolylineElement>(null);
@@ -83,63 +82,80 @@ function GraphMotif() {
   const pulseRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
-    const vals = Array.from({ length: GN }, (_, i) => 30 + i * 1.3);
-    let dispMin = Math.min(...vals);
-    let dispMax = Math.max(...vals);
+    // A trail of past values that scrolls left, with a smoothly-eased leading
+    // value. The dot IS the line's leading end — nothing is drawn in front of
+    // it — so the line and dot move in perfect sync (no leading-edge jolt).
+    const trail = Array.from({ length: GCOLS }, (_, i) => 30 + (i * 40) / (GCOLS - 1));
+    let lead = trail[GCOLS - 1];
+    let target = lead;
+    let dispMin = Math.min(...trail);
+    let dispMax = Math.max(...trail);
 
-    const nextVal = () => {
-      const last = vals[vals.length - 1];
+    const nextTarget = (prev: number) => {
       const dip = Math.random() < 0.3;
-      return last + (dip ? -(2 + Math.random() * 5) : 1.5 + Math.random() * 4);
+      const d = dip ? -(7 + Math.random() * 10) : 5 + Math.random() * 9;
+      return Math.max(12, Math.min(88, prev + d));
     };
 
-    const render = (phase: number) => {
-      // Smoothly track the value window so the curve never jumps vertically.
-      const tMin = Math.min(...vals);
-      const tMax = Math.max(...vals);
-      dispMin += (tMin - dispMin) * 0.08;
-      dispMax += (tMax - dispMax) * 0.08;
+    const render = (subPx: number) => {
       const range = dispMax - dispMin || 1;
       const yOf = (v: number) => GH - GPAD - ((v - dispMin) / range) * (GH - 2 * GPAD);
-
       const pts: string[] = [];
-      for (let i = 0; i < GN; i++) {
-        const px = i * GSTEP - phase * GSTEP;
-        pts.push(`${px.toFixed(2)},${yOf(vals[i]).toFixed(2)}`);
+      for (let i = 0; i < GCOLS; i++) {
+        pts.push(`${(i * GCOLSTEP - subPx).toFixed(2)},${yOf(trail[i]).toFixed(2)}`);
       }
+      const leadY = yOf(lead);
+      pts.push(`${GW},${leadY.toFixed(2)}`); // leading edge == the dot
       const ptsStr = pts.join(" ");
       polyRef.current?.setAttribute("points", ptsStr);
-      areaRef.current?.setAttribute("points", `${-GSTEP},${GH} ${ptsStr} ${GW + GSTEP},${GH}`);
-
-      // Dot pinned just inside the right edge, riding the curve smoothly.
-      const dotX = GW - 3;
-      const fi = dotX / GSTEP + phase;
-      const i0 = Math.max(0, Math.min(GN - 2, Math.floor(fi)));
-      const frac = Math.min(1, Math.max(0, fi - i0));
-      const dotY = yOf(vals[i0]) + (yOf(vals[i0 + 1]) - yOf(vals[i0])) * frac;
-      dotRef.current?.setAttribute("cx", `${dotX}`);
-      dotRef.current?.setAttribute("cy", `${dotY.toFixed(2)}`);
-      pulseRef.current?.setAttribute("cx", `${dotX}`);
-      pulseRef.current?.setAttribute("cy", `${dotY.toFixed(2)}`);
+      areaRef.current?.setAttribute("points", `${(-subPx).toFixed(2)},${GH} ${ptsStr} ${GW},${GH}`);
+      dotRef.current?.setAttribute("cx", `${GW}`);
+      dotRef.current?.setAttribute("cy", `${leadY.toFixed(2)}`);
+      pulseRef.current?.setAttribute("cx", `${GW}`);
+      pulseRef.current?.setAttribute("cy", `${leadY.toFixed(2)}`);
     };
 
     render(0); // draw immediately so there's never an empty frame
     if (prefersReducedMotion()) return;
 
+    const TARGET_EVERY = 240; // ms between new targets
+    const SPEED = 46; // px/s scroll
+    const TAU = 70; // ms ease constant for the leading value
     let raf = 0;
     let last = 0;
-    let phase = 0;
+    let tAccum = 0;
+    let subPx = 0;
     const loop = (t: number) => {
       if (!last) last = t;
       const dt = Math.min(t - last, 64); // clamp after tab-throttle pauses
       last = t;
-      phase += dt / GPERIOD;
-      while (phase >= 1) {
-        phase -= 1;
-        vals.shift();
-        vals.push(nextVal());
+
+      tAccum += dt;
+      while (tAccum >= TARGET_EVERY) {
+        tAccum -= TARGET_EVERY;
+        target = nextTarget(target);
       }
-      render(phase);
+      lead += (target - lead) * (1 - Math.exp(-dt / TAU));
+
+      // Auto-fit the value window, eased so the curve never snaps vertically.
+      let tMin = lead;
+      let tMax = lead;
+      for (const v of trail) {
+        if (v < tMin) tMin = v;
+        if (v > tMax) tMax = v;
+      }
+      const a = 1 - Math.exp(-dt / 150);
+      dispMin += (tMin - dispMin) * a;
+      dispMax += (tMax - dispMax) * a;
+
+      subPx += (SPEED * dt) / 1000;
+      while (subPx >= GCOLSTEP) {
+        subPx -= GCOLSTEP;
+        trail.shift();
+        trail.push(lead);
+      }
+
+      render(subPx);
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
@@ -173,62 +189,60 @@ function GraphMotif() {
   );
 }
 
-/* ── Products: live KPI dashboard (fluctuating SaaS metrics) ──────────── */
+/* ── Products: live SaaS metrics — % change cards ────────────────────── */
 
-type Kpi = { key: string; base: number; up: boolean; fmt: (v: number) => string };
+type Kpi = { key: string; up: boolean };
 const KPIS: Kpi[] = [
-  { key: "MRR", base: 48.3, up: true, fmt: (v) => `$${v.toFixed(1)}k` },
-  { key: "NRR", base: 112, up: true, fmt: (v) => `${Math.round(v)}%` },
-  { key: "WAU", base: 12.4, up: true, fmt: (v) => `${v.toFixed(1)}k` },
-  { key: "LTV", base: 4.9, up: true, fmt: (v) => `$${v.toFixed(1)}k` },
-  { key: "CAC", base: 342, up: false, fmt: (v) => `$${Math.round(v)}` },
+  { key: "MRR", up: true },
+  { key: "NRR", up: true },
+  { key: "WAU", up: true },
+  { key: "LTV", up: true },
+  { key: "CAC", up: false },
 ];
 
 function ProductMotif() {
-  const [vals, setVals] = useState<number[]>(() => KPIS.map((k) => k.base));
-  const [dirs, setDirs] = useState<number[]>(() => KPIS.map(() => 1));
+  const [pcts, setPcts] = useState<number[]>(() => KPIS.map((k) => (k.up ? 1 : -1) * 2.4));
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
     const id = setInterval(() => {
-      setVals((prev) => {
-        const next = prev.map((v, i) => {
-          const k = KPIS[i];
-          const drift = (k.up ? 1 : -1) * 0.004;
-          const noise = (Math.random() - 0.5) * 0.03;
-          const nv = v * (1 + drift + noise);
-          return Math.max(k.base * 0.9, Math.min(k.base * 1.12, nv));
-        });
-        setDirs(next.map((v, i) => (v >= prev[i] ? 1 : -1)));
-        return next;
-      });
-    }, 1100);
+      setPcts(KPIS.map((k) => (k.up ? 1.4 : -1.4) + (Math.random() - 0.5) * 5.5));
+    }, 1200);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <div className="relative grid h-24 grid-cols-2 grid-rows-3 gap-x-3 gap-y-0.5 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white px-3 py-2 font-mono text-[10px]">
-      <div className="flex items-center gap-1 font-medium text-[#16a34a]">
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="svc-pulse absolute inline-flex h-full w-full rounded-full bg-[#16a34a]" />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
+    <div className="flex h-24 flex-col gap-1.5 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white px-3 py-2">
+      <div className="flex items-center justify-between text-[9px]">
+        <span className="flex items-center gap-1 font-medium text-[#16a34a]">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="svc-pulse absolute inline-flex h-full w-full rounded-full bg-[#16a34a]" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
+          </span>
+          live
         </span>
-        live
+        <span className="text-[var(--color-muted-2)]">vs prev 7d</span>
       </div>
-      {KPIS.map((k, i) => {
-        const good = k.up ? dirs[i] > 0 : dirs[i] < 0;
-        return (
-          <div key={k.key} className="flex items-center justify-between">
-            <span className="text-[var(--color-muted-2)]">{k.key}</span>
-            <span className="font-medium text-ink">
-              {k.fmt(vals[i])}{" "}
-              <span className={good ? "text-[#16a34a]" : "text-[#dc2626]"}>
-                {dirs[i] > 0 ? "▲" : "▼"}
+      <div className="grid flex-1 grid-cols-5 gap-1.5">
+        {KPIS.map((k, i) => {
+          const p = pcts[i];
+          const good = k.up ? p > 0 : p < 0;
+          return (
+            <div
+              key={k.key}
+              className="flex flex-col items-center justify-center gap-0.5 rounded-md border border-[var(--color-line)] bg-[var(--color-surface)]"
+            >
+              <span className="text-[9px] text-[var(--color-muted-2)]">{k.key}</span>
+              <span
+                className={`font-mono text-[10px] font-medium ${good ? "text-[#16a34a]" : "text-[#dc2626]"}`}
+              >
+                {p > 0 ? "+" : ""}
+                {p.toFixed(1)}%
               </span>
-            </span>
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
