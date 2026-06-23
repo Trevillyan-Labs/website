@@ -193,6 +193,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Journalism portfolio",
     tag: "Website",
     dark: false,
+    image: "/images/work/journalism-portfolio.webp",
     summary: "A writer's portfolio site, designed and shipped end-to-end.",
     problem:
       "A working journalist needed a credible, well-crafted home for their writing and appearances — without managing a build or wrestling a site builder.",
