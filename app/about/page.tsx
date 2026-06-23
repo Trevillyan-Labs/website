@@ -82,9 +82,9 @@ export default function AboutPage() {
                 select client work.
               </p>
               <p className="mt-4 text-[15px] leading-relaxed text-muted">
-                Away from the keyboard, he runs on good coffee, gets out for backpacking and tennis,
-                and will happily travel (or cook) for cuisines from anywhere in the world. He&apos;s
-                based in Mountain View, CA — the heart of Silicon Valley.
+                Away from the keyboard, he lives off of good coffee, gets out for backpacking and
+                tennis, and will happily travel (or cook) for cuisines from anywhere in the world.
+                He&apos;s based in Mountain View, CA — the heart of Silicon Valley.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
@@ -109,15 +109,31 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-[var(--color-surface-2)]">
-        <Container className="py-14 text-center">
-          <h2 className="text-[1.4rem] font-medium text-ink">Want to work together?</h2>
-          <Link
-            href="/contact"
-            className="mt-5 inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-hover"
-          >
-            Work with us
-          </Link>
+      <section className="bg-[linear-gradient(135deg,#1583fa_0%,#0f5fc0_100%)] text-white">
+        <Container className="py-20 text-center">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="text-2xl font-medium leading-tight sm:text-3xl">
+              Let&apos;s build something worth shipping.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-white/85">
+              Whether you need a product built or a sharper path to market, tell us what you&apos;re
+              working on — we&apos;ll come back with a clear, scoped next step.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex items-center rounded-lg bg-white px-6 py-3 text-[14px] font-medium text-[var(--color-brand)] transition hover:bg-white/90"
+              >
+                Work with us →
+              </Link>
+              <Link
+                href="/work"
+                className="inline-flex items-center rounded-lg border border-white/40 px-6 py-3 text-[14px] font-medium text-white transition hover:bg-white/10"
+              >
+                See the work →
+              </Link>
+            </div>
+          </div>
         </Container>
       </section>
     </>
