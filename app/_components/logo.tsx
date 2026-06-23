@@ -8,7 +8,7 @@ export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
       <img
         src={src}
         alt="Trevillyan Labs"
-        className="h-7 w-auto origin-left transition duration-300 ease-out group-hover:scale-[1.04] group-hover:[filter:drop-shadow(0_0_10px_rgba(21,131,250,0.55))]"
+        className="h-7 w-auto opacity-70 transition-opacity duration-300 ease-out group-hover:opacity-100"
       />
     </Link>
   );
