@@ -51,11 +51,7 @@ export default function ServicesPage() {
                 {items.map((s) => (
                   <div
                     key={s.slug}
-                    className={`group relative flex flex-col rounded-xl border bg-white p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 ${
-                      s.secondary
-                        ? "border-[var(--color-line)] opacity-90"
-                        : "border-[var(--color-line)]"
-                    }`}
+                    className="group relative flex flex-col rounded-xl border border-[var(--color-line)] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5"
                   >
                     {s.group === "Build" ? (
                       <BuildMotif
@@ -70,14 +66,7 @@ export default function ServicesPage() {
                         <Icon name={s.icon} className="h-[22px] w-[22px]" />
                       </span>
                     )}
-                    <div className="mt-4 flex items-center gap-2">
-                      <h3 className="text-lg font-medium text-ink">{s.title}</h3>
-                      {s.secondary ? (
-                        <span className="rounded-full bg-[var(--color-surface-2)] px-2 py-0.5 text-[11px] text-muted">
-                          secondary
-                        </span>
-                      ) : null}
-                    </div>
+                    <h3 className="mt-4 text-lg font-medium text-ink">{s.title}</h3>
                     <p className="mt-3 text-[14px] leading-relaxed text-[#475569]">{s.summary}</p>
                     <ul className="mt-4 space-y-1.5">
                       {s.whatYouGet.map((w) => (

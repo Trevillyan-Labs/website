@@ -64,14 +64,13 @@ export const services: Service[] = [
     icon: "Sparkles",
     title: "Applying AI for leaders",
     summary:
-      "A secondary line: advising leaders on where agents, assistants, automation, and tooling fit — and what they can't do. The studio runs on agentic AI itself, which is the proof.",
+      "Advising leaders on where agents, assistants, automation, and tooling fit — and what they can't do. The studio runs on agentic AI itself, which is the proof.",
     whatYouGet: [
       "A practical, hype-free read on AI",
       "Where agents and automation fit your work",
       "What to try, and what to skip",
     ],
     start: { label: "Book a call", href: "/contact?intent=applying-ai" },
-    secondary: true,
   },
   {
     slug: "indie-saas",
