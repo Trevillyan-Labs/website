@@ -50,42 +50,6 @@ export default function PatentsPage() {
         </Container>
       </section>
 
-      {/* Licensing CTA */}
-      <section className="bg-[var(--color-hero)] text-white">
-        <Container className="py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[13px] font-medium uppercase tracking-widest text-[var(--color-hero-accent)]">
-              Licensing
-            </p>
-            <h2 className="mt-4 text-2xl font-medium leading-tight sm:text-3xl">
-              Interested in licensing this IP?
-            </h2>
-            <p className="mt-5 text-[15px] leading-relaxed text-[var(--color-hero-muted)]">
-              Both patents are issued and actively maintained. If your business operates in fluid
-              detection, smart textiles, IoT sensing, or adjacent technology — reach out. We&apos;re
-              open to licensing discussions with companies that can put the IP to work.
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-hero-muted)]">
-              William Trevillyan (the named inventor) handles all licensing inquiries directly.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link
-                href="/contact?intent=licensing"
-                className="inline-flex items-center rounded-lg bg-[var(--color-brand)] px-6 py-3 text-[14px] font-medium text-white transition hover:bg-[var(--color-brand-hover)]"
-              >
-                Inquire about licensing →
-              </Link>
-              <a
-                href="mailto:bill@trevillyanlabs.io?subject=Patent Licensing Inquiry"
-                className="inline-flex items-center text-[14px] text-[var(--color-hero-muted)] transition hover:text-white"
-              >
-                Or email directly
-              </a>
-            </div>
-          </div>
-        </Container>
-      </section>
-
       {/* Technology summary */}
       <section className="bg-[var(--color-surface)]">
         <Container className="py-16">
@@ -102,6 +66,33 @@ export default function PatentsPage() {
               Potential applications include leak detection in data centers, industrial facilities,
               smart buildings, smart textiles, medical monitoring, and consumer IoT devices.
             </p>
+          </div>
+        </Container>
+      </section>
+
+      {/* Licensing CTA */}
+      <section className="bg-[var(--color-hero)] text-white">
+        <Container className="py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-[13px] font-medium uppercase tracking-widest text-[var(--color-hero-accent)]">
+              Licensing
+            </p>
+            <h2 className="mt-4 text-2xl font-medium leading-tight sm:text-3xl">
+              Interested in licensing this IP?
+            </h2>
+            <p className="mt-5 text-[15px] leading-relaxed text-[var(--color-hero-muted)]">
+              Both patents are issued and actively maintained. If your business operates in fluid
+              detection, smart textiles, IoT sensing, or adjacent technology — reach out. We&apos;re
+              open to licensing discussions with companies that can put the IP to work.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/contact?intent=licensing"
+                className="inline-flex items-center rounded-lg bg-[var(--color-brand)] px-6 py-3 text-[14px] font-medium text-white transition hover:bg-[var(--color-brand-hover)]"
+              >
+                Inquire about licensing →
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
