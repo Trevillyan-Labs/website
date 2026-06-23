@@ -125,6 +125,24 @@ export const caseStudies: CaseStudy[] = [
     role: "Contract Product & Program lead (first 6 months)",
   },
   {
+    slug: "verbaly",
+    title: "Verbaly",
+    tag: "AI web app",
+    dark: false,
+    image: "/images/work/products/verbaly-web-app-project.webp",
+    summary: "An AI speech coach — built, launched to 2,300+ users, and funded by Jason Calacanis.",
+    problem:
+      "Most people communicate poorly in the moments that matter — interviews, presentations, sales calls — and the usual fix (Toastmasters and the like) is slow and inconvenient.",
+    approach:
+      "Designed and built a consumer web app: a humanized AI speech coach that records, evaluates, and trains, powered by LLMs and a retrieval-augmented-generation system — grounded in 70+ customer-discovery interviews.",
+    outcome: [
+      "Acquired 2,300+ users",
+      "Raised $25K from Jason Calacanis & LAUNCH (convertible note)",
+      "Shipped an LLM + RAG product end-to-end",
+    ],
+    role: "Founder — product, build, go-to-market, and fundraising",
+  },
+  {
     slug: "newsnook",
     title: "NewsNook",
     tag: "Our product",

@@ -145,7 +145,25 @@ body {
   mask-size: 100% 100%;
 }
 
+/* Blinking caret for the Ren console */
+@keyframes term-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+.term-caret {
+  animation: term-blink 1s steps(1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .term-caret {
+    animation: none;
+  }
   .reveal {
     animation: none;
     opacity: 1;

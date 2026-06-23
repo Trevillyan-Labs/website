@@ -1,5 +1,6 @@
 import { ClosingCta } from "@/app/_components/home/cta";
 import { Hero } from "@/app/_components/home/hero";
+import { OperatedByRen } from "@/app/_components/home/operated-by-ren";
 import { Services } from "@/app/_components/home/services";
 import { Work } from "@/app/_components/home/work";
 import { site } from "@/lib/site";
@@ -24,6 +25,7 @@ export default function HomePage() {
       <Hero />
       <Services />
       <Work />
+      <OperatedByRen />
       <ClosingCta />
     </>
   );

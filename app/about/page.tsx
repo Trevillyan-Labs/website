@@ -10,19 +10,6 @@ export const metadata = pageMeta({
   path: "/about",
 });
 
-const patents = [
-  {
-    id: "US 11,788,918 B2",
-    title: "Fluid Detection Fabric: A Method and System for Detecting a Leak",
-    date: "Oct 17, 2023",
-  },
-  {
-    id: "US 12,123,807 B2",
-    title: "Fluid Detection Fabric: Apparatus",
-    date: "Oct 22, 2024",
-  },
-];
-
 export default function AboutPage() {
   return (
     <>
@@ -73,17 +60,15 @@ export default function AboutPage() {
         <Container className="py-16">
           <h2 className="text-[1.4rem] font-medium text-ink">Patents</h2>
           <p className="mt-2 max-w-2xl text-[15px] text-muted">
-            Issued IP from the founder's invention work — proof of the capability, not the headline.
+            Two issued US patents from the founder's invention work — proof of the capability, not the
+            headline.
           </p>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {patents.map((p) => (
-              <div key={p.id} className="rounded-xl border border-[var(--color-line)] bg-white p-6">
-                <p className="font-mono text-[13px] text-brand">{p.id}</p>
-                <h3 className="mt-2 text-base font-medium text-ink">{p.title}</h3>
-                <p className="mt-2 text-[13px] text-muted">Published {p.date}</p>
-              </div>
-            ))}
-          </div>
+          <Link
+            href="/patents"
+            className="mt-6 inline-flex rounded-lg border border-[var(--color-line)] bg-white px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-brand hover:text-brand"
+          >
+            View patents →
+          </Link>
         </Container>
       </section>
 
