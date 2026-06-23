@@ -22,7 +22,7 @@ export const services: Service[] = [
     icon: "Code",
     title: "Contract software development",
     summary:
-      "Full-stack web apps taken from idea to production — MVPs, internal tools, and custom products, built on the right stack for each project.",
+      "Full-stack applications taken from idea to production — MVPs, internal tools, and custom products, built on the right stack for each project.",
     whatYouGet: [
       "A scoped build, shipped to production",
       "The same engineering rigor as our own product",
@@ -36,7 +36,7 @@ export const services: Service[] = [
     icon: "Globe",
     title: "Web & portfolio builds",
     summary:
-      "Focused, high-craft marketing and portfolio sites, handled end-to-end — design, build, and maintain — so you look credible online without running a project.",
+      "Focused, high-craft marketing and portfolio sites — designed, built, and maintained end-to-end, so you get a polished online presence without having to manage the work yourself.",
     whatYouGet: [
       "Design and build, end-to-end",
       "Fast, modern, and easy to update",

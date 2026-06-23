@@ -9,7 +9,8 @@ const reduced = () =>
 const STEPS = [
   { t: "$ build app", c: "text-[var(--color-hero-accent)]" },
   { t: "✓ compiled · 142 modules", c: "text-[#8fb89b]" },
-  { t: "✓ 86 tests passed", c: "text-[#8fb89b]" },
+  { t: "✓ 3,840 tests passed", c: "text-[#8fb89b]" },
+  { t: "✓ 763 security checks passed", c: "text-[#8fb89b]" },
   { t: "✓ shipped to production", c: "text-[#8fb89b]" },
 ];
 
@@ -30,7 +31,7 @@ function AppMotif() {
   }, []);
 
   return (
-    <div className="relative h-32 overflow-hidden rounded-lg bg-[var(--color-hero)] p-4 font-mono text-[11px] leading-relaxed">
+    <div className="relative h-36 overflow-hidden rounded-lg bg-[var(--color-hero)] p-4 font-mono text-[11px] leading-relaxed">
       <div className="mb-2.5 flex gap-1.5">
         <span className="h-2 w-2 rounded-full bg-[#3a4658]" />
         <span className="h-2 w-2 rounded-full bg-[#3a4658]" />
@@ -55,7 +56,7 @@ function AppMotif() {
 /* Web & portfolio builds — a polished browser mockup with a sheen sweep. */
 function SiteMotif() {
   return (
-    <div className="relative h-32 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
+    <div className="relative h-36 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
       <div className="flex items-center gap-1.5 border-b border-[var(--color-line)] px-3 py-2">
         <span className="h-2 w-2 rounded-full bg-[var(--color-line)]" />
         <span className="h-2 w-2 rounded-full bg-[var(--color-line)]" />

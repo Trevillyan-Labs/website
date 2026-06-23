@@ -111,16 +111,19 @@ export default function ServicesPage() {
             {[
               {
                 n: "01",
+                icon: "MessageSquare",
                 t: "Tell us what you need",
                 d: "A short note on the contact page — the problem, not a spec.",
               },
               {
                 n: "02",
+                icon: "ClipboardList",
                 t: "We scope it",
                 d: "We come back with a clear, bounded next step and what it costs.",
               },
               {
                 n: "03",
+                icon: "Rocket",
                 t: "We ship",
                 d: "A fixed-scope build, or an advisory cadence — run lean, at senior quality.",
               },
@@ -129,8 +132,13 @@ export default function ServicesPage() {
                 key={step.n}
                 className="rounded-xl border border-[var(--color-line)] bg-white p-6"
               >
-                <p className="font-mono text-sm text-brand">{step.n}</p>
-                <h3 className="mt-3 text-base font-medium text-ink">{step.t}</h3>
+                <div className="flex items-center justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">
+                    <Icon name={step.icon} className="h-[22px] w-[22px]" />
+                  </span>
+                  <span className="font-mono text-sm text-[var(--color-muted-2)]">{step.n}</span>
+                </div>
+                <h3 className="mt-4 text-base font-medium text-ink">{step.t}</h3>
                 <p className="mt-2 text-[13px] text-muted">{step.d}</p>
               </div>
             ))}

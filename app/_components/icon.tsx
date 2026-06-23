@@ -1,9 +1,11 @@
 import {
+  ClipboardList,
   Code,
   Compass,
   Globe,
   Hammer,
   type LucideIcon,
+  MessageSquare,
   Package,
   Rocket,
   Sparkles,
@@ -17,6 +19,8 @@ const map: Record<string, LucideIcon> = {
   Globe,
   Rocket,
   Sparkles,
+  MessageSquare,
+  ClipboardList,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {
