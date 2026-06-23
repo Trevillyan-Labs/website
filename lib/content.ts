@@ -100,6 +100,8 @@ export type CaseStudy = {
   approach: string;
   outcome: string[];
   role: string;
+  /** Optional reference images shown as a gallery on the detail page. */
+  gallery?: string[];
 };
 
 // Order matters — Clip Automation leads (most impactful). KPMG is held back
@@ -110,18 +112,26 @@ export const caseStudies: CaseStudy[] = [
     title: "Clip Automation",
     tag: "Startup MVP",
     dark: true,
-    image: "/images/work/products/clip-nexus-project.webp",
+    image: "/images/work/clip/clip360-project.webp",
     summary: "Delivered the MVP, the founding engineering team, and 7-figure ARR.",
     problem:
-      "An early-stage industrial-IoT startup needed to get from concept to a real, shippable product — and to a team that could build it — without the months of overhead a traditional hire-and-ramp takes.",
+      "The founder of an early-stage industrial-IoT startup needed to get from concept to a real, shippable product for a prospective Fortune 50 enterprise client — and to a team that could build it.",
     approach:
-      "Embedded as the contract product and program lead for the first six months: defined the product, drove execution end-to-end, and stood up the founding engineering team.",
+      "Hire #1, brought on as a contract product leader: defined the product, drove execution end-to-end, and stood up the founding engineering team.",
     outcome: [
       "Shipped the MVP",
       "Built the founding engineering team",
       "Drove the product to 7-figure ARR",
     ],
     role: "Contract Product & Program lead (first 6 months)",
+    gallery: [
+      "/images/work/clip/clip-nexus-project.webp",
+      "/images/work/clip/clip-telescript-project.webp",
+      "/images/work/clip/clip-real-time-map.webp",
+      "/images/work/clip/clip-equipment-analysis.webp",
+      "/images/work/clip/clip-nexus-server-rack.webp",
+      "/images/work/clip/clip-360-sign-in.webp",
+    ],
   },
   {
     slug: "verbaly",

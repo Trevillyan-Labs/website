@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Container } from "@/app/_components/container";
 import { JsonLd } from "@/app/_components/json-ld";
 import { caseStudies } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -38,7 +38,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       />
       <section className="bg-[var(--color-hero)] text-white">
         <Container className="pb-14 pt-28 sm:pt-32">
-          <Link href="/work" className="text-[13px] text-[var(--color-hero-accent)] hover:text-white">
+          <Link
+            href="/work"
+            className="text-[13px] text-[var(--color-hero-accent)] hover:text-white"
+          >
             ← Work
           </Link>
           <span className="mt-5 inline-block rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-[var(--color-hero-accent)]">
@@ -64,25 +67,53 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           ) : null}
           <div className="grid gap-12 md:grid-cols-3">
             <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">The problem</h2>
+              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
+                The problem
+              </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-ink">{study.problem}</p>
             </div>
             <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">The approach</h2>
+              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
+                The approach
+              </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-ink">{study.approach}</p>
             </div>
             <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">The outcome</h2>
+              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
+                The outcome
+              </h2>
               <ul className="mt-3 space-y-2">
                 {study.outcome.map((o) => (
                   <li key={o} className="flex gap-2 text-[15px] text-ink">
-                    <span className="mt-2.5 block h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                    <span
+                      className="mt-2.5 block h-1 w-1 shrink-0 rounded-full bg-brand"
+                      aria-hidden="true"
+                    />
                     {o}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
+
+          {study.gallery && study.gallery.length > 0 ? (
+            <div className="mt-16">
+              <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
+                A closer look
+              </h2>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {study.gallery.map((src) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`${study.title} — reference`}
+                    className="aspect-[4/3] w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-surface-2)] object-cover"
+                  />
+                ))}
+              </div>
+            </div>
+          ) : null}
         </Container>
       </section>
 
