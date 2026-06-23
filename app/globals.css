@@ -198,6 +198,18 @@ body {
   animation: svc-shimmer 2.8s ease-in-out infinite;
 }
 
+/* Orbiting agent network (advise AI motif) */
+@keyframes svc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.svc-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svc-spin 9s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .term-caret {
     animation: none;
@@ -206,6 +218,9 @@ body {
     animation: none;
   }
   .svc-shimmer {
+    animation: none;
+  }
+  .svc-spin {
     animation: none;
   }
   .reveal {

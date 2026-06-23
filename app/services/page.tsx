@@ -2,6 +2,7 @@ import { Container } from "@/app/_components/container";
 import { Icon } from "@/app/_components/icon";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
+import { AdviseMotif } from "@/app/_components/services/advise-motif";
 import { BuildMotif } from "@/app/_components/services/build-motif";
 import { type Group, services } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
@@ -20,10 +21,6 @@ const groups: { group: Group; blurb: string }[] = [
     group: "Advise",
     blurb: "Product & go-to-market execution for founders and early-stage startups.",
   },
-  {
-    group: "Products",
-    blurb: "We build and operate our own — proof we ship and run real software.",
-  },
 ];
 
 export default function ServicesPage() {
@@ -34,13 +31,13 @@ export default function ServicesPage() {
           "@context": "https://schema.org",
           "@type": "Service",
           provider: { "@type": "Organization", name: "Trevillyan Labs" },
-          serviceType: services.map((s) => s.title),
+          serviceType: services.filter((s) => s.group !== "Products").map((s) => s.title),
         }}
       />
       <PageHeader
         eyebrow="Services"
         title="Hire the studio — to build, or to advise."
-        intro="Three ways to work with us. Each one starts with a clear, scoped next step — so you know exactly what you're getting before you commit."
+        intro="Two ways to work with us. Each one starts with a clear, scoped next step — so you know exactly what you're getting before you commit."
       />
 
       {groups.map((g, i) => {
@@ -63,6 +60,10 @@ export default function ServicesPage() {
                     {s.group === "Build" ? (
                       <BuildMotif
                         kind={s.slug === "contract-software-development" ? "app" : "site"}
+                      />
+                    ) : s.group === "Advise" ? (
+                      <AdviseMotif
+                        kind={s.slug === "product-and-gtm-execution" ? "growth" : "ai"}
                       />
                     ) : (
                       <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-brand-tint)] text-brand">

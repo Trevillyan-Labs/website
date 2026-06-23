@@ -29,16 +29,16 @@ export function Hero() {
               className="reveal mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--color-muted-2)]"
               style={{ animationDelay: "0.22s" }}
             >
-              Trevillyan Labs ships custom software for clients, operates its own products, and advises
-              founders and early-stage startups on product and go-to-market execution.
+              Trevillyan Labs ships custom software for clients, operates its own products, and
+              advises founders and early-stage startups on product and go-to-market execution.
             </p>
             <div
               className="reveal mt-8 flex flex-wrap items-center gap-3"
               style={{ animationDelay: "0.32s" }}
             >
               <Button href="/contact">Work with us</Button>
-              <Button href="/products/newsnook" variant="outline">
-                See what we ship → NewsNook
+              <Button href="/products" variant="outline">
+                See what we ship →
               </Button>
             </div>
             <div className="reveal mt-10" style={{ animationDelay: "0.42s" }}>

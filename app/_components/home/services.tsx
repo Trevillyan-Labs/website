@@ -24,7 +24,7 @@ const services: Service[] = [
     body: "We build and operate our own (NewsNook, live today).",
     detail: "Proof we ship & run",
     motif: "product",
-    cta: { label: "See NewsNook →", href: "/products/newsnook" },
+    cta: { label: "See our products →", href: "/products" },
   },
 ];
 

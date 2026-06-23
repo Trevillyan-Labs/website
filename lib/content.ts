@@ -85,7 +85,7 @@ export const services: Service[] = [
       "Product instincts from running our own",
       "A live product you can go try",
     ],
-    start: { label: "See NewsNook", href: "/products/newsnook" },
+    start: { label: "See our products", href: "/products" },
   },
 ];
 
