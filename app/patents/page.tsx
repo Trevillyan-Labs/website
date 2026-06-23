@@ -17,7 +17,7 @@ export default function PatentsPage() {
       <PageHeader
         eyebrow="Issued IP"
         title="Patents"
-        intro="Two issued US patents from the founder's invention work. Proof of deep technical capability — and available for commercial licensing."
+        intro="Two issued US patents. Proof of deep technical capability — and available for commercial licensing."
       />
 
       {/* Patent cards */}
