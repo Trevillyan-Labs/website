@@ -20,9 +20,29 @@ export default function PatentsPage() {
         intro="Two issued US patents. Proof of deep technical capability — and available for commercial licensing."
       />
 
+      {/* Technology summary */}
+      <section className="bg-white">
+        <Container className="pt-16 pb-10">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="text-lg font-medium text-[var(--color-ink)]">The technology</h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
+              These patents cover a fluid detection system using conductive fabric: a multi-layer
+              textile that detects liquid presence and pinpoints leak location via an electrical
+              pathway formed by the liquid itself. The architecture spans the detection fabric, the
+              sensing methodology, and the control apparatus — providing broad coverage across
+              applications.
+            </p>
+            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
+              Potential applications include leak detection in data centers, industrial facilities,
+              smart buildings, smart textiles, medical monitoring, and consumer IoT devices.
+            </p>
+          </div>
+        </Container>
+      </section>
+
       {/* Patent cards */}
       <section className="bg-white">
-        <Container className="py-16">
+        <Container className="pt-6 pb-16">
           <div className="grid gap-6 md:grid-cols-2">
             {patents.map((p) => (
               <a
@@ -50,37 +70,17 @@ export default function PatentsPage() {
         </Container>
       </section>
 
-      {/* Technology summary */}
-      <section className="bg-[var(--color-surface)]">
-        <Container className="py-16">
-          <div className="mx-auto max-w-2xl">
-            <h2 className="text-lg font-medium text-[var(--color-ink)]">The technology</h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
-              These patents cover a fluid detection system using conductive fabric: a multi-layer
-              textile that detects liquid presence and pinpoints leak location via an electrical
-              pathway formed by the liquid itself. The architecture spans the detection fabric, the
-              sensing methodology, and the control apparatus — providing broad coverage across
-              applications.
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
-              Potential applications include leak detection in data centers, industrial facilities,
-              smart buildings, smart textiles, medical monitoring, and consumer IoT devices.
-            </p>
-          </div>
-        </Container>
-      </section>
-
       {/* Licensing CTA */}
-      <section className="bg-[var(--color-hero)] text-white">
+      <section className="bg-[linear-gradient(135deg,#1583fa_0%,#0f5fc0_100%)] text-white">
         <Container className="py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[13px] font-medium uppercase tracking-widest text-[var(--color-hero-accent)]">
+            <p className="text-[13px] font-medium uppercase tracking-widest text-white/70">
               Licensing
             </p>
             <h2 className="mt-4 text-2xl font-medium leading-tight sm:text-3xl">
               Interested in licensing this IP?
             </h2>
-            <p className="mt-5 text-[15px] leading-relaxed text-[var(--color-hero-muted)]">
+            <p className="mt-5 text-[15px] leading-relaxed text-white/85">
               Both patents are issued and actively maintained. If your business operates in fluid
               detection, smart textiles, IoT sensing, or adjacent technology — reach out. We&apos;re
               open to licensing discussions with companies that can put the IP to work.
@@ -88,7 +88,7 @@ export default function PatentsPage() {
             <div className="mt-8 flex justify-center">
               <Link
                 href="/contact?intent=licensing"
-                className="inline-flex items-center rounded-lg bg-[var(--color-brand)] px-6 py-3 text-[14px] font-medium text-white transition hover:bg-[var(--color-brand-hover)]"
+                className="inline-flex items-center rounded-lg bg-white px-6 py-3 text-[14px] font-medium text-[var(--color-brand)] transition hover:bg-white/90"
               >
                 Inquire about licensing →
               </Link>
