@@ -169,17 +169,17 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "trevillyan-dev",
-    title: "trevillyan.dev",
+    title: "Product portfolio",
     tag: "Website",
     dark: false,
-    image: "/images/work/trevillyan-dev.png",
-    summary: "The founder's own developer portfolio — designed and built end-to-end.",
+    image: "/images/work/product-portfolio-home.webp",
+    summary: "A development portfolio — designed and built end-to-end.",
     problem:
-      "A founder and product leader needed a sharp personal site to showcase his work, writing, and the projects behind Trevillyan Labs.",
+      "A development portfolio needed a sharp, modern home to showcase the products and projects shipped across startups — fast, polished, and easy to keep current.",
     approach:
-      "Designed and built trevillyan.dev end-to-end — a fast, modern portfolio that doubles as a live sample of the studio's web work.",
+      "Designed and built the portfolio end-to-end — a fast, modern site that doubles as a live sample of the studio's web work.",
     outcome: [
-      "A polished personal portfolio, shipped end-to-end",
+      "A polished portfolio, shipped end-to-end",
       "Fast, modern, and easy to keep current",
       "A live sample of the studio's web/portfolio craft",
     ],
