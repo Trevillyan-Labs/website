@@ -2,6 +2,19 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
+// Best-effort in-memory rate limit (per warm instance). For global limits use a
+// shared store (Upstash/Vercel KV); this still curbs casual abuse.
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 5;
+const recentHits = new Map<string, number[]>();
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (recentHits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  hits.push(now);
+  recentHits.set(ip, hits);
+  return hits.length > RATE_MAX;
+}
+
 function escapeHtml(str: string) {
   return str
     .replace(/&/g, "&amp;")
@@ -22,11 +35,24 @@ async function verifyTurnstile(token: string | undefined, secret: string) {
 }
 
 export async function POST(req: Request) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again shortly." },
+      { status: 429 },
+    );
+  }
+
   let body: Record<string, string>;
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  }
+
+  // Honeypot: real users never fill this; bots do. Drop silently (pretend ok).
+  if (body.company) {
+    return NextResponse.json({ ok: true });
   }
 
   const { name, email, intent, message, consent, cf_turnstile_response: token } = body;

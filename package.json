@@ -17,6 +17,7 @@
     "lucide-react": "^1.21.0",
     "next": "^15",
     "nodemailer": "^8.0.1",
+    "posthog-js": "^1.393.0",
     "react": "^19",
     "react-dom": "^19"
   },
@@ -32,6 +33,9 @@
     "typescript": "^5"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["sharp", "@biomejs/biome"]
+    "onlyBuiltDependencies": [
+      "sharp",
+      "@biomejs/biome"
+    ]
   }
 }

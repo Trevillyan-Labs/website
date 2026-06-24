@@ -1,4 +1,5 @@
 import { Container } from "@/app/_components/container";
+import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -12,9 +13,21 @@ export const metadata = pageMeta({
   path: "/about",
 });
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Bill Trevillyan",
+  alternateName: "William Trevillyan",
+  jobTitle: "Founder",
+  worksFor: { "@type": "Organization", name: site.name, url: site.url },
+  url: `${site.url}/about`,
+  sameAs: ["https://www.linkedin.com/in/williamtrevillyan/", site.portfolioUrl],
+};
+
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={personJsonLd} />
       <PageHeader
         eyebrow="About"
         title="A studio that runs on leverage, not headcount."

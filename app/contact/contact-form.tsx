@@ -1,7 +1,10 @@
 "use client";
 
+import { Turnstile } from "@/app/contact/turnstile";
 import { site } from "@/lib/site";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const intents = [
   { value: "build", label: "Hire us to build something" },
@@ -18,6 +21,8 @@ type Status = "idle" | "sending" | "sent" | "error";
 export function ContactForm({ initialIntent }: { initialIntent?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [token, setToken] = useState("");
+  const onToken = useCallback((t: string) => setToken(t), []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,7 +34,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, cf_turnstile_response: token }),
       });
       if (!res.ok)
         throw new Error((await res.json().catch(() => ({})))?.error || "Something went wrong.");
@@ -65,6 +70,13 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
+      {/* Honeypot — hidden from people, bots fill it; server drops those. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Company
+          <input name="company" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="text-[13px] font-medium text-ink">Name</span>
@@ -99,10 +111,11 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
         <input name="consent" type="checkbox" required className="mt-0.5" />
         <span>I'm happy for Trevillyan Labs to use this to reply to my enquiry.</span>
       </label>
+      {turnstileSiteKey ? <Turnstile siteKey={turnstileSiteKey} onToken={onToken} /> : null}
       {status === "error" ? <p className="text-[13px] text-red-600">{error}</p> : null}
       <button
         type="submit"
-        disabled={status === "sending"}
+        disabled={status === "sending" || (Boolean(turnstileSiteKey) && !token)}
         className="inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-hover disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : "Send"}

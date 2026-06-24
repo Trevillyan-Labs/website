@@ -1,0 +1,15 @@
+import { site } from "@/lib/site";
+import type { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: site.name,
+    short_name: "Trevillyan Labs",
+    description: site.tagline,
+    start_url: "/",
+    display: "standalone",
+    background_color: "#0b1220",
+    theme_color: "#0b1220",
+    icons: [{ src: "/icon-256.png", sizes: "256x256", type: "image/png", purpose: "any" }],
+  };
+}
