@@ -4,6 +4,12 @@ import { OperatedByRen } from "@/app/_components/home/operated-by-ren";
 import { Services } from "@/app/_components/home/services";
 import { Work } from "@/app/_components/home/work";
 import { site } from "@/lib/site";
+import type { Metadata } from "next";
+
+// Home uses the layout's default title/description/OG; set the canonical here.
+export const metadata: Metadata = {
+  alternates: { canonical: site.url },
+};
 
 const orgJsonLd = {
   "@context": "https://schema.org",

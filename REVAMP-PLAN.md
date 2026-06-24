@@ -81,20 +81,21 @@ links survive. Current `vercel.json` rewrites/redirects are the spec to preserve
 ## 4. SEO / AEO / LLM / tracking / security upgrades (the NewsNook-grade layer)
 
 **SEO**
-- Per-route `metadata` (title, description, canonical, OG/Twitter) via the Metadata API.
-- **`robots.ts`** (currently missing) + **dynamic `sitemap.ts`** (replaces hand-built `sitemap.xml`).
-- **JSON-LD structured data** (currently none): `Organization`, `Person` (founder), `Service`,
-  `FAQPage`, `BreadcrumbList`, `Article` on blog/case studies.
-- Per-page OG images (keep the existing `og-image-*.jpg` pattern; add for new pages).
+- Per-route `metadata` (title, description, canonical, OG/Twitter) via the Metadata API. ✅
+- **`app/robots.ts`** ✅ (allow-list per ADR-0004 + Sitemap/Host) + **dynamic `app/sitemap.ts`** ✅
+  (all routes + case studies, patents, team — replaces the hand-built `sitemap.xml`).
+- **JSON-LD structured data**: `Organization` (home), `Service` (services), `Article` (case studies),
+  `FAQPage` (faq) ✅. Still to add: `Person` (founder), `BreadcrumbList`.
+- Per-page OG images (keep the existing `og-image-*.jpg` pattern; add for new pages). _(pending)_
 
 **AEO / LLM discoverability** (objectives in `.agents/references/strategy/product_vision.md` →
 Discoverability — a *primary acquisition channel* for an AI-native studio: be surfaced, cited, and
 represented accurately by AI answer engines and LLMs to drive client referrals)
-- **`/faq`** written the way prospects ask (extractable, question-shaped), backed by `FAQPage` JSON-LD.
-- **`llms.txt`** — curated, accurate plain-text overview for LLMs (offerings, proof, how to engage),
-  docs-supported facts only.
-- **`robots.ts` allows all reputable AI crawlers — training *and* answer/search** (GPTBot, ClaudeBot,
-  CCBot, Google-Extended, Applebot-Extended, OAI-SearchBot, PerplexityBot, …); see
+- **`/faq`** written the way prospects ask (extractable, question-shaped), backed by `FAQPage` JSON-LD. ✅
+- **`public/llms.txt`** ✅ — curated, accurate plain-text overview for LLMs (offerings, proof, how to
+  engage), docs-supported facts only.
+- **`app/robots.ts` allows all reputable AI crawlers — training *and* answer/search** ✅ (GPTBot,
+  ClaudeBot, CCBot, Google-Extended, Applebot-Extended, OAI-SearchBot, PerplexityBot, …); see
   `.agents/references/decisions/ADR-0004-allow-ai-crawlers.md`.
 - **Entity consistency** — link out to LinkedIn, patents, newsnook.ai for correct entity resolution.
 - Spot-check target prompts in answer engines pre/post launch.
