@@ -1,3 +1,4 @@
+import { PostHogProvider } from "@/app/_components/posthog-provider";
 import { SiteFooter } from "@/app/_components/site-footer";
 import { SiteHeader } from "@/app/_components/site-header";
 import { site } from "@/lib/site";
@@ -53,9 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${ubuntu.variable} ${ubuntuMono.variable}`}>
       <body className="font-sans antialiased">
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <PostHogProvider>
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </PostHogProvider>
       </body>
     </html>
   );
