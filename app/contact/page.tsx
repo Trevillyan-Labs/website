@@ -1,8 +1,8 @@
+import { BookingLink } from "@/app/_components/booking-link";
 import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
 import { contactPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
-import { site } from "@/lib/site";
 import { ContactForm } from "./contact-form";
 
 export const metadata = pageMeta({
@@ -24,10 +24,8 @@ export default async function ContactPage({
       <section className="bg-white">
         <Container className="py-16">
           <div className="mx-auto max-w-2xl">
-            <a
-              href={site.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <BookingLink
+              location="contact_intro_card"
               className="group mb-8 flex items-center justify-between gap-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-5 transition hover:border-brand"
             >
               <div>
@@ -37,7 +35,7 @@ export default async function ContactPage({
               <span className="shrink-0 rounded-lg bg-brand px-4 py-2 text-[13px] font-medium text-white transition group-hover:bg-brand-hover">
                 Book a call →
               </span>
-            </a>
+            </BookingLink>
             <ContactForm initialIntent={intent} />
           </div>
         </Container>

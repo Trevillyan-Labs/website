@@ -1,7 +1,8 @@
 "use client";
 
+import { BookingLink } from "@/app/_components/booking-link";
 import { Turnstile } from "@/app/contact/turnstile";
-import { site } from "@/lib/site";
+import { track } from "@/lib/analytics";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
@@ -40,6 +41,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
       if (!res.ok)
         throw new Error((await res.json().catch(() => ({})))?.error || "Something went wrong.");
       setStatus("sent");
+      track("contact_submitted", { intent: data.intent });
       form.reset();
     } catch (err) {
       setStatus("error");
@@ -54,14 +56,12 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
         <p className="mt-2 text-[15px] text-muted">
           We'll come back with a clear, scoped next step. Talk soon.
         </p>
-        <a
-          href={site.bookingUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <BookingLink
+          location="contact_success"
           className="mt-4 inline-flex text-[14px] font-medium text-brand hover:text-brand-hover"
         >
           Want to talk sooner? Book a call →
-        </a>
+        </BookingLink>
       </div>
     );
   }
