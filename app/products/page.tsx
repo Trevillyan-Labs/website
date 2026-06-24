@@ -1,7 +1,7 @@
 import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
+import { productsPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
-import { site } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
 import Link from "next/link";
 
@@ -12,42 +12,20 @@ export const metadata = pageMeta({
   path: "/products",
 });
 
-type Product = {
-  name: string;
-  status: string;
-  summary: string;
-  image: string;
-  href: string;
-  cta: string;
-  external: boolean;
-};
-
-const products: Product[] = [
-  {
-    name: "NewsNook",
-    status: "Live in production",
-    summary:
-      "An AI newsletter reader for thought leaders — built, shipped, and operated by the studio. Our clearest proof we run real software, not just ship it.",
-    image: "/images/work/products/newsnook-project.webp",
-    href: withUtm(site.newsnookUrl, {
-      medium: "referral",
-      campaign: "studio_site",
-      content: "products_page",
-    }),
-    cta: "Visit newsnook.ai →",
-    external: true,
-  },
-  {
-    name: "Verbaly",
-    status: "2,300+ users · Calacanis-backed",
-    summary:
-      "An AI speech coach — a consumer web app built end-to-end on LLMs + RAG, launched to 2,300+ users and funded by Jason Calacanis & LAUNCH.",
-    image: "/images/work/products/verbaly-web-app-project.webp",
-    href: "/work/verbaly",
-    cta: "Read the case study →",
-    external: false,
-  },
-];
+// External links get UTM tagging at render; the canonical product copy + plain
+// destinations live in lib/content/pages.ts (shared with the .md mirror).
+const products = productsPage.items.map((p) =>
+  p.external
+    ? {
+        ...p,
+        href: withUtm(p.href, {
+          medium: "referral",
+          campaign: "studio_site",
+          content: "products_page",
+        }),
+      }
+    : p,
+);
 
 export default function ProductsPage() {
   return (
@@ -55,7 +33,7 @@ export default function ProductsPage() {
       <PageHeader
         eyebrow="Products"
         title="Products we build — and run."
-        intro="We don't just ship software for clients; we build and operate our own. It's the clearest proof the studio ships real products — and the instincts we earn running them feed every client build and advisory engagement."
+        intro={productsPage.intro}
       />
 
       <section className="bg-white">
@@ -113,11 +91,10 @@ export default function ProductsPage() {
         <Container className="py-20">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-medium leading-tight sm:text-3xl">
-              Have a product to build?
+              {productsPage.closingCta.heading}
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-white/85">
-              We build and operate our own — and we&apos;ll do the same for yours, from first scope
-              to live in production.
+              {productsPage.closingCta.body}
             </p>
             <div className="mt-8 flex justify-center">
               <Link

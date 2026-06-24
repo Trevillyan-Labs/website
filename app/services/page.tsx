@@ -5,6 +5,7 @@ import { PageHeader } from "@/app/_components/page-header";
 import { AdviseMotif } from "@/app/_components/services/advise-motif";
 import { BuildMotif } from "@/app/_components/services/build-motif";
 import { type Group, services } from "@/lib/content";
+import { servicesPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 
@@ -16,11 +17,8 @@ export const metadata = pageMeta({
 });
 
 const groups: { group: Group; blurb: string }[] = [
-  { group: "Build", blurb: "Custom software and high-craft sites, shipped to production." },
-  {
-    group: "Advise",
-    blurb: "Product & go-to-market execution for founders and early-stage startups.",
-  },
+  { group: "Build", blurb: servicesPage.groupBlurbs.Build },
+  { group: "Advise", blurb: servicesPage.groupBlurbs.Advise },
 ];
 
 export default function ServicesPage() {
@@ -37,7 +35,7 @@ export default function ServicesPage() {
       <PageHeader
         eyebrow="Services"
         title="Hire the studio — to build, or to advise."
-        intro="Two ways to work with us. Each one starts with a clear, scoped next step — so you know exactly what you're getting before you commit."
+        intro={servicesPage.intro}
       />
 
       {groups.map((g, i) => {
@@ -95,28 +93,9 @@ export default function ServicesPage() {
 
       <section className="bg-[var(--color-surface-2)]">
         <Container className="py-16">
-          <h2 className="text-[1.6rem] font-medium text-ink">How engagements work</h2>
+          <h2 className="text-[1.6rem] font-medium text-ink">{servicesPage.stepsHeading}</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-3">
-            {[
-              {
-                n: "01",
-                icon: "MessageSquare",
-                t: "Tell us what you need",
-                d: "A short note on the contact page — the problem, not a spec.",
-              },
-              {
-                n: "02",
-                icon: "ClipboardList",
-                t: "We scope it",
-                d: "We come back with a clear, bounded next step and what it costs.",
-              },
-              {
-                n: "03",
-                icon: "Rocket",
-                t: "We ship",
-                d: "A fixed-scope build, or an advisory cadence — run lean, at senior quality.",
-              },
-            ].map((step) => (
+            {servicesPage.steps.map((step) => (
               <div
                 key={step.n}
                 className="rounded-xl border border-[var(--color-line)] bg-white p-6"
@@ -127,8 +106,8 @@ export default function ServicesPage() {
                   </span>
                   <span className="font-mono text-sm text-[var(--color-muted-2)]">{step.n}</span>
                 </div>
-                <h3 className="mt-4 text-base font-medium text-ink">{step.t}</h3>
-                <p className="mt-2 text-[13px] text-muted">{step.d}</p>
+                <h3 className="mt-4 text-base font-medium text-ink">{step.title}</h3>
+                <p className="mt-2 text-[13px] text-muted">{step.desc}</p>
               </div>
             ))}
           </div>
