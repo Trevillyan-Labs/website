@@ -65,9 +65,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Please check your details." }, { status: 400 });
   }
 
-  // Turnstile (only enforced when configured)
+  // Turnstile — only enforced when BOTH halves are configured. The client can
+  // only produce a token when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set, so a
+  // secret-without-site-key (or vice versa) config would otherwise reject every
+  // real submission with a 403. The honeypot + rate limit still apply.
   const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-  if (turnstileSecret) {
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  if (turnstileSecret && turnstileSiteKey) {
     const ok = await verifyTurnstile(token, turnstileSecret);
     if (!ok) return NextResponse.json({ error: "Verification failed." }, { status: 403 });
   }
