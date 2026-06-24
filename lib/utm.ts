@@ -1,4 +1,4 @@
-// UTM tagging for outbound links from trevillyanlabs.io.
+// UTM tagging for outbound links from trevillyanlabs.com.
 //
 // Conventions follow the org UTM standard — lowercase, underscores; always set
 // utm_source and utm_medium. This mirrors NewsNook's tagging guide
