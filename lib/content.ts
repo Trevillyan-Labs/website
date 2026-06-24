@@ -201,10 +201,11 @@ export const caseStudies: CaseStudy[] = [
       "Designed and built the site end-to-end: a clean publications-first layout, fast and easy to maintain, handed over ready to run.",
     outcome: [
       "A polished, credible portfolio, shipped end-to-end",
+      "Client-editable — content managed through a simple admin panel",
       "Fast and simple to keep current",
       "Client hands-off throughout",
     ],
-    role: "Web/portfolio build — design through delivery (client unnamed)",
+    role: "Web/portfolio build — design through delivery",
   },
 ];
 
