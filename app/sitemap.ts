@@ -1,5 +1,4 @@
 import { caseStudies } from "@/lib/content";
-import { patents } from "@/lib/patents";
 import { site } from "@/lib/site";
 import { team } from "@/lib/team";
 import type { MetadataRoute } from "next";
@@ -42,14 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     });
   }
-  for (const p of patents) {
-    entries.push({
-      url: `${base}/patents/${p.slug}`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.5,
-    });
-  }
+  // /patents/[slug] is intentionally excluded — those URLs 301 to Google
+  // Patents (URL parity), so they're redirects, not indexable content.
   for (const m of team) {
     entries.push({
       url: `${base}/team/${m.slug}`,

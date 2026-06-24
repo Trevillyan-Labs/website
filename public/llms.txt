@@ -4,6 +4,8 @@
 
 The site's priority job is to get visitors to hire the studio (Build + Advise). Owned products (e.g. NewsNook) appear as credibility proof and link out to their own sites.
 
+Full content (all offerings, case studies, patents, FAQ): https://www.trevillyanlabs.io/llms-full.txt
+
 ## What we do
 
 - **Build** — Contract software development (full-stack applications: MVPs, internal tools, custom products) and high-craft web/portfolio sites, taken from idea to production.
