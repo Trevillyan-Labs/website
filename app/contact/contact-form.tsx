@@ -2,6 +2,7 @@
 
 import { Turnstile } from "@/app/contact/turnstile";
 import { site } from "@/lib/site";
+import Link from "next/link";
 import { useCallback, useState } from "react";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -109,7 +110,14 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
       </label>
       <label className="flex items-start gap-2.5 text-[13px] text-muted">
         <input name="consent" type="checkbox" required className="mt-0.5" />
-        <span>I'm happy for Trevillyan Labs to use this to reply to my enquiry.</span>
+        <span>
+          I agree that Trevillyan Labs can use the details I&apos;ve entered to reply to my message.
+          We won&apos;t use them for anything else — see our{" "}
+          <Link href="/privacy-policy" className="text-brand underline hover:text-brand-hover">
+            Privacy Policy
+          </Link>
+          .
+        </span>
       </label>
       {turnstileSiteKey ? <Turnstile siteKey={turnstileSiteKey} onToken={onToken} /> : null}
       {status === "error" ? <p className="text-[13px] text-red-600">{error}</p> : null}
