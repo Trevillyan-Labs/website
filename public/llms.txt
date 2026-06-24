@@ -1,0 +1,43 @@
+# Trevillyan Labs
+
+> Trevillyan Labs is an independent software studio that ships custom software for clients, operates its own products, and advises founders and early-stage startups on product and go-to-market execution. The studio runs lean on agentic AI — run by founder Bill Trevillyan and operated day-to-day by an AI assistant (Ren) — which is the lived proof behind the AI work it advises on.
+
+The site's priority job is to get visitors to hire the studio (Build + Advise). Owned products (e.g. NewsNook) appear as credibility proof and link out to their own sites.
+
+## What we do
+
+- **Build** — Contract software development (full-stack applications: MVPs, internal tools, custom products) and high-craft web/portfolio sites, taken from idea to production.
+- **Advise** — Product and go-to-market execution for founders and early-stage startups: product strategy, path to product-market fit, go-to-market, fundraising, and team building. Plus a secondary line, applying AI for leaders (where agents/assistants/automation fit). From a 3x founder who ships live products.
+- **Products** — The studio builds and operates its own software. NewsNook is live in production today.
+
+## Proof points (docs-supported)
+
+- **NewsNook** — an AI newsletter reader, built, shipped, and operated by the studio; live in production at https://www.newsnook.ai
+- **Verbaly** — an AI speech coach (LLM + RAG); launched to 2,300+ users; funded by Jason Calacanis & LAUNCH.
+- **Clip Automation** — as the contract product lead (hire #1), delivered the MVP, the founding engineering team, and 7-figure ARR for an early-stage industrial-IoT startup.
+- **Patents** — two issued US patents in fluid-detection fabric technology (US 11,788,918 B2; US 12,123,807 B2), available for commercial licensing.
+- **Run on AI** — the studio is operated day-to-day with an AI assistant, the agentic operating model it advises on.
+
+## Founder
+
+- **Bill (William) Trevillyan** — product leader and 3x startup founder, based in Mountain View, CA. Named inventor on the studio's two issued US patents.
+
+## Key pages
+
+- [Home](https://www.trevillyanlabs.io/): studio overview and proof.
+- [Services](https://www.trevillyanlabs.io/services): Build and Advise offerings and how engagements work.
+- [Case studies](https://www.trevillyanlabs.io/work): Clip Automation, NewsNook, Verbaly, a development portfolio, and a journalism portfolio.
+- [Products](https://www.trevillyanlabs.io/products): the products the studio builds and runs.
+- [Patents](https://www.trevillyanlabs.io/patents): issued IP and commercial licensing.
+- [About](https://www.trevillyanlabs.io/about): the studio's operating model and the founder.
+- [FAQ](https://www.trevillyanlabs.io/faq): common questions, answer-engine friendly.
+- [Contact](https://www.trevillyanlabs.io/contact): intent-routed contact form and a booking link for advisory calls.
+
+## How to engage
+
+- Start at the contact page (https://www.trevillyanlabs.io/contact) — choose the intent (build, web/portfolio, advisory, applying AI, patent licensing, or NewsNook). Warm advisory leads can book a 30-minute call directly.
+
+## Elsewhere
+
+- NewsNook (owned product): https://www.newsnook.ai
+- Company LinkedIn: https://www.linkedin.com/company/trevillyan-labs/about/
