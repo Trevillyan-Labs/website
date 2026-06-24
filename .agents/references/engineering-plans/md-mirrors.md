@@ -13,8 +13,10 @@ related_docs:
 
 # Engineering Plan — Per-page Markdown mirrors (`/<path>.md`)
 
-> **Status: Phase 1 implemented** on `feat/md-mirrors` (off `staging`). This was the reviewable design;
-> the code now exists (`middleware.ts`, `app/api/md/[[...path]]/route.ts`, `lib/routes.ts`, `lib/md/`).
+> **Status: Phase 1 + Phase 2 implemented.** Phase 1 on `feat/md-mirrors`, Phase 2 on
+> `feat/md-mirrors-phase2` (both off `staging`). The code exists (`middleware.ts`,
+> `app/api/md/[[...path]]/route.ts`, `lib/routes.ts`, `lib/md/`, prose lifted to `lib/content/pages.ts`).
+> Every page now has a `.md` mirror (home at `/index.md`); `/patents/[slug]` stays excluded.
 > Implementation notes vs. this plan:
 > - **Middleware matcher:** the regex sketched in §3.2 (negative-lookahead with a trailing `\.md$`)
 >   does **not** match under Next 15 — `path-to-regexp` mishandles the `$` anchor and every `.md`
@@ -26,6 +28,11 @@ related_docs:
 >   the typed layer.
 > - **Vitest** was added (dev-only) for the serializer/registry/consistency tests (§8) — the repo had
 >   no test runner.
+> - **`llms-full.txt` (§12.2):** the protective half shipped — a snapshot test now pins its output
+>   (`lib/md/llms-full.test.ts`). The structural *migration* onto the shared serializer was **not**
+>   done: on inspection `llms-full.txt` is a single concatenated `text/plain` corpus whose format
+>   differs from the per-page `text/markdown` docs, so forcing shared serialization would be artificial
+>   and risk changing a crawled artifact for little gain. Left as an optional future cleanup.
 > Original design follows unchanged.
 
 ## 1. Problem / goal & non-goals

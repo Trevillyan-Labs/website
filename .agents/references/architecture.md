@@ -87,9 +87,10 @@ the per-URL counterpart to `llms.txt`/`llms-full.txt` (engineering plan: `engine
   copy), `renderers.ts` (per-page renderers from the typed content layer), `registry.ts` (path → renderer).
 - **`lib/seo.ts`** `pageMeta` emits `<link rel="alternate" type="text/markdown">` for mirror-able pages.
 
-Phase 1 (shipped) mirrors the data-driven pages: `/services` (cards), `/work` (+detail), `/patents`,
-`/faq`, `/team` (+detail), and the legal pages. Phase 2 adds the prose pages (home, about, contact,
-products) once their copy is lifted into typed constants.
+**Every** page now has a mirror. Phase 1 shipped the data-driven pages (`/services`, `/work` +detail,
+`/patents`, `/faq`, `/team` +detail, legal). Phase 2 added the prose pages (home → `/index.md`, about,
+contact, products, products/newsnook) by lifting their copy into typed constants in `lib/content/pages.ts`
+(shared by the page components and the renderers). `/patents/[slug]` stays excluded (it 307s out).
 
 > Keep this doc's "current/target" split honest as the rebuild progresses — promote target → current
 > section by section and bump `last_verified`.
