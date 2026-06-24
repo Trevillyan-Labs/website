@@ -1,6 +1,7 @@
 import { Container } from "@/app/_components/container";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
+import { aboutPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
@@ -31,43 +32,33 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="A studio that runs on leverage, not headcount."
-        intro="Trevillyan Labs is an independent software studio. We build and run our own products, ship software for clients, and advise founders on product and go-to-market execution."
+        intro={aboutPage.intro}
       />
 
       <section className="bg-white">
         <Container className="py-16">
           <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <h2 className="text-[1.4rem] font-medium text-ink">Who's behind it</h2>
-              <p className="mt-4 text-[15px] leading-relaxed text-ink">
-                The studio is run by <strong className="font-medium">Bill Trevillyan</strong>. He
-                builds and operates Trevillyan Labs' own products alongside select client
-                engagements.
-              </p>
-              <p className="mt-4 text-[15px] leading-relaxed text-ink">
-                Day to day, the studio is operated with <strong className="font-medium">Ren</strong>
-                , an AI assistant — Trevillyan Labs runs lean on agentic AI rather than headcount.
-                It's how we move fast and deliver at senior quality without an agency's overhead,
-                and it's the lived proof behind the AI work we advise on.
-              </p>
+              <h2 className="text-[1.4rem] font-medium text-ink">
+                {aboutPage.whoBehindIt.heading}
+              </h2>
+              {aboutPage.whoBehindIt.paras.map((para) => (
+                <p key={para.slice(0, 24)} className="mt-4 text-[15px] leading-relaxed text-ink">
+                  {para}
+                </p>
+              ))}
             </div>
             <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-6">
               <h3 className="text-sm font-medium uppercase tracking-wide text-muted">
-                Two engines
+                {aboutPage.twoEngines.heading}
               </h3>
               <ul className="mt-4 space-y-4 text-[14px] text-ink">
-                <li>
-                  <p className="font-medium">Owned products</p>
-                  <p className="text-muted">
-                    Software we build and run for ourselves — NewsNook today.
-                  </p>
-                </li>
-                <li>
-                  <p className="font-medium">Client work</p>
-                  <p className="text-muted">
-                    Custom builds and product/go-to-market advisory for founders and teams.
-                  </p>
-                </li>
+                {aboutPage.twoEngines.items.map((item) => (
+                  <li key={item.title}>
+                    <p className="font-medium">{item.title}</p>
+                    <p className="text-muted">{item.desc}</p>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -86,21 +77,18 @@ export default function AboutPage() {
               />
             </div>
             <div>
-              <p className="text-[13px] font-medium text-brand">Meet Bill</p>
+              <p className="text-[13px] font-medium text-brand">{aboutPage.founder.eyebrow}</p>
               <h2 className="mt-2 text-[1.4rem] font-medium text-ink">
-                The founder behind the studio.
+                {aboutPage.founder.heading}
               </h2>
-              <p className="mt-4 text-[15px] leading-relaxed text-ink">
-                Bill Trevillyan is a product leader and 3x startup founder. He&apos;s built and
-                shipped products across early- and mid-stage startups, holds two issued US patents,
-                and now runs Trevillyan Labs — building and operating its own products alongside
-                select client work.
-              </p>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted">
-                Away from the keyboard, he lives off of good coffee, gets out for backpacking and
-                tennis, and will happily travel (or cook) for cuisines from anywhere in the world.
-                He&apos;s based in Mountain View, CA — the heart of Silicon Valley.
-              </p>
+              {aboutPage.founder.paras.map((para, i) => (
+                <p
+                  key={para.slice(0, 24)}
+                  className={`mt-4 text-[15px] leading-relaxed ${i === 0 ? "text-ink" : "text-muted"}`}
+                >
+                  {para}
+                </p>
+              ))}
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href="https://www.linkedin.com/in/williamtrevillyan/"

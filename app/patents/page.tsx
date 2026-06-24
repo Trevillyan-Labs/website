@@ -1,5 +1,6 @@
 import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
+import { patentsPage } from "@/lib/content/pages";
 import { patents } from "@/lib/patents";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
@@ -25,17 +26,14 @@ export default function PatentsPage() {
         <Container className="pt-16 pb-10">
           <div className="mx-auto max-w-2xl">
             <h2 className="text-lg font-medium text-[var(--color-ink)]">The technology</h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
-              These patents cover a fluid detection system using conductive fabric: a multi-layer
-              textile that detects liquid presence and pinpoints leak location via an electrical
-              pathway formed by the liquid itself. The architecture spans the detection fabric, the
-              sensing methodology, and the control apparatus — providing broad coverage across
-              applications.
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
-              Potential applications include leak detection in data centers, industrial facilities,
-              smart buildings, smart textiles, medical monitoring, and consumer IoT devices.
-            </p>
+            {patentsPage.technology.map((para) => (
+              <p
+                key={para.slice(0, 32)}
+                className="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]"
+              >
+                {para}
+              </p>
+            ))}
           </div>
         </Container>
       </section>
@@ -81,9 +79,7 @@ export default function PatentsPage() {
               Interested in licensing this IP?
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-white/85">
-              Both patents are issued and actively maintained. If your business operates in fluid
-              detection, smart textiles, IoT sensing, or adjacent technology — reach out. We&apos;re
-              open to licensing discussions with companies that can put the IP to work.
+              {patentsPage.licensing}
             </p>
             <div className="mt-8 flex justify-center">
               <Link

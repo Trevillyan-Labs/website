@@ -6,6 +6,8 @@ The site's priority job is to get visitors to hire the studio (Build + Advise). 
 
 Full content (all offerings, case studies, patents, FAQ): https://www.trevillyanlabs.io/llms-full.txt
 
+Per-page Markdown: most pages have a Markdown mirror at their URL + `.md` (e.g. https://www.trevillyanlabs.io/services.md).
+
 ## What we do
 
 - **Build** — Contract software development (full-stack applications: MVPs, internal tools, custom products) and high-craft web/portfolio sites, taken from idea to production.
