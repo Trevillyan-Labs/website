@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import { Container } from "@/app/_components/container";
+import type { ReactNode } from "react";
 
 export function PageHeader({
   eyebrow,

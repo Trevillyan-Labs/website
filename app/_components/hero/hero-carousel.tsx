@@ -1,8 +1,8 @@
 "use client";
 
+import { type Shot, showcase } from "@/lib/showcase";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { type Shot, showcase } from "@/lib/showcase";
 
 const GAP = 16; // constant gap between images (px), preserved while scaling
 const SPEED = 20; // auto-scroll px/sec
@@ -128,7 +128,7 @@ function Column({ shots, dir, align }: { shots: Shot[]; dir: "up" | "down"; alig
       window.removeEventListener("scroll", onScrollResize);
       cancelAnimationFrame(raf);
     };
-  }, [dir, align]);
+  }, [dir]);
 
   const originX = align === "right" ? "right" : "left";
   return (

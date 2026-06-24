@@ -1,7 +1,16 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "files": {
-    "ignore": ["node_modules", ".next", "scripts", "src", "js", "css", "components/*.html", "*.html"]
+    "ignore": [
+      "node_modules",
+      ".next",
+      "scripts",
+      "src",
+      "js",
+      "css",
+      "components/*.html",
+      "*.html"
+    ]
   },
   "organizeImports": { "enabled": true },
   "linter": {

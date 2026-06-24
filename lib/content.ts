@@ -150,6 +150,18 @@ export const caseStudies: CaseStudy[] = [
       "Shipped an LLM + RAG product end-to-end",
     ],
     role: "Founder — product, build, go-to-market, and fundraising",
+    gallery: [
+      "/images/work/verbaly/verbaly-home.webp",
+      "/images/work/verbaly/verbaly-landing.webp",
+      "/images/work/verbaly/verbaly-practice-speech.webp",
+      "/images/work/verbaly/verbaly-speech-analysis.webp",
+      "/images/work/verbaly/verbaly-vee-chatbot.webp",
+      "/images/work/verbaly/verbaly-sessions.webp",
+      "/images/work/verbaly/verbaly-mock-small-talk.webp",
+      "/images/work/verbaly/verbaly-mock-interview.webp",
+      "/images/work/verbaly/verbaly-mock-pitch.webp",
+      "/images/work/verbaly/verbaly-api-schema.webp",
+    ],
   },
   {
     slug: "newsnook",
@@ -169,6 +181,12 @@ export const caseStudies: CaseStudy[] = [
       "The studio's clearest proof it builds and runs real products",
     ],
     role: "Owned product — built and operated by Trevillyan Labs",
+    gallery: [
+      "/images/work/newsnook/newsnook-inbox.webp",
+      "/images/work/newsnook/newsnook-reader.webp",
+      "/images/work/newsnook/newsnook-ai-assistant.webp",
+      "/images/work/newsnook/newsnook-mobile.webp",
+    ],
   },
   {
     slug: "trevillyan-dev",

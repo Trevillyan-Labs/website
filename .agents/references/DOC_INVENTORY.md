@@ -41,6 +41,12 @@ A doc's authoritative status is the `status:` in its own frontmatter; this table
 | `strategy/content_plan.md` | canonical |
 | `strategy/brand_style_guide.md` | canonical |
 
+## Engineering plans
+
+| Plan | Status |
+|---|---|
+| `engineering-plans/md-mirrors.md` | accepted (Phase 1 + 2 shipped) |
+
 ## Decisions (ADRs)
 
 | ADR | Status |

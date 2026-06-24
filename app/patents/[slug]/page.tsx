@@ -1,5 +1,5 @@
-import { notFound, redirect } from "next/navigation";
 import { patents } from "@/lib/patents";
+import { notFound, redirect } from "next/navigation";
 
 export function generateStaticParams() {
   return patents.map((p) => ({ slug: p.slug }));

@@ -108,5 +108,5 @@ export function HeroDots() {
     };
   }, []);
 
-  return <canvas ref={ref} className="absolute inset-0 h-full w-full" aria-hidden="true" />;
+  return <canvas ref={ref} className="absolute inset-0 h-full w-full" />;
 }

@@ -3,6 +3,7 @@ import { Container } from "@/app/_components/container";
 import { HeroCarousel } from "@/app/_components/hero/hero-carousel";
 import { HeroDots } from "@/app/_components/hero/hero-dots";
 import { ProofTicker } from "@/app/_components/hero/proof-ticker";
+import { homePage } from "@/lib/content/pages";
 
 export function Hero() {
   return (
@@ -17,20 +18,19 @@ export function Hero() {
               className="reveal text-[13px] font-medium text-[var(--color-hero-accent)]"
               style={{ animationDelay: "0.05s" }}
             >
-              Independent software studio
+              {homePage.hero.eyebrow}
             </p>
             <h1
               className="reveal mt-4 max-w-2xl text-4xl font-medium leading-[1.08] sm:text-[2.85rem]"
               style={{ animationDelay: "0.12s" }}
             >
-              We build and run software — ours and yours.
+              {homePage.hero.headline}
             </h1>
             <p
               className="reveal mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--color-muted-2)]"
               style={{ animationDelay: "0.22s" }}
             >
-              Trevillyan Labs ships custom software for clients, operates its own products, and
-              advises founders and early-stage startups on product and go-to-market execution.
+              {homePage.hero.subcopy}
             </p>
             <div
               className="reveal mt-8 flex flex-wrap items-center gap-3"

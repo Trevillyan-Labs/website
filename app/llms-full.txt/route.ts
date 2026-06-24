@@ -90,7 +90,7 @@ export function GET() {
   p(`- FAQ: ${site.url}/faq`);
   p(`- Contact: ${site.url}/contact`);
   p(`- NewsNook (owned product): ${site.newsnookUrl}`);
-  p(`- Company LinkedIn: https://www.linkedin.com/company/trevillyan-labs/about/`);
+  p("- Company LinkedIn: https://www.linkedin.com/company/trevillyan-labs/about/");
   p("");
 
   return new Response(out.join("\n"), {
