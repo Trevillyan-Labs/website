@@ -22,8 +22,15 @@ describe("mirror-able path consistency", () => {
     for (const p of staticMirror) expect(declared.has(p), p).toBe(true);
   });
 
-  it("non-mirror pages are not mirror-able", () => {
+  it("home and all static pages are mirror-able (Phase 2)", () => {
     for (const p of ["/", "/about", "/contact", "/products", "/products/newsnook"]) {
+      expect(isMirrorablePath(p), p).toBe(true);
+      expect(renderPageMarkdown(p), p).toBeTruthy();
+    }
+  });
+
+  it("unknown static pages are not mirror-able", () => {
+    for (const p of ["/blog", "/nope", "/pricing"]) {
       expect(isMirrorablePath(p), p).toBe(false);
       expect(renderPageMarkdown(p), p).toBeNull();
     }

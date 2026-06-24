@@ -1,0 +1,130 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`llms-full.txt > output is stable 1`] = `
+"# Trevillyan Labs — full content
+
+> Trevillyan Labs ships custom software for clients, operates its own products, and advises founders and early-stage startups on product and go-to-market execution.
+
+Trevillyan Labs is an independent software studio. The site's priority job is to get visitors to hire the studio (Build + Advise); owned products (e.g. NewsNook) appear as credibility proof. The studio runs lean on agentic AI — run by founder Bill Trevillyan and operated day-to-day by an AI assistant (Ren), the lived proof behind the AI work it advises on.
+
+## What we do
+
+### Build
+
+**Contract software development** — Full-stack applications taken from idea to production — MVPs, internal tools, and custom products, built on the right stack for each project.
+- A scoped build, shipped to production
+- The same engineering rigor as our own product
+- A founder-level partner, not a ticket-taker
+
+**Web & portfolio builds** — Focused, high-craft marketing and portfolio sites — designed, built, and maintained end-to-end, so you get a polished online presence without having to manage the work yourself.
+- Design and build, end-to-end
+- Fast, modern, and easy to update
+- Ongoing maintenance if you want it
+
+### Advise
+
+**Product & go-to-market execution** — Hands-on help for founders and early-stage startups on what decides whether a company makes it: product strategy, the path to product-market fit, go-to-market, fundraising, and team building — running lean with AI as a means, not the pitch. From a 3x founder who ships a live product.
+- Product strategy and a path to PMF
+- Go-to-market and fundraising help
+- How to run lean with agentic AI
+
+**Applying AI for leaders** — Advising leaders on where agents, assistants, automation, and tooling fit — and what they can't do. The studio runs on agentic AI itself, which is the proof.
+- A practical, hype-free read on AI
+- Where agents and automation fit your work
+- What to try, and what to skip
+
+### Products
+
+**Indie SaaS — our own products** — We build and operate our own products. NewsNook is live in production today. It's proof we ship and run real software — and the know-how feeds every client build and advisory engagement.
+- Proof we build and operate real software
+- Product instincts from running our own
+- A live product you can go try
+
+## Case studies
+
+### Clip Automation (Startup MVP)
+Delivered the MVP, the founding engineering team, and 7-figure ARR.
+- **Problem:** The founder of an early-stage industrial-IoT startup needed to get from concept to a real, shippable product for a prospective Fortune 50 enterprise client — and to a team that could build it.
+- **Approach:** Bill, hire #1, was brought on as a contract product leader: defined the product, drove execution end-to-end, and stood up the founding engineering team.
+- **Outcome:** Shipped the MVP; Built the founding engineering team; Drove the product to 7-figure ARR
+- **Role:** Contract Product Lead
+
+### Verbaly (AI web app)
+An AI speech coach — built, launched to 2,300+ users, and funded by Jason Calacanis.
+- **Problem:** Most people communicate poorly in the moments that matter — interviews, presentations, sales calls — and the usual fix (Toastmasters and the like) is slow and inconvenient.
+- **Approach:** Designed and built a consumer web app: a humanized AI speech coach that records, evaluates, and trains, powered by LLMs and a retrieval-augmented-generation system.
+- **Outcome:** Acquired 2,300+ users; Raised $25K from Jason Calacanis & LAUNCH; Shipped an LLM + RAG product end-to-end
+- **Role:** Founder — product, build, go-to-market, and fundraising
+
+### NewsNook (Our product)
+An AI newsletter reader — built, shipped, and live in production.
+- **Problem:** Knowledge workers drown in newsletters. We wanted a product that lets people read more of what matters without the inbox overload — and that proves the studio ships and operates real software.
+- **Approach:** Built and operate NewsNook ourselves: the marketing site, the product app, and the day-to-day operation — run lean with AI.
+- **Outcome:** Live in production at newsnook.ai; Owned end-to-end: built, shipped, and operated; The studio's clearest proof it builds and runs real products
+- **Role:** Owned product — built and operated by Trevillyan Labs
+- **Live:** https://www.newsnook.ai
+
+### Product portfolio (Website)
+A development portfolio — designed and built end-to-end.
+- **Problem:** A development portfolio needed a sharp, modern home to showcase the products and projects shipped across startups — fast, polished, and easy to keep current.
+- **Approach:** Designed and built the portfolio end-to-end — a fast, modern site that doubles as a live sample of the studio's web work.
+- **Outcome:** A polished portfolio, shipped end-to-end; Fast, modern, and easy to keep current; A live sample of the studio's web/portfolio craft
+- **Role:** Web/portfolio build — design through delivery
+
+### Journalism portfolio (Website)
+A writer's portfolio site, designed and shipped end-to-end.
+- **Problem:** A working journalist needed a credible, well-crafted home for their writing and appearances — without managing a build or wrestling a site builder.
+- **Approach:** Designed and built the site end-to-end: a clean publications-first layout, fast and easy to maintain, handed over ready to run.
+- **Outcome:** A polished, credible portfolio, shipped end-to-end; Client-editable — content managed through a simple admin panel; Fast and simple to keep current; Client hands-off throughout
+- **Role:** Web/portfolio build — design through delivery
+
+## Patents
+Two issued US patents in fluid-detection fabric technology, available for commercial licensing.
+
+### US 11,788,918 B2 — Fluid Detection Fabric: A Method and System for Detecting a Leak
+A method and system for detecting a leak and the leak's location via a fluid detection fabric. (Issued Oct 17, 2023.) Source: https://patents.google.com/patent/US11788918B2/en
+
+### US 12,123,807 B2 — Fluid Detection Fabric: Apparatus
+An apparatus for detecting a leak and the leak's location via a fluid detection fabric. (Issued Oct 22, 2024.) Source: https://patents.google.com/patent/US12123807B2/en
+
+## Founder
+
+**William Trevillyan** — Founder. Bill is a product leader and 3x startup founder. He has built and shipped products for early- and mid-stage SaaS startups and holds two issued US patents. He founded Trevillyan Labs to build and operate its own software products and to ship custom software and product/go-to-market advisory for clients — running the studio lean on AI.
+- LinkedIn: https://www.linkedin.com/in/williamtrevillyan/
+
+## FAQ
+
+**Q: What does Trevillyan Labs do?**
+A: We're an independent software studio. We ship custom software for clients, operate our own products (like NewsNook), and advise founders and early-stage startups on product and go-to-market execution.
+
+**Q: Can a small studio actually build my product?**
+A: Yes — that's the core of what we do. We build full-stack web apps in Next.js / React / TypeScript and run lean with AI, so you get senior-quality delivery without an agency's overhead. We also build and operate our own product, so we ship like owners, not contractors.
+
+**Q: Who do you advise, and on what?**
+A: Founders and early-stage startups, on product and go-to-market execution: product strategy, the path to product-market fit, go-to-market, fundraising, and team building. From a 3x founder who ships a live product.
+
+**Q: Do you use AI?**
+A: The studio is run day-to-day with an AI assistant — we run lean on agentic AI rather than headcount. It's how we move fast, and it's the proof behind any AI advice we give.
+
+**Q: How does an engagement start?**
+A: Tell us what you need on the contact page. We come back with a clear, scoped next step — a fixed-scope build, or an advisory call — so you know exactly what you're getting before you commit.
+
+**Q: What is NewsNook?**
+A: NewsNook is our own product — an AI newsletter reader, live in production at newsnook.ai. On this site it's proof we build and operate real software; the product itself is sold on its own site.
+
+## How to engage
+Start at the contact page (https://www.trevillyanlabs.com/contact) and pick the intent (build, web/portfolio, advisory, applying AI, patent licensing, or NewsNook). Warm advisory leads can book a 30-minute call directly.
+
+## Links
+- Home: https://www.trevillyanlabs.com/
+- Services: https://www.trevillyanlabs.com/services
+- Case studies: https://www.trevillyanlabs.com/work
+- Products: https://www.trevillyanlabs.com/products
+- Patents: https://www.trevillyanlabs.com/patents
+- About: https://www.trevillyanlabs.com/about
+- FAQ: https://www.trevillyanlabs.com/faq
+- Contact: https://www.trevillyanlabs.com/contact
+- NewsNook (owned product): https://www.newsnook.ai
+- Company LinkedIn: https://www.linkedin.com/company/trevillyan-labs/about/
+"
+`;
