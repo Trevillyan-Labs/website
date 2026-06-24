@@ -33,9 +33,6 @@
     "typescript": "^5"
   },
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp",
-      "@biomejs/biome"
-    ]
+    "onlyBuiltDependencies": ["sharp", "@biomejs/biome"]
   }
 }

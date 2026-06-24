@@ -34,7 +34,8 @@ export const patents: Patent[] = [
     title: "Fluid Detection Fabric: Apparatus",
     number: "US 12,123,807 B2",
     published: "Oct 22, 2024",
-    summary: "An apparatus for detecting a leak and the leak's location via a fluid detection fabric.",
+    summary:
+      "An apparatus for detecting a leak and the leak's location via a fluid detection fabric.",
     bodyHtml: body,
     image: "/images/fluid-detection-fabric-1.jpg",
     sourceUrl: "https://patents.google.com/patent/US12123807B2/en",

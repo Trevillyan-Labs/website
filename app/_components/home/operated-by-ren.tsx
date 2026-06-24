@@ -12,13 +12,13 @@ export function OperatedByRen() {
               Run by a founder. Operated by an AI.
             </h2>
             <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--color-muted-2)]">
-              Trevillyan Labs runs lean on agentic AI: a founder&apos;s judgment, and an AI assistant —
-              Ren — doing the heavy lifting. It&apos;s how we ship fast at senior quality without an
-              agency&apos;s overhead.
+              Trevillyan Labs runs lean on agentic AI: a founder&apos;s judgment, and an AI
+              assistant — Ren — doing the heavy lifting. It&apos;s how we ship fast at senior
+              quality without an agency&apos;s overhead.
             </p>
             <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--color-muted-2)]">
-              We don&apos;t just advise on agentic AI — we run on it. That&apos;s the lived proof behind
-              the AI work we help founders and teams adopt.
+              We don&apos;t just advise on agentic AI — we run on it. That&apos;s the lived proof
+              behind the AI work we help founders and teams adopt.
             </p>
           </div>
           <RenConsole />
