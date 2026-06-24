@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import { SiteFooter } from "@/app/_components/site-footer";
 import { SiteHeader } from "@/app/_components/site-header";
 import { site } from "@/lib/site";
+import type { Metadata } from "next";
+import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
 
 const ubuntu = Ubuntu({
@@ -32,8 +32,21 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: site.name,
     type: "website",
+    images: [
+      {
+        url: `${site.url}/og?title=${encodeURIComponent("We build and run software — ours and yours.")}`,
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — independent software studio`,
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      `${site.url}/og?title=${encodeURIComponent("We build and run software — ours and yours.")}`,
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

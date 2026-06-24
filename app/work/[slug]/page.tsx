@@ -5,6 +5,7 @@ import { Container } from "@/app/_components/container";
 import { JsonLd } from "@/app/_components/json-ld";
 import { caseStudies } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -55,6 +56,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           headline: study.title,
           description: study.summary,
           author: { "@type": "Organization", name: "Trevillyan Labs" },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+            { "@type": "ListItem", position: 2, name: "Case studies", item: `${site.url}/work` },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: study.title,
+              item: `${site.url}/work/${study.slug}`,
+            },
+          ],
         }}
       />
       <section className="bg-[var(--color-hero)] text-white">
