@@ -7,8 +7,13 @@ import { site } from "@/lib/site";
 import type { Metadata } from "next";
 
 // Home uses the layout's default title/description/OG; set the canonical here.
+// Home doesn't use pageMeta(), so its Markdown-mirror link is wired directly. The
+// mirror URL is /index.md (`${site.url}.md` would be malformed); /.md also resolves.
 export const metadata: Metadata = {
-  alternates: { canonical: site.url },
+  alternates: {
+    canonical: site.url,
+    types: { "text/markdown": `${site.url}/index.md` },
+  },
 };
 
 const orgJsonLd = {

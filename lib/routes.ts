@@ -19,14 +19,14 @@ export type StaticRoute = {
 // (see .agents/references/engineering-plans/md-mirrors.md): Phase 1 mirrors the
 // data-driven pages; home/about/contact/products are prose and land in Phase 2.
 export const staticRoutes: StaticRoute[] = [
-  { path: "", priority: 1, changeFrequency: "weekly", mirror: false },
+  { path: "", priority: 1, changeFrequency: "weekly", mirror: true },
   { path: "/services", priority: 0.9, changeFrequency: "monthly", mirror: true },
   { path: "/work", priority: 0.9, changeFrequency: "monthly", mirror: true },
-  { path: "/products", priority: 0.8, changeFrequency: "monthly", mirror: false },
-  { path: "/products/newsnook", priority: 0.6, changeFrequency: "monthly", mirror: false },
-  { path: "/about", priority: 0.7, changeFrequency: "monthly", mirror: false },
+  { path: "/products", priority: 0.8, changeFrequency: "monthly", mirror: true },
+  { path: "/products/newsnook", priority: 0.6, changeFrequency: "monthly", mirror: true },
+  { path: "/about", priority: 0.7, changeFrequency: "monthly", mirror: true },
   { path: "/patents", priority: 0.7, changeFrequency: "yearly", mirror: true },
-  { path: "/contact", priority: 0.8, changeFrequency: "yearly", mirror: false },
+  { path: "/contact", priority: 0.8, changeFrequency: "yearly", mirror: true },
   { path: "/faq", priority: 0.7, changeFrequency: "monthly", mirror: true },
   { path: "/team", priority: 0.4, changeFrequency: "yearly", mirror: true },
   { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly", mirror: true },
