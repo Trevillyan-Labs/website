@@ -1,14 +1,32 @@
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
 import { CaseStudyGallery } from "@/app/_components/case-study-gallery";
 import { Container } from "@/app/_components/container";
 import { JsonLd } from "@/app/_components/json-ld";
 import { caseStudies } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
+}
+
+// Any images dropped into public/images/work/<slug>/ become the case-study
+// gallery automatically (no code change needed to add screenshots). An explicit
+// `gallery` on the case study takes precedence.
+function folderGallery(slug: string): string[] {
+  try {
+    const dir = join(process.cwd(), "public", "images", "work", slug);
+    return readdirSync(dir)
+      .filter((f) => /\.(webp|png|jpe?g|avif)$/i.test(f))
+      .sort()
+      .map((f) => `/images/work/${slug}/${f}`);
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -27,6 +45,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const study = caseStudies.find((c) => c.slug === slug);
   if (!study) notFound();
 
+  const gallery = study.gallery ?? folderGallery(study.slug);
+
   return (
     <>
       <JsonLd
@@ -36,6 +56,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           headline: study.title,
           description: study.summary,
           author: { "@type": "Organization", name: "Trevillyan Labs" },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+            { "@type": "ListItem", position: 2, name: "Case studies", item: `${site.url}/work` },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: study.title,
+              item: `${site.url}/work/${study.slug}`,
+            },
+          ],
         }}
       />
       <section className="bg-[var(--color-hero)] text-white">
@@ -112,12 +148,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </div>
           </div>
 
-          {study.gallery && study.gallery.length > 0 ? (
+          {gallery.length > 0 ? (
             <div className="mt-16">
               <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
                 A closer look
               </h2>
-              <CaseStudyGallery images={study.gallery} title={study.title} />
+              <CaseStudyGallery images={gallery} title={study.title} />
             </div>
           ) : null}
         </Container>

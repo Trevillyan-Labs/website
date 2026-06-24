@@ -5,9 +5,9 @@ import { caseStudies } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Work",
+  title: "Case studies",
   description:
-    "Selected work from Trevillyan Labs — across owned products, startup builds, and websites.",
+    "Featured work from Trevillyan Labs — across owned products, startup builds, and websites.",
   path: "/work",
 });
 
@@ -15,7 +15,7 @@ export default function WorkPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Selected work"
+        eyebrow="Featured work"
         title="Proof, across engagement types"
         intro="From a startup's founding product to our own SaaS to a client website — the through-line is software that ships and runs."
       />
