@@ -1,7 +1,12 @@
 import {
+  renderAbout,
+  renderContact,
   renderFaq,
+  renderHome,
   renderLegal,
+  renderNewsnook,
   renderPatentsIndex,
+  renderProducts,
   renderServices,
   renderWorkDetail,
 } from "@/lib/md/renderers";
@@ -30,6 +35,44 @@ describe("renderServices", () => {
     expect(md).toContain("Contract software development");
     // The /services page does not render the Products group; the mirror matches.
     expect(md).not.toContain("Indie SaaS");
+  });
+
+  it("includes the intro and the engagement steps (Phase 2)", () => {
+    const md = renderServices();
+    expect(md).toContain("## How engagements work");
+    expect(md).toContain("Tell us what you need");
+  });
+});
+
+describe("prose pages (Phase 2)", () => {
+  it("renders home with frontmatter, what-we-do, and the operating model", () => {
+    const md = renderHome();
+    expect(md.startsWith("---\n")).toBe(true);
+    expect(md).toContain("We build and run software — ours and yours.");
+    expect(md).toContain("Run by a founder. Operated by an AI.");
+  });
+
+  it("renders about with the founder bio", () => {
+    const md = renderAbout();
+    expect(md).toContain("## Who's behind it");
+    expect(md).toContain("Bill Trevillyan");
+  });
+
+  it("renders contact with the booking link", () => {
+    expect(renderContact()).toContain("Prefer to talk it through?");
+  });
+
+  it("renders products with both products and plain links", () => {
+    const md = renderProducts();
+    expect(md).toContain("## NewsNook (Live in production)");
+    expect(md).toContain("## Verbaly");
+    expect(md).not.toMatch(/utm_/); // mirror uses plain destinations, no UTM tags
+  });
+
+  it("renders the NewsNook product page", () => {
+    const md = renderNewsnook();
+    expect(md).toContain("## Why it's here");
+    expect(md).toContain("## At a glance");
   });
 });
 

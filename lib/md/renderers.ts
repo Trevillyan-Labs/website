@@ -1,8 +1,17 @@
-import { type Group, caseStudies, faqs, services } from "@/lib/content";
-import { patentsPage } from "@/lib/content/pages";
+import { caseStudies, faqs, services } from "@/lib/content";
+import {
+  aboutPage,
+  contactPage,
+  homePage,
+  newsnookPage,
+  patentsPage,
+  productsPage,
+  servicesPage,
+} from "@/lib/content/pages";
 import { legalHtml } from "@/lib/legal";
 import { bullets, frontmatter, htmlToMarkdown, mirrorUrl } from "@/lib/md/serialize";
 import { patents } from "@/lib/patents";
+import { offerings, site } from "@/lib/site";
 import { team } from "@/lib/team";
 
 // Frontmatter title/description for static mirror pages. These mirror each page's
@@ -10,6 +19,27 @@ import { team } from "@/lib/team";
 // drift-free (rendered from the typed layer); this header metadata is low-stakes
 // per the md-mirrors plan §5.
 const META: Record<string, { title: string; description: string }> = {
+  "/": { title: `${site.name} — independent software studio`, description: site.tagline },
+  "/about": {
+    title: "About",
+    description:
+      "Trevillyan Labs is an independent software studio run by Bill Trevillyan — a product leader and 3x founder — and operated day-to-day with an AI assistant.",
+  },
+  "/contact": {
+    title: "Contact",
+    description:
+      "Tell Trevillyan Labs what you need — a build, a website, or product/go-to-market advice. We'll come back with a clear, scoped next step.",
+  },
+  "/products": {
+    title: "Products",
+    description:
+      "The products Trevillyan Labs builds and operates — proof the studio ships and runs real software. NewsNook is live in production today.",
+  },
+  "/products/newsnook": {
+    title: "NewsNook — our product",
+    description:
+      "NewsNook is Trevillyan Labs' own product — an AI newsletter reader, live in production. Proof the studio builds and operates real software.",
+  },
   "/services": {
     title: "Services",
     description:
@@ -54,16 +84,17 @@ function staticDoc(path: string, body: string): string {
 
 export function renderServices(): string {
   // Mirrors the /services page: Build and Advise groups only (the page does not
-  // render the Products service). Intro and the "How engagements work" steps are
-  // prose and land in Phase 2.
-  const groups: Group[] = ["Build", "Advise"];
-  const out = [`# ${META["/services"].title}`, "", META["/services"].description];
+  // render the Products service).
+  const groups = ["Build", "Advise"] as const;
+  const out = [`# ${META["/services"].title}`, "", servicesPage.intro];
   for (const g of groups) {
-    out.push("", `## ${g}`);
+    out.push("", `## ${g}`, servicesPage.groupBlurbs[g]);
     for (const s of services.filter((x) => x.group === g)) {
       out.push("", `### ${s.title}`, s.summary, "", bullets(s.whatYouGet));
     }
   }
+  out.push("", `## ${servicesPage.stepsHeading}`, "");
+  out.push(bullets(servicesPage.steps.map((s) => `**${s.n} · ${s.title}** — ${s.desc}`)));
   return staticDoc("/services", out.join("\n"));
 }
 
@@ -142,4 +173,67 @@ export function renderLegal(name: "privacy" | "terms"): string {
   const path = name === "privacy" ? "/privacy-policy" : "/terms";
   const body = `# ${META[path].title}\n\n${htmlToMarkdown(legalHtml(name))}`;
   return staticDoc(path, body);
+}
+
+// --- Prose pages (Phase 2): copy lifted to lib/content/pages.ts ------------------
+
+export function renderHome(): string {
+  const { hero, howWeWork, closingCta } = homePage;
+  const out = [`# ${META["/"].title}`, "", `${hero.headline} ${hero.subcopy}`];
+  out.push("", "## What we do");
+  out.push(bullets(offerings.map((o) => `**${o.title}** — ${o.body}. ${o.detail}`)));
+  out.push("", `## ${howWeWork.heading}`);
+  for (const p of howWeWork.paras) out.push("", p);
+  out.push("", `## ${closingCta.heading}`, closingCta.body);
+  out.push("", `Work with us: ${mirrorUrl("/contact")}`);
+  return doc(META["/"].title, META["/"].description, "/", out.join("\n"));
+}
+
+export function renderAbout(): string {
+  const out = [`# ${META["/about"].title}`, "", aboutPage.intro];
+  out.push("", `## ${aboutPage.whoBehindIt.heading}`);
+  for (const p of aboutPage.whoBehindIt.paras) out.push("", p);
+  out.push("", `## ${aboutPage.twoEngines.heading}`, "");
+  out.push(bullets(aboutPage.twoEngines.items.map((i) => `**${i.title}** — ${i.desc}`)));
+  out.push("", `## ${aboutPage.founder.heading}`);
+  for (const p of aboutPage.founder.paras) out.push("", p);
+  out.push(
+    "",
+    "",
+    bullets([
+      "LinkedIn: https://www.linkedin.com/in/williamtrevillyan/",
+      `Portfolio: ${site.portfolioUrl}`,
+    ]),
+  );
+  return staticDoc("/about", out.join("\n"));
+}
+
+export function renderContact(): string {
+  const out = [`# ${META["/contact"].title}`, "", contactPage.intro];
+  out.push("", `## ${contactPage.booking.title}`, `${contactPage.booking.desc} ${site.bookingUrl}`);
+  out.push(
+    "",
+    `Or send a short note from ${mirrorUrl("/contact")} — choose the intent (build, web/portfolio, advisory, applying AI, patent licensing, or NewsNook).`,
+  );
+  return staticDoc("/contact", out.join("\n"));
+}
+
+export function renderProducts(): string {
+  const out = [`# ${META["/products"].title}`, "", productsPage.intro];
+  for (const p of productsPage.items) {
+    const link = p.external ? p.href : mirrorUrl(p.href);
+    out.push("", `## ${p.name} (${p.status})`, p.summary, `${p.cta.replace(/\s*→$/, "")}: ${link}`);
+  }
+  out.push("", `## ${productsPage.closingCta.heading}`, productsPage.closingCta.body);
+  return staticDoc("/products", out.join("\n"));
+}
+
+export function renderNewsnook(): string {
+  const out = [`# ${META["/products/newsnook"].title}`, "", newsnookPage.intro];
+  out.push("", `## ${newsnookPage.whyItsHere.heading}`);
+  for (const p of newsnookPage.whyItsHere.paras) out.push("", p);
+  out.push("", "## At a glance", "");
+  out.push(bullets(newsnookPage.features.map((f) => `**${f.title}** — ${f.desc}`)));
+  out.push("", `Visit: ${site.newsnookUrl}`);
+  return staticDoc("/products/newsnook", out.join("\n"));
 }

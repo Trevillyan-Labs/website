@@ -1,5 +1,6 @@
 import { Container } from "@/app/_components/container";
 import { PageHeader } from "@/app/_components/page-header";
+import { newsnookPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
@@ -14,11 +15,7 @@ export const metadata = pageMeta({
 export default function NewsNookPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Our product"
-        title="NewsNook"
-        intro="The AI newsletter reader for thought leaders — built, shipped, and operated by Trevillyan Labs. It's live in production today."
-      >
+      <PageHeader eyebrow="Our product" title="NewsNook" intro={newsnookPage.intro}>
         <a
           href={withUtm(site.newsnookUrl, {
             medium: "referral",
@@ -36,33 +33,24 @@ export default function NewsNookPage() {
       <section className="bg-white">
         <Container className="py-16">
           <div className="max-w-2xl">
-            <h2 className="text-[1.4rem] font-medium text-ink">Why it's here</h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-ink">
-              This page isn't a sales pitch — NewsNook sells itself on its own site. On{" "}
-              <span className="font-medium">trevillyanlabs.com</span>, NewsNook is{" "}
-              <span className="font-medium">proof</span>: the studio doesn't just build software for
-              clients, it builds and <em>operates</em> its own product, end-to-end, run lean with
-              AI.
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-ink">
-              That ownership is what we bring to client work — we ship like owners, not contractors,
-              and the product instincts we earn running NewsNook feed every build and advisory
-              engagement.
-            </p>
+            <h2 className="text-[1.4rem] font-medium text-ink">
+              {newsnookPage.whyItsHere.heading}
+            </h2>
+            {newsnookPage.whyItsHere.paras.map((para) => (
+              <p key={para.slice(0, 24)} className="mt-4 text-[15px] leading-relaxed text-ink">
+                {para}
+              </p>
+            ))}
           </div>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            {[
-              { t: "Live in production", d: "Real users, real product — not a demo." },
-              {
-                t: "Built & operated by us",
-                d: "Next.js / TypeScript / Supabase, run day-to-day.",
-              },
-              { t: "Run lean on AI", d: "The agentic operating model we advise on." },
-            ].map((f) => (
-              <div key={f.t} className="rounded-xl border border-[var(--color-line)] bg-white p-6">
-                <h3 className="text-base font-medium text-ink">{f.t}</h3>
-                <p className="mt-2 text-[13px] text-muted">{f.d}</p>
+            {newsnookPage.features.map((f) => (
+              <div
+                key={f.title}
+                className="rounded-xl border border-[var(--color-line)] bg-white p-6"
+              >
+                <h3 className="text-base font-medium text-ink">{f.title}</h3>
+                <p className="mt-2 text-[13px] text-muted">{f.desc}</p>
               </div>
             ))}
           </div>

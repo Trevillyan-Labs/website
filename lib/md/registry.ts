@@ -1,7 +1,12 @@
 import {
+  renderAbout,
+  renderContact,
   renderFaq,
+  renderHome,
   renderLegal,
+  renderNewsnook,
   renderPatentsIndex,
+  renderProducts,
   renderServices,
   renderTeamDetail,
   renderTeamIndex,
@@ -14,9 +19,14 @@ import { isMirrorablePath, listMirrorablePaths } from "@/lib/routes";
 // static routes in lib/routes.ts (asserted by lib/routes.test.ts) so the matcher,
 // generateStaticParams, and rel=alternate can never disagree about what exists.
 const staticRenderers: Record<string, () => string> = {
+  "/": renderHome,
   "/services": renderServices,
   "/work": renderWorkIndex,
+  "/products": renderProducts,
+  "/products/newsnook": renderNewsnook,
+  "/about": renderAbout,
   "/patents": renderPatentsIndex,
+  "/contact": renderContact,
   "/faq": renderFaq,
   "/team": renderTeamIndex,
   "/privacy-policy": () => renderLegal("privacy"),
