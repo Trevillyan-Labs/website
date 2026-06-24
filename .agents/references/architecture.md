@@ -1,13 +1,14 @@
 ---
 status: canonical
 source_of_truth: true
-last_verified: 2026-06-20
+last_verified: 2026-06-24
 owner: bill
 related_docs:
   - building_the_project.md
   - integrations.md
   - decisions/ADR-0001-nextjs-rebuild.md
   - decisions/ADR-0003-build-in-place.md
+  - engineering-plans/md-mirrors.md
 ---
 
 # Architecture
@@ -69,6 +70,26 @@ The existing static site keeps working until cutover. Port `images/`, brand SVGs
 `/blog` + `/blog/[slug]` (Phase 5). **Discoverability artifacts:** `robots.ts`/`robots.txt`,
 `sitemap.ts`/`sitemap.xml`, and `llms.txt` (AI crawlers allowed — ADR-0004). IA + page intent are
 authoritative in `strategy/content_plan.md`.
+
+### Per-page Markdown mirrors (AEO)
+
+Every mirror-able page is also served as clean `text/markdown` at `/<path>.md` (e.g. `/services.md`),
+the per-URL counterpart to `llms.txt`/`llms-full.txt` (engineering plan: `engineering-plans/md-mirrors.md`).
+
+- **`middleware.ts`** matches `*.md` requests and **rewrites** (URL stays `/<path>.md`) to an internal
+  handler — the App Router page tree is untouched.
+- **`app/api/md/[[...path]]/route.ts`** — `force-static` Route Handler; `generateStaticParams` bakes
+  every mirror at build, served from the CDN.
+- **`lib/routes.ts`** — single source of the static route list + the `mirror` flag, consumed by both
+  `app/sitemap.ts` and the mirror registry so the two can't drift. Patent detail pages (`/patents/[slug]`,
+  which 307-redirect out) are excluded from both.
+- **`lib/md/`** — `serialize.ts` (Markdown + a minimal whitelisted HTML→md converter for legal/patent
+  copy), `renderers.ts` (per-page renderers from the typed content layer), `registry.ts` (path → renderer).
+- **`lib/seo.ts`** `pageMeta` emits `<link rel="alternate" type="text/markdown">` for mirror-able pages.
+
+Phase 1 (shipped) mirrors the data-driven pages: `/services` (cards), `/work` (+detail), `/patents`,
+`/faq`, `/team` (+detail), and the legal pages. Phase 2 adds the prose pages (home, about, contact,
+products) once their copy is lifted into typed constants.
 
 > Keep this doc's "current/target" split honest as the rebuild progresses — promote target → current
 > section by section and bump `last_verified`.
