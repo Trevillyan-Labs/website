@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function CaseStudyGallery({ images, title }: { images: string[]; title: string }) {
@@ -30,13 +31,14 @@ export function CaseStudyGallery({ images, title }: { images: string[]; title: s
             type="button"
             onClick={() => setOpen(i)}
             aria-label={`Expand image ${i + 1}`}
-            className="group block cursor-zoom-in overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+            className="group relative block aspect-[4/3] cursor-zoom-in overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-surface-2)]"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={src}
               alt={`${title} — reference`}
-              className="aspect-[4/3] w-full object-cover transition duration-300 group-hover:scale-[1.04]"
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition duration-300 group-hover:scale-[1.04]"
             />
           </button>
         ))}

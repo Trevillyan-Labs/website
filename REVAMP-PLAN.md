@@ -159,3 +159,26 @@ represented accurately by AI answer engines and LLMs to drive client referrals)
 - **Scope creep** — the studio story is the must-ship; blog/extras are explicitly Phase 5.
 - **Confidentiality** — client case studies must clear the rules in `identity-and-positioning.md §Confidentiality` before going public.
 - **Secrets** — Turnstile/Gmail keys stay Vercel-only; analytics keys via env-config; nothing sensitive in git.
+
+---
+
+## 8. Post-launch backlog (prioritised)
+
+Improvement ideas captured after launch, highest-impact first. Tier reflects impact on the site's
+#1 job — turning visitors into "hire the studio" conversations.
+
+### Tier 1 — Conversion
+1. **Social proof / testimonials.** No client quotes exist on the site today — the single biggest
+   conversion gap. Add 2–3 attributed quotes (e.g. the Clip founder, an advisory client) near the CTAs,
+   with `Review`/`AggregateRating` JSON-LD. *Needs: real quotes from Bill (clear confidentiality first).*
+2. **"Trusted by" logo wall.** Surface real company logos already in the portfolio repo (Clip Automation,
+   Incode, Property Meld, HomeMetrics) as a credibility strip, ideally above the fold.
+3. **Concrete engagement path.** A short "how we work" (scope → timeline → what you get), no pricing
+   required, to reduce "is this for me?" friction before the contact form.
+
+### Tier 2 — Inbound & discoverability
+4. **Blog / Insights** (also tracked as Phase 5). Highest value for the **advisory** line — thought
+   leadership is what AI answer engines cite. Depends on the deferred MDX migration to author well.
+
+> **Done since launch:** markdown mirrors / `llms-full.txt` AEO layer, case-study galleries (NewsNook +
+> Verbaly), `.com` canonical, conversion analytics events, `next/image` galleries, and lint hygiene.
