@@ -34,6 +34,9 @@ Routing map for the Trevillyan Labs website repo. Read the minimum needed for th
 - `decisions/ADR-0003-build-in-place.md` — build the new app in this repo, preserve URLs
 - `decisions/ADR-0004-allow-ai-crawlers.md` — allow AI crawlers (training + answer/search)
 
+## Tier 1: Engineering plans
+- `engineering-plans/md-mirrors.md` — per-page Markdown mirrors (`/<path>.md`) for AEO; Phase 1 shipped
+
 ## Tier 2: Strategy (the marketing exercise)
 - `strategy/product_vision.md` — what the site is for (authority for content/feature decisions)
 - `strategy/personas.md` — visitor personas (Dana, Hugh, Sam, Wren, Jordan)
