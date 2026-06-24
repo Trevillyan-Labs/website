@@ -1,7 +1,7 @@
 export const site = {
   name: "Trevillyan Labs",
-  domain: "trevillyanlabs.io",
-  url: "https://www.trevillyanlabs.io",
+  domain: "trevillyanlabs.com",
+  url: "https://www.trevillyanlabs.com",
   newsnookUrl: "https://www.newsnook.ai",
   portfolioUrl: "https://www.trevillyan.dev",
   bookingUrl: "https://calendly.com/bill-trevillyanlabs/30min",
