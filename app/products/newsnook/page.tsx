@@ -39,7 +39,7 @@ export default function NewsNookPage() {
             <h2 className="text-[1.4rem] font-medium text-ink">Why it's here</h2>
             <p className="mt-4 text-[15px] leading-relaxed text-ink">
               This page isn't a sales pitch — NewsNook sells itself on its own site. On{" "}
-              <span className="font-medium">trevillyanlabs.io</span>, NewsNook is{" "}
+              <span className="font-medium">trevillyanlabs.com</span>, NewsNook is{" "}
               <span className="font-medium">proof</span>: the studio doesn't just build software for
               clients, it builds and <em>operates</em> its own product, end-to-end, run lean with
               AI.

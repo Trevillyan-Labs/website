@@ -6,7 +6,7 @@ full agent operating contract, see [`CLAUDE.md`](CLAUDE.md).
 
 ## Branching model
 
-- **`main`** — production (https://www.trevillyanlabs.io). Protected.
+- **`main`** — production (https://www.trevillyanlabs.com). Protected.
 - **`staging`** — integration / pre-production. Feature work targets it via PR.
 - **Feature branches** — branch off the latest `staging`. Suggested prefixes: `feat/`, `fix/`,
   `docs/`, `chore/`, `revamp/`.
