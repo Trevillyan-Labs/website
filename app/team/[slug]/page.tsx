@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Container } from "@/app/_components/container";
 import { pageMeta } from "@/lib/seo";
 import { team } from "@/lib/team";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return team.map((m) => ({ slug: m.slug }));
@@ -28,7 +28,10 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
     <>
       <section className="bg-[var(--color-hero)] text-white">
         <Container className="pb-14 pt-28 sm:pt-32">
-          <Link href="/team" className="text-[13px] text-[var(--color-hero-accent)] hover:text-white">
+          <Link
+            href="/team"
+            className="text-[13px] text-[var(--color-hero-accent)] hover:text-white"
+          >
             ← Team
           </Link>
           <div className="mt-6 flex items-center gap-5">
@@ -52,7 +55,10 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
             <p className="text-[15px] leading-relaxed text-ink">{member.bio}</p>
             <div className="mt-6 flex gap-4 text-[13px]">
               {member.links.linkedin ? (
-                <a href={member.links.linkedin} className="font-medium text-brand hover:text-brand-hover">
+                <a
+                  href={member.links.linkedin}
+                  className="font-medium text-brand hover:text-brand-hover"
+                >
                   LinkedIn →
                 </a>
               ) : null}
