@@ -1,7 +1,7 @@
 ---
 status: canonical
 source_of_truth: true
-last_verified: 2026-06-20
+last_verified: 2026-06-26
 owner: bill
 related_docs:
   - building_the_project.md
@@ -31,9 +31,14 @@ External services the website depends on. Keys and secret rules: `security_check
 - **Target (ADR-0002):** **PostHog** — product analytics + session replay + funnels in one tool.
   Public project key via env-config (no committed keys). Re-implement the useful pieces of today's
   setup (declarative event mapping, scroll-depth) as a typed analytics module.
-- **Planned events (see `strategy/user_journeys.md`):** `contact_submitted` (with intent),
-  `call_booked`, `newsnook_clickthrough`, `about_viewed`. Core funnels: visitor → service view →
-  contact; visitor → NewsNook.
+- **Wired today (see `strategy/user_journeys.md`):** `contact_submitted` (with intent, in
+  `app/contact/contact-form.tsx`), `booking_click` (with location, `app/_components/booking-link.tsx`),
+  `newsnook_clickthrough` (with location: `footer` / `products_page` / `newsnook_spotlight`, via
+  `app/_components/newsnook-link.tsx`). All fire through the env-gated `track()` helper in
+  `lib/analytics.ts` (no-op unless `NEXT_PUBLIC_POSTHOG_KEY` is set) and are additive to the UTM tags
+  on outbound links (`lib/utm.ts`).
+- **Still planned:** `about_viewed`. Core funnels: visitor → service view → contact; visitor →
+  NewsNook.
 
 ## Fonts — Google Fonts
 - **Ubuntu** (+ Ubuntu Mono). In the rebuild, prefer `next/font` for self-hosting/perf.
