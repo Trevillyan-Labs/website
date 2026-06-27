@@ -9,7 +9,9 @@ export function ClosingCta() {
         <h2 className="text-[1.6rem] font-medium text-ink">{homePage.closingCta.heading}</h2>
         <p className="mx-auto mt-3 max-w-xl text-[15px] text-muted">{homePage.closingCta.body}</p>
         <div className="mt-7 flex justify-center">
-          <Button href="/contact">Work with us</Button>
+          <Button href="/contact" location="home_footer_cta">
+            Work with us
+          </Button>
         </div>
       </Container>
     </section>

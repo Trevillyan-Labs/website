@@ -2,6 +2,7 @@ import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { CaseStudyGallery } from "@/app/_components/case-study-gallery";
 import { Container } from "@/app/_components/container";
+import { CtaLink } from "@/app/_components/cta-link";
 import { JsonLd } from "@/app/_components/json-ld";
 import { caseStudies } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
@@ -162,12 +163,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <section className="bg-[var(--color-surface)]">
         <Container className="py-14 text-center">
           <h2 className="text-[1.4rem] font-medium text-ink">Have something like this to build?</h2>
-          <Link
+          <CtaLink
             href="/contact"
+            location="case_study_cta"
             className="mt-5 inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-hover"
           >
             Work with us
-          </Link>
+          </CtaLink>
         </Container>
       </section>
     </>

@@ -36,8 +36,10 @@ export function Hero() {
               className="reveal mt-8 flex flex-wrap items-center gap-3"
               style={{ animationDelay: "0.32s" }}
             >
-              <Button href="/contact">Work with us</Button>
-              <Button href="/products" variant="outline">
+              <Button href="/contact" location="home_hero">
+                Work with us
+              </Button>
+              <Button href="/products" location="home_hero" variant="outline">
                 See what we ship →
               </Button>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
+import { CtaLink } from "@/app/_components/cta-link";
 import { Icon } from "@/app/_components/icon";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export type Service = {
@@ -336,12 +336,13 @@ export function ServiceCard({ service, index }: { service: Service; index: numbe
         <div className="mt-5 border-t border-[var(--color-surface-2)] pt-4">
           <p className="text-[11.5px] text-muted">{service.detail}</p>
         </div>
-        <Link
+        <CtaLink
           href={service.cta.href}
+          location="home_services"
           className="mt-4 text-[13px] font-medium text-brand after:absolute after:inset-0 hover:text-brand-hover"
         >
           {service.cta.label}
-        </Link>
+        </CtaLink>
       </div>
     </article>
   );

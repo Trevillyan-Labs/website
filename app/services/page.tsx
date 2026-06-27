@@ -1,4 +1,5 @@
 import { Container } from "@/app/_components/container";
+import { CtaLink } from "@/app/_components/cta-link";
 import { Icon } from "@/app/_components/icon";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
@@ -111,12 +112,13 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
-          <Link
+          <CtaLink
             href="/contact"
+            location="services_cta"
             className="mt-8 inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-hover"
           >
             Work with us
-          </Link>
+          </CtaLink>
         </Container>
       </section>
     </>
