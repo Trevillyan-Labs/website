@@ -11,7 +11,7 @@ export function SiteHeader() {
           <Logo tone="dark" />
           <nav className="flex items-center gap-2 sm:gap-4">
             <HeaderNav />
-            <Button href="/contact" className="px-5 py-2.5 text-sm">
+            <Button href="/contact" location="header" className="px-5 py-2.5 text-sm">
               Work with us
             </Button>
           </nav>

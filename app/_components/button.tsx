@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { CtaLink } from "@/app/_components/cta-link";
 import type { ReactNode } from "react";
 
 type Variant = "primary" | "outline" | "ghost";
@@ -17,15 +17,21 @@ export function Button({
   children,
   variant = "primary",
   className = "",
+  location,
 }: {
   href: string;
   children: ReactNode;
   variant?: Variant;
   className?: string;
+  location?: string;
 }) {
   return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
+    <CtaLink
+      href={href}
+      location={location}
+      className={`${base} ${variants[variant]} ${className}`}
+    >
       {children}
-    </Link>
+    </CtaLink>
   );
 }

@@ -4,7 +4,7 @@ import { BookingLink } from "@/app/_components/booking-link";
 import { Turnstile } from "@/app/contact/turnstile";
 import { track } from "@/lib/analytics";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
@@ -25,6 +25,16 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
   const onToken = useCallback((t: string) => setToken(t), []);
+  const started = useRef(false);
+
+  // Fire `contact_started` once, on first interaction with any field. With
+  // `contact_submitted` this gives a form-abandonment rate (started − submitted).
+  function onFirstFocus(e: React.FocusEvent<HTMLFormElement>) {
+    if (started.current) return;
+    started.current = true;
+    const intent = new FormData(e.currentTarget).get("intent");
+    track("contact_started", { intent: typeof intent === "string" ? intent : undefined });
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,8 +54,12 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
       track("contact_submitted", { intent: data.intent });
       form.reset();
     } catch (err) {
+      const message = err instanceof Error ? err.message : "Something went wrong.";
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(message);
+      // A submit can fail silently otherwise — Turnstile, the API route, or
+      // validation — and a broken form looks identical to "no traffic" in PostHog.
+      track("contact_submit_failed", { intent: data.intent, error: message });
     }
   }
 
@@ -70,7 +84,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
     "w-full rounded-lg border border-[var(--color-line)] bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form onSubmit={onSubmit} onFocus={onFirstFocus} className="space-y-5">
       {/* Honeypot — hidden from people, bots fill it; server drops those. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
