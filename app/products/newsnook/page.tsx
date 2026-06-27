@@ -1,4 +1,5 @@
 import { Container } from "@/app/_components/container";
+import { NewsnookLink } from "@/app/_components/newsnook-link";
 import { PageHeader } from "@/app/_components/page-header";
 import { newsnookPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
@@ -16,18 +17,17 @@ export default function NewsNookPage() {
   return (
     <>
       <PageHeader eyebrow="Our product" title="NewsNook" intro={newsnookPage.intro}>
-        <a
+        <NewsnookLink
           href={withUtm(site.newsnookUrl, {
             medium: "referral",
             campaign: "studio_site",
             content: "newsnook_spotlight",
           })}
-          target="_blank"
-          rel="noopener noreferrer"
+          location="newsnook_spotlight"
           className="mt-7 inline-flex rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-hover"
         >
           Visit newsnook.ai →
-        </a>
+        </NewsnookLink>
       </PageHeader>
 
       <section className="bg-white">

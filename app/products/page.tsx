@@ -1,4 +1,5 @@
 import { Container } from "@/app/_components/container";
+import { NewsnookLink } from "@/app/_components/newsnook-link";
 import { PageHeader } from "@/app/_components/page-header";
 import { productsPage } from "@/lib/content/pages";
 import { pageMeta } from "@/lib/seo";
@@ -67,15 +68,9 @@ export default function ProductsPage() {
               const cls =
                 "group overflow-hidden rounded-xl border border-[var(--color-line)] bg-white transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5";
               return p.external ? (
-                <a
-                  key={p.name}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cls}
-                >
+                <NewsnookLink key={p.name} href={p.href} location="products_page" className={cls}>
                   {inner}
-                </a>
+                </NewsnookLink>
               ) : (
                 <Link key={p.name} href={p.href} className={cls}>
                   {inner}

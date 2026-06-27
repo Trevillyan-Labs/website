@@ -1,5 +1,6 @@
 import { Container } from "@/app/_components/container";
 import { Logo } from "@/app/_components/logo";
+import { NewsnookLink } from "@/app/_components/newsnook-link";
 import { SocialIcons } from "@/app/_components/social-icons";
 import { nav, site } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
@@ -48,18 +49,17 @@ export function SiteFooter() {
               </p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li>
-                  <a
+                  <NewsnookLink
                     href={withUtm(site.newsnookUrl, {
                       medium: "referral",
                       campaign: "studio_site",
                       content: "footer",
                     })}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    location="footer"
                     className="hover:text-white"
                   >
                     NewsNook
-                  </a>
+                  </NewsnookLink>
                 </li>
               </ul>
             </div>
