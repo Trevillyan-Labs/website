@@ -1,4 +1,5 @@
 import { Container } from "@/app/_components/container";
+import { CtaLink } from "@/app/_components/cta-link";
 import { NewsnookLink } from "@/app/_components/newsnook-link";
 import { PageHeader } from "@/app/_components/page-header";
 import { productsPage } from "@/lib/content/pages";
@@ -92,12 +93,13 @@ export default function ProductsPage() {
               {productsPage.closingCta.body}
             </p>
             <div className="mt-8 flex justify-center">
-              <Link
+              <CtaLink
                 href="/contact?intent=build"
+                location="products_cta"
                 className="inline-flex items-center rounded-lg bg-white px-6 py-3 text-[14px] font-medium text-[var(--color-brand)] transition hover:bg-white/90"
               >
                 Work with us →
-              </Link>
+              </CtaLink>
             </div>
           </div>
         </Container>

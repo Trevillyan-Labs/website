@@ -1,4 +1,5 @@
 import { Container } from "@/app/_components/container";
+import { CtaLink } from "@/app/_components/cta-link";
 import { JsonLd } from "@/app/_components/json-ld";
 import { PageHeader } from "@/app/_components/page-header";
 import { aboutPage } from "@/lib/content/pages";
@@ -127,12 +128,13 @@ export default function AboutPage() {
               working on — we&apos;ll come back with a clear, scoped next step.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
+              <CtaLink
                 href="/contact"
+                location="about_cta"
                 className="inline-flex items-center rounded-lg bg-white px-6 py-3 text-[14px] font-medium text-[var(--color-brand)] transition hover:bg-white/90"
               >
                 Work with us →
-              </Link>
+              </CtaLink>
               <Link
                 href="/work"
                 className="inline-flex items-center rounded-lg border border-white/40 px-6 py-3 text-[14px] font-medium text-white transition hover:bg-white/10"

@@ -31,14 +31,23 @@ External services the website depends on. Keys and secret rules: `security_check
 - **Target (ADR-0002):** **PostHog** — product analytics + session replay + funnels in one tool.
   Public project key via env-config (no committed keys). Re-implement the useful pieces of today's
   setup (declarative event mapping, scroll-depth) as a typed analytics module.
-- **Wired today (see `strategy/user_journeys.md`):** `contact_submitted` (with intent, in
-  `app/contact/contact-form.tsx`), `booking_click` (with location, `app/_components/booking-link.tsx`),
-  `newsnook_clickthrough` (with location: `footer` / `products_page` / `newsnook_spotlight`, via
-  `app/_components/newsnook-link.tsx`). All fire through the env-gated `track()` helper in
-  `lib/analytics.ts` (no-op unless `NEXT_PUBLIC_POSTHOG_KEY` is set) and are additive to the UTM tags
-  on outbound links (`lib/utm.ts`).
-- **Still planned:** `about_viewed`. Core funnels: visitor → service view → contact; visitor →
-  NewsNook.
+- **Wired today (see `strategy/user_journeys.md`):** PostHog loads only when
+  `NEXT_PUBLIC_POSTHOG_KEY` is set (`app/_components/posthog-provider.tsx`); autocapture + `$pageview`
+  (manual, on route change) + `$pageleave`. Named conversion events go through `lib/analytics.ts`
+  (`track()`, a no-op until the key is set):
+  - `contact_submitted` (with `intent`) — contact form success.
+  - `contact_submit_failed` (with `intent`, `error`) — submit error path (Turnstile / API / validation),
+    so a broken form doesn't read as "no traffic".
+  - `contact_started` (with `intent`) — first interaction with the contact form (→ abandonment rate).
+  - `booking_click` (with `location`) — Calendly CTA via `app/_components/booking-link.tsx`.
+  - `cta_click` (with `label`, `location`, `href`) — primary "Work with us" / "Start a project" CTAs
+    via `app/_components/cta-link.tsx` (the `Button` component routes through it).
+  - `newsnook_clickthrough` (with `location`: `footer` / `products_page` / `newsnook_spotlight`) —
+    outbound NewsNook links via `app/_components/newsnook-link.tsx`; additive to the UTM tags from
+    `lib/utm.ts`.
+  Core funnels: visitor → service view → CTA click → contact; visitor → NewsNook.
+- **Still planned:** scroll/read depth, and `about_viewed`+depth as a soft conversion. (`about_viewed`
+  is covered by `$pageview` today.)
 
 ## Fonts — Google Fonts
 - **Ubuntu** (+ Ubuntu Mono). In the rebuild, prefer `next/font` for self-hosting/perf.
