@@ -126,7 +126,7 @@ represented accurately by AI answer engines and LLMs to drive client referrals)
 | **2 — Content & narrative** ✅ | All pages live with real copy | `/services`, `/work` + case studies (Clip/NewsNook/journalism), `/about` (+patents), `/products/newsnook`, `/contact` (intent-routed + route handler), `/faq` (+FAQPage JSON-LD), `/patents` + `/patents/[slug]`, `/team` + `/team/[slug]`, `/privacy-policy` + `/terms` (faithful legal copy), and legacy `.html` → clean-URL redirects (parity). Case studies use typed content (`lib/content.ts`); MDX deferred. Booking link wired (Calendly, `site.bookingUrl`) on `/contact` + advisory CTAs. **Still needs Bill:** journalism-portfolio screencaps; full Turnstile wiring (env/keys) — landing in Phase 3. |
 | **3 — SEO/AEO/analytics/security** | NewsNook-grade non-functional layer | Metadata + JSON-LD + robots/sitemap, **AEO/LLM layer (FAQ, `llms.txt`, AI-crawler allowlist, entity consistency)**, env-config analytics, security headers + rate-limit, `.agents/` + SECURITY.md + CODEOWNERS |
 | **4 — QA & launch** | Production on Vercel | URL/redirect parity check, Lighthouse + a11y pass, contact-form e2e, preview → promote |
-| **5 — Post-launch** *(optional)* | Compounding SEO | Blog/case-study cadence, conversion measurement, iterate copy on data |
+| **5 — Post-launch** *(optional)* | Compounding SEO + advisory authority | **Agentic workflows blog program** (see §8.5) — platform → free series → optional paid tier; conversion measurement; iterate copy on data |
 
 ---
 
@@ -139,7 +139,9 @@ represented accurately by AI answer engines and LLMs to drive client referrals)
   ("Startup MVP" — contracted PM/PgM for 6 months; **delivered the MVP, founding engineering team, and
   7-figure ARR**). Type tags lead with delivered value, plain-language. **KPMG is held back** — don't
   publish until KPMG grants permission.
-- **C. Blog → deferred to Phase 5.** Ship the studio story first.
+- **C. Blog → Phase 5 program (expanded 2026-07-22).** Ship the studio story first. Post-launch the
+  blog is the **agentic workflows program** (platform → free series → optional paid) documented in
+  §8.5 — not an unbounded writing dump.
 - **D. Repo → build in place** on this branch (`revamp/site-narrative-restack`), same Vercel project.
 
 ### Content still to gather (Phase 2 input)
@@ -177,8 +179,122 @@ Improvement ideas captured after launch, highest-impact first. Tier reflects imp
    required, to reduce "is this for me?" friction before the contact form.
 
 ### Tier 2 — Inbound & discoverability
-4. **Blog / Insights** (also tracked as Phase 5). Highest value for the **advisory** line — thought
-   leadership is what AI answer engines cite. Depends on the deferred MDX migration to author well.
+4. **Blog / Insights — agentic workflows program** (Phase 5). Highest value for the **advisory** line —
+   thought leadership + lived-practice posts are what AI answer engines cite and what warm leads
+   convert on. Full expansion in **§8.5** below. Depends on the deferred MDX content path to author well.
 
 > **Done since launch:** markdown mirrors / `llms-full.txt` AEO layer, case-study galleries (NewsNook +
 > Verbaly), `.com` canonical, conversion analytics events, `next/image` galleries, and lint hygiene.
+
+---
+
+## 8.5 Agentic workflows blog program (Phase 5 expansion)
+
+Bill prompt 2026-07-22: turn the deferred blog into a **deliberate content program** that posts
+solutions, dos/don'ts, and credibility on *how to get the most out of agentic workflows* — rooted in how
+Trevillyan Labs actually runs (Ren). Decide "one vs many roadmap items," document accordingly.
+
+### Decision (one parent, three tracks — not six company-roadmap rows)
+
+| Layer | What | Why this shape |
+|---|---|---|
+| **1 parent initiative** | *Agentic workflows blog on trevillyanlabs.com* | One company/studio bet; one owner of payoff (advisory inbound + AEO citations). Lives here as Phase 5 + Tier-2 #4; thin pointer on `docs/company/roadmap.md`. |
+| **3 sequential tracks** | A platform · B free series · C optional paid tier | Different critical path, risk, and "done". Shipping articles before a render path is inventing work twice; paywall before free traction is premature. |
+| **Content backlog (not roadmap items)** | Named article concepts under Track B | Topics are a *series outline*, not six parallel initiatives. Reorder/swap freely without renumbering roadmaps. |
+
+Do **not** promote each article concept to its own company-roadmap row. Do **not** walk paywall until
+free posts prove citation + inquiry signal.
+
+### Strategy fit
+
+- **Primary job:** compounding inbound for the **Advise** line (founder / product-GTM / agentic-operating-model buyers) + AEO citations on high-intent "how do I run agents" queries.
+- **Secondary:** credibility that TL *runs* the model it advises (Ren as lived proof) — already the
+  supporting differentiator in the site narrative.
+- **Non-job:** selling a content product first. Paywall is a *later option*, not the launch thesis.
+- **Guardrail:** never leak proprietary Ren internals, client detail, or anything covered by Hard Rule 5 /
+  `identity-and-positioning.md` confidentiality. Public bar = patterns, tradeoffs, practices — not
+  runbooks that hand a competitor the stack.
+
+### Track A — Blog platform (prerequisite)
+
+**Outcome:** `/blog` + `/blog/[slug]` ship, authored via MDX (or the post-Phase-2 content path), with
+Article JSON-LD, OG, sitemap inclusion, and a list → post IA that matches `content_plan.md`.
+
+- [ ] MDX (or equivalent) authoring path live; blog routes in App Router
+- [ ] Index + post templates (title, dek, publish date, series tag, CTA to /contact · advisory)
+- [ ] SEO/AEO: `Article` JSON-LD, canonical/OG, sitemap + `llms.txt` pointer to the series hub
+- [ ] PostHog: `blog_view`, `blog_cta_click` (route into existing conversion analytics)
+- [ ] Editorial minimalism: one series tag (`agentic-workflows`), draft → review → publish checklist
+
+**Depends on:** site launch gate (Phase 4) stable. **Unblocks:** Track B.
+
+### Track B — Free high-value series: *Getting the most out of agentic workflows*
+
+**Outcome:** a public series of practical how-to / dos-and-don'ts posts, each long enough to be citable
+and specific enough to be useful — TLDV, not thought-leadership fog. Cadence target once platform is
+up: **1 post / 2 weeks** until the first 6 land, then reassess on GSC + AEO + inquiry evidence
+(`seo-pulse` already covers trevillyanlabs.com).
+
+**Series outline** (seed concepts from Bill 2026-07-22 — reorder on evidence; each is a post, not a roadmap row):
+
+| # | Working title | Angle (solutions + dos/don'ts + credibility) |
+|---|---|---|
+| 1 | **One agent brain, many harnesses** | Multi-harness orchestration on top of a single agent "brain" with unified memory — why fork-per-tool identity drifts, and the pattern that keeps Claude Code / Cursor / Hermes / Discord as hands on one mind. |
+| 2 | **What an "agent brain" actually is** | Durable memory vs session context vs skills vs prompts; what belongs in the brain, what must stay ephemeral, and the failure mode of "the model is the memory." |
+| 3 | **Cockpit observability & directing** | Practices for *directing* an agent you trust: progress gists not play-by-plays, decision pings only, ledgers, verification-as-a-stage — how the human stays pilot without becoming the bottleneck. |
+| 4 | **Discord (or chat) as the agent gateway** | Event-driven two-way reach from any device; threads as workspaces; when chat-as-gateway beats a web UI; ops gotchas (mentions, reply chrome, streaming). |
+| 5 | **Voice pedal → right Discord thread** | Hands-free capture: speech-to-text pedal that drops a transcript and triggers the agent into the *correct* thread — hardware + routing pattern, failure modes. |
+| 6 | **Skills as the unit of leverage** | Skills vs prompts vs tools; how a skill library compounds; draft/audit loops; when *not* to mint a skill. |
+
+Each post should earn: (a) one clear practice a reader can try this week, (b) at least one explicit
+don't, (c) a soft CTA into advisory / "work with us" for readers who want it built with them.
+
+**Depends on:** Track A. **Unblocks:** Track C decision.
+
+### Track C — Optional paid tier (later, evidence-gated)
+
+**Outcome:** a call on whether high-value depth becomes a paid blog / members tier — **only after**
+Track B shows signal.
+
+Gate before any paywall design (all three preferred):
+1. **Organic/AEO signal** — non-brand queries + answer-engine citations on series posts (via `seo-pulse` + AEO panel).
+2. **Commercial signal** — inbound that names a post, or advisory conversations that started from one.
+3. **Depth leftover** — material too operational/sensitive for free, still clean to publish behind a wall
+   (templates, scorecards, deeper run-pattern libraries) without violating the proprietary-info guardrail.
+
+Until the gate trips: **do not** scaffold billing, members routes, or gated MDX. If it never trips, the
+free series still paid for itself as advisory inbound.
+
+Possible paid shapes (pick later, don't pre-commit): email/member newsletter · paid post tier on-site ·
+bundle as an advisory lead-magnet / workshop companion. Stripe exists for NewsNook; reuse patterns, don't
+fork a second commerce stack casually.
+
+### Sequencing & sizing
+
+```
+Phase 4 launch stable
+        │
+        ▼
+ Track A  blog platform          (eng, ~S–M)
+        │
+        ▼
+ Track B  free series (posts 1–6) (content + light eng; 1/2wk cadence)
+        │
+        ▼
+  evidence gate?
+    no  → keep free cadence / retire weak topics
+    yes → Track C paid-tier design (separate decision)
+```
+
+**Right-sizing vs "maybe multiple roadmap items":** keep **one** Phase-5/Tier-2 parent. Tracks A/B/C are
+checklist stages inside it. Article concepts stay a content backlog. Promote a sub-item to its own
+company-roadmap row only if it grows into a standalone product (e.g. a real paid publication with its
+own P&L) — default assumption is it won't.
+
+### Open calls (not blocking documentation)
+
+- Voice-pedal post: publish only if the hardware path is real enough to demo or honestly frame as a
+  pattern-in-progress — no vapor screenshots.
+- Series home: `/blog` filtered by `agentic-workflows` vs a dedicated hub page — decide at Track A.
+- Cross-post to Substack/personal brand: `projects/substack` is parked; default is **site-canonical**,
+  syndicate later if useful.

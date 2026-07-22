@@ -1,7 +1,7 @@
 ---
 status: canonical
 source_of_truth: true
-last_verified: 2026-06-20
+last_verified: 2026-07-22
 owner: bill
 related_docs:
   - product_vision.md
@@ -32,7 +32,7 @@ This is the bridge from strategy to build. Copy is drafted per page in Phase 2.
 /contact                Intent-routed contact + Turnstile; booking link — preserved URL
 /faq                    FAQ written for answer engines (AEO); FAQPage JSON-LD
 /privacy-policy · /terms  Legal — preserved URLs
-/blog · /blog/[slug]    Writing — Phase 5 (deferred)
+/blog · /blog/[slug]    Writing — Phase 5 (agentic-workflows program; see below)
 
 robots.txt              Allow reputable AI crawlers; point to sitemap
 sitemap.xml             Dynamic, from routes/content
@@ -123,6 +123,29 @@ URL parity for `/patents`, `/team`, `/contact`, `/privacy-policy`, `/terms` is m
 
 ### Legal
 - Port privacy policy + terms; update for the new analytics stack (PostHog) and any new sub-processors.
+
+### Blog / Insights  *(Priya, Hugh, Jordan; J2/J2b/J5 — Phase 5)*
+- **Program, not a dumping ground.** Parent initiative: *Getting the most out of agentic workflows* —
+  practical solutions, dos/don'ts, and credibility posts rooted in how TL actually runs (Ren). Full
+  track split (platform → free series → optional paid) lives in `REVAMP-PLAN.md` §8.5.
+- **Intent:** be the citable answer for founders/leaders asking how to *operate* agents day-to-day, then
+  route high-intent readers to advisory / work-with-us. Not a NewsNook acquisition channel; not a
+  dump of Ren internals.
+- **IA:** `/blog` index (filterable by series tag `agentic-workflows`) + `/blog/[slug]` posts. Soft CTA
+  block on every post → `/contact` (advisory intent) and booking link.
+- **Seed series outline** (content backlog — each a post, not a roadmap row; reorder on evidence):
+  1. One agent brain, many harnesses (multi-harness + unified memory)
+  2. What an "agent brain" actually is
+  3. Cockpit observability & directing practices
+  4. Discord (chat) as the agent gateway
+  5. Voice pedal → right Discord thread (STT trigger + routing)
+  6. Skills as the unit of leverage
+- **SEO/AEO:** `Article` JSON-LD per post; series hub linked from `llms.txt`; titles/deks question-shaped
+  where natural so answer engines can quote them.
+- **Paid tier:** explicitly *later and evidence-gated* (see REVAMP-PLAN §8.5 Track C). Do not author
+  gated content or members IA until free series shows citation + inquiry signal.
+- **Voice & confidentiality:** first-person studio voice; patterns and tradeoffs yes; proprietary Ren
+  runbooks, credentials, client detail, or anything under Hard Rule 5 — no.
 
 ## Cross-page elements
 - **Persistent CTAs** in nav/footer — *Work with us* (primary) and *See what we ship → NewsNook*
