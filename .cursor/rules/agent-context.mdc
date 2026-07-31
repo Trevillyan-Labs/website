@@ -1,0 +1,8 @@
+---
+description: Canonical repository agent contract
+alwaysApply: true
+---
+
+Read and follow `CLAUDE.md` before acting. It is the single canonical repository contract and is
+also exposed to AGENTS.md-aware tools through the tracked `AGENTS.md` symlink. Do not duplicate its
+instructions in Cursor rules.
